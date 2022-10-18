@@ -11,7 +11,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/store")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "fr.unice.polytech.cf.demo.store")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "fr.unice.polytech.cf")
 
 public class RunCucumberTest {
     // will run all features found on the classpath

@@ -1,6 +1,7 @@
 package fr.unice.polytech.cf;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Cart {
@@ -14,5 +15,9 @@ public class Cart {
 
     public void addCookie(Cookie cookie) {
         this.cookies.add(cookie);
+    }
+
+    public Collection<Object> getCookies() {
+        return new ArrayList<>(cookies);
     }
 }
