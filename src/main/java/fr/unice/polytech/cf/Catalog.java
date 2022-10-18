@@ -8,11 +8,14 @@ public class Catalog {
 
     public Catalog() {
         this.cookies = new ArrayList<>();
-        this.cookies.add(new Cookie("Chocolate"));
+    }
+
+    public void addCookie(Cookie cookie){
+        this.cookies.add(cookie);
     }
 
     public List<Cookie> getCookies() {
-        return this.cookies;
+        return new ArrayList<>(this.cookies);
     }
 
     public boolean hasCookie(String name) {
