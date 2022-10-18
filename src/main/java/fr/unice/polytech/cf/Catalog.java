@@ -15,7 +15,7 @@ public class Catalog {
         return this.cookies;
     }
 
-    public boolean getCookie(String name) {
+    public boolean hasCookie(String name) {
         for (Cookie cookie : this.cookies) {
             if (cookie.getName().equals(name)) {
                 return true;
