@@ -20,10 +20,15 @@ public class Cart {
     }
 
     public Order confirmOrder() throws CloneNotSupportedException {
-        Order order = new Order((Cart) this.clone());
-        this.cookies = new ArrayList<>();
-        return order;
-
+        if(cookies.size()!=0) {
+            Order order = new Order((Cart) this.clone());
+            this.cookies = new ArrayList<>();
+            return order;
+        }
+        else{
+            System.out.println("your cart is empty");
+            return null;
+        }
     }
 
 }
