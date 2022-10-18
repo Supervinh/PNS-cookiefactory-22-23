@@ -46,6 +46,9 @@ public class Order {
         if(commandState!=CommandState.WORKING_ON_IT || commandState!=CommandState.DELIVERED || commandState!=CommandState.READY ){
             commandState=CommandState.CANCELED;
         }
+        else{
+            System.out.println("your order can't be cancelled, it's already being prepared or ready");
+        }
     }
 
 
