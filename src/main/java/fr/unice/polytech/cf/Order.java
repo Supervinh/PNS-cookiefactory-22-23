@@ -1,17 +1,19 @@
 package fr.unice.polytech.cf;
 
 public class Order {
-    private Cart panier;
-    private Store store;
+    private Cart cart;
+    //private Store store;
+
     private CommandState commandState;
-    public Order(Cart panier,Store store){
+
+    /*public Order(Cart panier,Store store){
         this.commandState=CommandState.UNPAID;
-        this.panier=panier;
+        this.cart=panier;
         this.store=store;
-    }
-    public Order(Cart panier){
+    }*/
+    public Order(Cart cart){
         this.commandState=CommandState.UNPAID;
-        this.panier=panier;
+        this.cart=cart;
 
     }
     public CommandState getCommandState() {

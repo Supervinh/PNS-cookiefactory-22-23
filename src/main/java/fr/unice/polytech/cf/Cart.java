@@ -10,19 +10,20 @@ public class Cart {
     public Cart() {
         this.cookies = new ArrayList<>();
     }
-    public Order ConfirmOrder(){
-        Order order=new Order(this);
-        return order;
-    }
-    public Order ConfirmOrder(Store store){
-        Order order=new Order(this,store);
-        return order;
-    }
+
     public void addCookie(Cookie cookie) {
         this.cookies.add(cookie);
     }
 
-    public Collection<Object> getCookies() {
+    public ArrayList<Cookie> getCookies() {
         return new ArrayList<>(cookies);
     }
+
+    public Order confirmOrder() throws CloneNotSupportedException {
+        Order order = new Order((Cart) this.clone());
+        this.cookies = new ArrayList<>();
+        return order;
+
+    }
+
 }
