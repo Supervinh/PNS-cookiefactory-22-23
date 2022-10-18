@@ -1,22 +1,28 @@
 package fr.unice.polytech.cf;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Cart {
     private List<Cookie> cookies;
+    private double price;
 
     public Cart() {
         this.cookies = new ArrayList<>();
+        price = 0;
     }
 
     public void addCookie(Cookie cookie) {
         this.cookies.add(cookie);
+        price += cookie.getPrice();
     }
 
     public ArrayList<Cookie> getCookies() {
         return new ArrayList<>(cookies);
+    }
+
+    public double getPrice() {
+        return price;
     }
 
     public Order confirmOrder() throws CloneNotSupportedException {
