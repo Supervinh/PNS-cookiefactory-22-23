@@ -14,7 +14,8 @@ public class OrderDefinitions {
     @And("the catalog contains the cookie {word}")
     public void the_catalog_contains_cookie(String cookie) {
         catalog = new Catalog();
-        catalog.addCookie(new Cookie("chocolate"));
+        if (!catalog.hasCookie(cookie))
+            catalog.addCookie(new Cookie("chocolate"));
         possible = true;
         assert(catalog.hasCookie(cookie));
     }
@@ -44,7 +45,6 @@ public class OrderDefinitions {
 
     @Then("the cart should contain {int} cookies")
     public void the_cart_should_contain_cookies(Integer number) {
-        System.out.println(cart.getCookies().size());
         assert(cart.getCookies().size() == number);
     }
 
