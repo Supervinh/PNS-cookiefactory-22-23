@@ -7,10 +7,8 @@ import java.util.List;
 public class Cart {
     private List<Cookie> cookies;
 
-    public Cart(List<Cookie> cookies) {
-        this.cookies = new ArrayList<Cookie>();
-        this.cookies = cookies;
-
+    public Cart() {
+        this.cookies = new ArrayList<>();
     }
 
     public void addCookie(Cookie cookie) {

@@ -1,14 +1,13 @@
 package fr.unice.polytech.cf;
 
 public class Cookie {
-    public int getAmount() {
-        return amount;
+    private String name;
+
+    public Cookie(String name) {
+        this.name = name;
     }
 
-    private int amount;
-
-    public Cookie(int amount) {
-        this.amount = amount;
+    public String getName() {
+        return name;
     }
-
 }
