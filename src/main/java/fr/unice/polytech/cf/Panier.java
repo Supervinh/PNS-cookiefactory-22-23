@@ -4,17 +4,17 @@ import java.util.List;
 
 public class Panier {
     private int price;
-    private List<Item> cookies;
+    private List<Cookie> cookies;
 
-    public Panier(List<Item> cookies) {
+    public Panier(List<Cookie> cookies) {
         this.cookies = cookies;
         this.price = 0;
-        for (Item item : cookies) {
-            this.price += item.getAmount() * item.getIngredient().getPrice();
+        for (Cookie cookie : cookies) {
+            this.price += cookie.getAmount() * cookie.getIngredient().getPrice();
         }
     }
 
-    public void addCookie(Item cookie) {
+    public void addCookie(Cookie cookie) {
         this.cookies.add(cookie);
         this.price += cookie.getIngredient().getPrice();
     }

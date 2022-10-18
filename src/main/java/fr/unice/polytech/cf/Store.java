@@ -135,37 +135,37 @@ public class Store {
      *
      * @return false in case of shortages
      **/
-    public boolean canTakeCareOf(List<Item> items) {
-        if (items == null) {
+    public boolean canTakeCareOf(List<Cookie> cookies) {
+        if (cookies == null) {
             throw new IllegalArgumentException("items must not be  null");
         }
         //check for ingredient shortage
-        return hasEnoughIngredientsFor(items);
+        return hasEnoughIngredientsFor(cookies);
     }
 
     /**
      * Count the quantity of each ingredient and check if the
      * stocks provide enough ingredients.
      *
-     * @param pItems the list of <code>Item</code>to check
+     * @param pCookies the list of <code>Item</code>to check
      * @return true if the stocks provide enough ingredients
      * false if not
      */
-    boolean hasEnoughIngredientsFor(List<Item> pItems) {
-        for (Item item : pItems) {
-            if (getAmountIngredient(item.getIngredient()) < item.getAmount())
+    boolean hasEnoughIngredientsFor(List<Cookie> pCookies) {
+        for (Cookie cookie : pCookies) {
+            if (getAmountIngredient(cookie.getIngredient()) < cookie.getAmount())
                 return false;
         }
         return true;
     }
 
-    public boolean update(List<Item> pItems) {
-        if (!hasEnoughIngredientsFor(pItems)) {
+    public boolean update(List<Cookie> pCookies) {
+        if (!hasEnoughIngredientsFor(pCookies)) {
             return false;
         }
-        for (Item item : pItems) {
+        for (Cookie cookie : pCookies) {
             try {
-                removeIngredientsFromStock(item.getIngredient(), item.getAmount());
+                removeIngredientsFromStock(cookie.getIngredient(), cookie.getAmount());
             } catch (CannotRemoveFromStock e) {
                 throw new RuntimeException("unexcepted" +  e);
             }

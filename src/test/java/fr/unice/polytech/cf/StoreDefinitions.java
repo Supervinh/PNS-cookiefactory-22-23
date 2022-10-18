@@ -1,8 +1,5 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Ingredient;
-import fr.unice.polytech.cf.Item;
-import fr.unice.polytech.cf.Store;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -23,7 +20,7 @@ public class StoreDefinitions {
 
     boolean updated;
 
-    List<Item> items;
+    List<Cookie> cookies;
     private boolean result;
 
     @Given("a store of name {string}")
@@ -63,9 +60,9 @@ public class StoreDefinitions {
     }
     @When("user asks the {int} of ingredients of name chocolate")
     public void the_demand_for_ingredients_of_name_chocolate(Integer amount) {
-        items = new ArrayList<>();
-        items.add((new Item(chocolate,amount)));
-        result = store.hasEnoughIngredientsFor(items);
+        cookies = new ArrayList<>();
+        cookies.add((new Cookie(chocolate,amount)));
+        result = store.hasEnoughIngredientsFor(cookies);
     }
 
     @Then("there is {int} ingredients of name chocolate  in the stock")
@@ -91,16 +88,16 @@ public class StoreDefinitions {
 
     @Given("a list of items of {int} chocolate, strawberry and almond")
     public void a_list_of_items_of_chocolate_as_strawberry_as_and_almond_as(Integer amount) {
-        items = new ArrayList<>();
-        items.add(new Item(chocolate,amount));
-        items.add(new Item(strawberry,amount));
-        items.add(new Item(almond,amount));
+        cookies = new ArrayList<>();
+        cookies.add(new Cookie(chocolate,amount));
+        cookies.add(new Cookie(strawberry,amount));
+        cookies.add(new Cookie(almond,amount));
     }
 
 
     @When("the manager asks store update with this list of items")
     public void update_is_asked_with_this_list_of_items() {
-        updated = store.update(items);
+        updated = store.update(cookies);
     }
 
     @Then("the stocks have been updated")

@@ -2,7 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.Ingredient;
 
-public class Item {
+public class Cookie {
     public int getAmount() {
         return amount;
     }
@@ -10,7 +10,7 @@ public class Item {
     private int amount;
     private Ingredient ingredient;
 
-    public Item(Ingredient recipe, int amount) {
+    public Cookie(Ingredient recipe, int amount) {
         this.ingredient = recipe;
         this.amount = amount;
     }

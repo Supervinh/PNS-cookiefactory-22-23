@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf;
 
-public class CompteClient {
+public class UserAccount {
     private String name;
     private boolean isVIP;
 }
