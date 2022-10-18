@@ -6,5 +6,5 @@ public enum CommandState {
     DELIVERED,
     WORKING_ON_IT,
     READY,
-    CANCELED,
+    CANCELLED,
 }
