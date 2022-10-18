@@ -1,7 +1,5 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Ingredient;
-import fr.unice.polytech.cf.Stock;
 import io.cucumber.java.fr.Alors;
 import io.cucumber.java.fr.Etantdonné;
 import io.cucumber.java.fr.Quand;
@@ -14,7 +12,7 @@ public class GestionDuStockDefinitions {
     boolean accepted;
     @Etantdonné("un stock contenant {int} doses de chocolats")
     public void un_stock_contenant_doses_de_chocolats(Integer number) {
-        stock = new Stock(new Ingredient("chocolate",0), number);
+        //stock = new Stock(new Ingredient("chocolate",0), number);
     }
 
     @Quand("le gestionnaire ajoute {int} doses de chocolats")

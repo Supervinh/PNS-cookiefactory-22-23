@@ -1,7 +1,5 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Ingredient;
-
 /**
  * Inspired from group e in 20-21
  *
@@ -9,7 +7,6 @@ import fr.unice.polytech.cf.Ingredient;
  * @version %I% %G%
  */
 public class Stock {
-    private Ingredient ingredient;
 
     public int getAmount() {
         return amount;
@@ -17,14 +14,10 @@ public class Stock {
 
     private int amount;
 
-    public Stock(Ingredient ingredient, int amount) {
-        this.ingredient = ingredient;
+    public Stock(int amount) {
         this.amount = amount;
     }
 
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
 
     /**
      * modify pAmount to the stock.

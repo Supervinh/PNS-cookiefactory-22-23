@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
 public class Order {
-    private Panier panier;
+    private Cart panier;
     private Store store;
 
 }

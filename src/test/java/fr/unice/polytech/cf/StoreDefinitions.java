@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StoreDefinitions {
 
-    Store store;
+    /*Store store;
     Ingredient chocolate = new Ingredient("chocolate",0);
     Ingredient strawberry = new Ingredient("strawberry",0);
     Ingredient almond = new Ingredient("almond",0);
@@ -130,5 +130,5 @@ public class StoreDefinitions {
     @Then("we expect the system to answer false")
     public void we_expect_the_system_to_answer_false() {
         assertFalse(result);
-    }
+    }*/
 }
