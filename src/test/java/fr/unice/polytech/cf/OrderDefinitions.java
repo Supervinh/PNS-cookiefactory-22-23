@@ -19,7 +19,7 @@ public class OrderDefinitions {
 
     Order order;
 
-    CookAccount cook;
+    CookAccount cook = new CookAccount("Gordon");
 
     UserAccount client = new UserAccount();
 
@@ -109,7 +109,10 @@ public class OrderDefinitions {
 
     @Then("the order's status should be {word}")
     public void theOrderSStatusShouldBe(String status) {
-        assert (cook.getOrder().getCommandState()==CommandState.valueOf(status));
+        if (cook.getOrder() != null)
+            assert (cook.getOrder().getCommandState()==CommandState.valueOf(status));
+        else
+            assert (client.getCurrentOrders().get(0).getCommandState()==CommandState.valueOf(status));
     }
 
     @And("the order is not paid")
