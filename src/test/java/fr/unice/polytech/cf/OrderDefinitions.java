@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.Exceptions.EmptyCartException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +11,10 @@ public class OrderDefinitions {
     Catalog catalog;
 
     boolean possible;
+
+    boolean ordered;
+
+    Order order;
 
     @And("the catalog contains the cookie {word}")
     public void the_catalog_contains_cookie(String cookie) {
@@ -56,4 +61,23 @@ public class OrderDefinitions {
     }
 
 
+    @When("the client confirm the order")
+    public void theClientConfirmTheOrder() throws CloneNotSupportedException {
+        try {
+            ordered = true;
+            order = cart.confirmOrder();
+        }catch (EmptyCartException e){
+            ordered = false;
+        }
+    }
+
+    @Then("the client should get notified that the order is empty")
+    public void theClientShouldGetNotifiedThatTheOrderIsEmpty() {
+        assert(!ordered);
+    }
+
+    @Then("the client should receive a purchase order")
+    public void theClientShouldReceiveAPurchaseOrder() {
+        assert(order!=null);
+    }
 }
