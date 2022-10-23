@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import java.util.ArrayList;
+
 public class CookAccount {
     private String name;
     private Order order;
@@ -26,5 +28,9 @@ public class CookAccount {
         if (order.getCommandState() == CommandState.WORKING_ON_IT){
             order.AdvanceOrder();
         }
+    }
+
+    public Order getOrder(){
+        return this.order;
     }
 }

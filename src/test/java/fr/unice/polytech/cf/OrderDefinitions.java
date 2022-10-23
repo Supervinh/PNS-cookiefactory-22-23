@@ -16,6 +16,8 @@ public class OrderDefinitions {
 
     Order order;
 
+    CookAccount cook;
+
     @And("the catalog contains the cookie {word}")
     public void the_catalog_contains_cookie(String cookie) {
         catalog = new Catalog();
@@ -79,5 +81,42 @@ public class OrderDefinitions {
     @Then("the client should receive a purchase order")
     public void theClientShouldReceiveAPurchaseOrder() {
         assert(order!=null);
+    }
+
+    @Given("the cook is working and has {int} order")
+    public void theCookIsWorkingAndHasOrder(int nbOrders) {
+        if (nbOrders == 0)
+            cook = new CookAccount("Gordon");
+        else{
+            Order cookOrder = new Order(new Cart());
+            cookOrder.setCommandState(CommandState.WORKING_ON_IT);
+            cook = new CookAccount("Gordon", cookOrder);
+        }
+    }
+
+    @When("the cook receive an order")
+    public void theCookReceiveAnOrder() {
+        Order receivedOrder = new Order(new Cart());
+        receivedOrder.setCommandState(CommandState.PAID);
+        cook.setOrder(receivedOrder);
+        cook.prepareOrder();
+    }
+
+    @Then("the order's status should be {word}")
+    public void theOrderSStatusShouldBe(String word) {
+        assert (cook.getOrder().getCommandState()==CommandState.valueOf(word));
+    }
+
+    @And("the order is not paid")
+    public void theOrderIsNotPaid() {
+        Order unpaidOrder = new Order(new Cart());
+        unpaidOrder.setCommandState(CommandState.UNPAID);
+        cook.setOrder(unpaidOrder);
+        cook.prepareOrder();
+    }
+
+    @When("the cook finishes to prepare the order")
+    public void theCookFinishesToPrepareTheOrder() {
+        cook.finishOrder();
     }
 }

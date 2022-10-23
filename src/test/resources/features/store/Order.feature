@@ -34,3 +34,19 @@ Feature: Order management
     When the client confirm the order
     Then the client should receive a purchase order
     And the cart should contain 0 cookies
+
+  Scenario: The cook receive an order
+    Given the cook is working and has 0 order
+    When the cook receive an order
+    Then the order's status should be WORKING_ON_IT
+
+  Scenario: The cook receive an order
+    Given the cook is working and has 1 order
+    When the cook finishes to prepare the order
+    Then the order's status should be READY
+
+  Scenario: The order is not "paid"
+    Given the cook is working and has 0 order
+    When the cook receive an order
+    And the order is not paid
+    Then the order's status should be UNPAID
