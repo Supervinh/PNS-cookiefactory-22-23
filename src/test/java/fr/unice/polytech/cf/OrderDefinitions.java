@@ -1,10 +1,13 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.Exceptions.EmptyCartException;
+import fr.unice.polytech.cf.Exceptions.OrderNotReadyException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.*;
 
 public class OrderDefinitions {
     Cart cart ;
@@ -17,6 +20,8 @@ public class OrderDefinitions {
     Order order;
 
     CookAccount cook;
+
+    UserAccount client = new UserAccount();
 
     @And("the catalog contains the cookie {word}")
     public void the_catalog_contains_cookie(String cookie) {
@@ -103,8 +108,8 @@ public class OrderDefinitions {
     }
 
     @Then("the order's status should be {word}")
-    public void theOrderSStatusShouldBe(String word) {
-        assert (cook.getOrder().getCommandState()==CommandState.valueOf(word));
+    public void theOrderSStatusShouldBe(String status) {
+        assert (cook.getOrder().getCommandState()==CommandState.valueOf(status));
     }
 
     @And("the order is not paid")
@@ -119,4 +124,37 @@ public class OrderDefinitions {
     public void theCookFinishesToPrepareTheOrder() {
         cook.finishOrder();
     }
+
+    @Given("the client has made an order")
+    public void theClientHasMadeAnOrder() {
+        client.addOrder(new Order(new Cart()));
+    }
+
+    @And("the client's order is ready")
+    public void theClientSOrderIsReady() {
+        client.getCurrentOrders().get(0).setCommandState(CommandState.READY);
+    }
+
+    @And("the client's order is not ready")
+    public void theClientSOrderIsNotReady() {
+        Random rnd = new Random();
+        CommandState randomState = CommandState.values()[rnd.nextInt(CommandState.values().length-1)];
+        client.getCurrentOrders().get(0).setCommandState(randomState);
+    }
+
+    @When("the client comes to retrieve the order")
+    public void theClientComesToRetrieveTheOrder() {
+        try {
+            client.retrieveOrder();
+        }catch (OrderNotReadyException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Then("the order's status should be the same as before")
+    public void theOrderSStatusShouldBeTheSameAsBefore() {
+        assert (client.getCurrentOrders().get(0).getCommandState() != CommandState.DELIVERED);
+    }
+
+
 }

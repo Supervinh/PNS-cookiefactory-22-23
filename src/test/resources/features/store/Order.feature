@@ -50,3 +50,15 @@ Feature: Order management
     When the cook receive an order
     And the order is not paid
     Then the order's status should be UNPAID
+
+  Scenario: The client tries to retrieve a finished order
+    Given the client has made an order
+    And the client's order is ready
+    When the client comes to retrieve the order
+    Then the order's status should be DELIVERED
+
+  Scenario: The client tries to retrieve an unfinished order
+    Given the client has made an order
+    And the client's order is not ready
+    When the client comes to retrieve the order
+    Then the order's status should be the same as before
