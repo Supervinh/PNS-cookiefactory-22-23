@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Exceptions.OrderNotReadyException;
+import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
 
 import java.util.ArrayList;
 import java.util.List;

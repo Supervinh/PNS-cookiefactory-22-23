@@ -1,8 +1,15 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.ingredients.*;
+
 public class Cookie {
     private final String name;
     private final double price;
+    private Cooking cooking;
+    private Dough dough;
+    private Flavour flavour;
+    private Mix mix;
+    private Topping topping;
 
     public Cookie(String name) {
         this.name = name;

@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Exceptions.EmptyCartException;
-import fr.unice.polytech.cf.Exceptions.OrderNotReadyException;
+import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

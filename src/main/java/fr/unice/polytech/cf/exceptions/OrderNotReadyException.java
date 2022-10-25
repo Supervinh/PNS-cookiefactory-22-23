@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf.Exceptions;
+package fr.unice.polytech.cf.exceptions;
 
 public class OrderNotReadyException extends Throwable{
 

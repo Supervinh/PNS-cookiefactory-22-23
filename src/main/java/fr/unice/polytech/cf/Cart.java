@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.Exceptions.EmptyCartException;
+import fr.unice.polytech.cf.exceptions.EmptyCartException;
 
 import java.util.ArrayList;
 import java.util.List;
