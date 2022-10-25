@@ -24,17 +24,29 @@ public class Order {
     public void setCommandState(CommandState commandState) {
         this.commandState = commandState;
     }
-    public void AdvanceOrder(){
-        switch (commandState) {
-            case UNPAID -> commandState = CommandState.PAID;
-            case PAID -> commandState = CommandState.WORKING_ON_IT;
-            case WORKING_ON_IT -> commandState = CommandState.READY;
-            case READY -> commandState = CommandState.DELIVERED;
+    public void paycommand(){
+        if(commandState==CommandState.UNPAID){
+            commandState=CommandState.PAID;
         }
-
     }
+    public void StartCook(){
+        if(commandState==CommandState.PAID){
+            commandState=CommandState.WORKING_ON_IT;
+        }
+    }
+    public void Ready(){
+        if(commandState==CommandState.WORKING_ON_IT){
+            commandState=CommandState.READY;
+        }
+    }
+    public void Delivered(){
+        if(commandState==CommandState.READY){
+            commandState=CommandState.DELIVERED;
+        }
+    }
+
     public void cancelOrder(){
-        if(commandState!=CommandState.WORKING_ON_IT || commandState!=CommandState.DELIVERED || commandState!=CommandState.READY ){
+        if(commandState==CommandState.PAID || commandState==CommandState.UNPAID ){
             commandState=CommandState.CANCELLED;
         }
         else{
