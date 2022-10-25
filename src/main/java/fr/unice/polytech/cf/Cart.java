@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class Cart implements Cloneable{
     private Map<Cookie, Integer> cookies;
-
     private double price;
 
     public Cart() {
@@ -15,6 +14,7 @@ public class Cart implements Cloneable{
     }
 
     public void addCookie(Cookie cookie, int number) {
+        if(number<1) throw new RuntimeException("Not a positive number of cookies");
         if(cookies.containsKey(cookie)){
             cookies.replace(cookie, cookies.get(cookie)+number);
         } else {
@@ -31,8 +31,16 @@ public class Cart implements Cloneable{
         return price;
     }
 
+    public int getNbCookies(){
+        int sum = 0;
+        for (Integer e : cookies.values()){
+            sum += e;
+        }
+        return sum;
+    }
+
     public Order confirmOrder() throws  EmptyCartException, CloneNotSupportedException {
-        if(cookies.size()!=0) {
+        if(!cookies.isEmpty()) {
             Order order = new Order((Cart) this.clone());
             this.cookies = new HashMap<>();
             return order;
