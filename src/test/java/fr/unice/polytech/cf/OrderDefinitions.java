@@ -43,15 +43,13 @@ public class OrderDefinitions {
     @Given("the cart contains {int} cookies")
     public void theCartContainsCookies(int number) {
         cart = new Cart();
-        for (int i = 0; i<number; i++)
-            cart.addCookie(new Cookie("chocolat"));
+        cart.addCookie(new Cookie("chocolat"), number);
     }
 
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer amount, String cookie) {
         if(possible){
-            for (int i = 0; i<amount; i++)
-                cart.addCookie(new Cookie( cookie));
+            cart.addCookie(new Cookie( cookie), amount);
         }
     }
 
