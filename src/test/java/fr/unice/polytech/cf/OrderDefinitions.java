@@ -141,7 +141,9 @@ public class OrderDefinitions {
     @And("the client's order is not ready")
     public void theClientSOrderIsNotReady() {
         Random rnd = new Random();
-        CommandState randomState = CommandState.values()[rnd.nextInt(CommandState.values().length-2)];
+        List<CommandState> possibleStates = new ArrayList<>( Arrays.asList(CommandState.values()));
+        possibleStates.remove(CommandState.DELIVERED);
+        CommandState randomState = possibleStates.get(rnd.nextInt(possibleStates.size()-1));
         client.getCurrentOrders().get(0).setCommandState(randomState);
     }
 
