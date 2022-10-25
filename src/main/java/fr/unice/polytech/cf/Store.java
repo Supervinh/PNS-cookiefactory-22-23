@@ -1,9 +1,6 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.ingredients.Ingredient;
-
 import java.time.LocalTime;
-import java.util.*;
 
 public class Store {
     private final String name;

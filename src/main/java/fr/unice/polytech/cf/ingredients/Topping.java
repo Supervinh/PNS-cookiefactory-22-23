@@ -1,22 +1,30 @@
 package fr.unice.polytech.cf.ingredients;
+public enum Topping {
+    WHITECHOCOLATE(1.5),
+    MILKCHOCOLATE(2.5),
+    MMS(3.5),
+    REESESBUTTERCUP(1.5);
 
-public class Topping implements Ingredient {
-    private String name;
     private double price;
 
-    public Topping(String name, double price) {
-        this.name = name;
+    Topping(double price) {
         this.price = price;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public double getPrice() {
         return price;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public static double getPrice(String topping) {
+        for (Dough t : Dough.values()) {
+            if (t.name().equals(topping)) {
+                return t.getPrice();
+            }
+        }
+        return 0;
+    }
 }

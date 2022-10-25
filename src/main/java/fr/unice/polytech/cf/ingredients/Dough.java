@@ -1,22 +1,30 @@
 package fr.unice.polytech.cf.ingredients;
+public enum Dough {
+    PLAIN(2.2),
+    CHOCOLATE(3),
+    PEANUTBUTTER(1.5),
+    OATMEAL(2);
 
-public class Dough implements Ingredient {
-    private String name;
     private double price;
 
-    public Dough(String name, double price) {
-        this.name = name;
+    Dough(double price) {
         this.price = price;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
     public double getPrice() {
         return price;
     }
-}
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public static double getPrice(String dough) {
+        for (Dough d : Dough.values()) {
+            if (d.name().equals(dough)) {
+                return d.getPrice();
+            }
+        }
+        return 0;
+    }
+}

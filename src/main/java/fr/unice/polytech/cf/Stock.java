@@ -24,19 +24,19 @@ public class Stock {
     }
 
     private void initStock(){
-        doughStock.put(new Dough("Plain", 2.2), 20);
-        doughStock.put(new Dough("Chocolate", 3), 20);
-        doughStock.put(new Dough("Peanut butter", 1.5), 20);
-        doughStock.put(new Dough("Oatmeal", 2), 20);
+        doughStock.put(Dough.PLAIN, 20);
+        doughStock.put(Dough.CHOCOLATE, 20);
+        doughStock.put(Dough.PEANUTBUTTER, 20);
+        doughStock.put(Dough.OATMEAL, 20);
 
-        flavourStock.put(new Flavour("Vanilla", 2), 20);
-        flavourStock.put(new Flavour("Cinnamon", 2.5), 20);
-        flavourStock.put(new Flavour("Chili", 3), 20);
+        flavourStock.put(Flavour.VANILLA, 20);
+        flavourStock.put(Flavour.CINNAMON, 20);
+        flavourStock.put(Flavour.CHILI, 20);
 
-        toppingStock.put(new Topping("White Chocolate", 1.5), 20);
-        toppingStock.put(new Topping("Milk Chocolate", 2.5), 20);
-        toppingStock.put(new Topping("M&M’s", 3.5), 20);
-        toppingStock.put(new Topping(" Reese’s buttercup", 1.5), 20);
+        toppingStock.put(Topping.WHITECHOCOLATE, 20);
+        toppingStock.put(Topping.MILKCHOCOLATE, 20);
+        toppingStock.put(Topping.MMS, 20);
+        toppingStock.put(Topping.REESESBUTTERCUP, 20);
     }
 
 
