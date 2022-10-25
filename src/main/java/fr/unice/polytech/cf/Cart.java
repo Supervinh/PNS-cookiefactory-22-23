@@ -28,7 +28,7 @@ public class Cart implements Cloneable{
         return price;
     }
 
-    public Order confirmOrder() throws CloneNotSupportedException, EmptyCartException {
+    public Order confirmOrder() throws  EmptyCartException, CloneNotSupportedException {
         if(cookies.size()!=0) {
             Order order = new Order((Cart) this.clone());
             this.cookies = new ArrayList<>();

@@ -27,7 +27,7 @@ public class UserAccount {
         if(currentOrders.get(0).getCommandState() != CommandState.READY){
             throw new OrderNotReadyException();
         }else{
-            currentOrders.get(0).AdvanceOrder();    // TODO: rajouter la commande terminer à l'historique des commandes et la supprimer des commandes actuelles
+            currentOrders.get(0).Delivered();    // TODO: rajouter la commande terminer à l'historique des commandes et la supprimer des commandes actuelles
         }
     }
     public void utiliseReduction(){

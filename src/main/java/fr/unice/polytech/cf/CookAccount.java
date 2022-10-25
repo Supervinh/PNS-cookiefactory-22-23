@@ -21,12 +21,12 @@ public class CookAccount {
 
     public void prepareOrder() {
       if (order.getCommandState() == CommandState.PAID){
-          order.AdvanceOrder();
+          order.StartCook();
       }
     }
     public void finishOrder(){
         if (order.getCommandState() == CommandState.WORKING_ON_IT){
-            order.AdvanceOrder();
+            order.Ready();
         }
     }
 
