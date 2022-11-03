@@ -13,12 +13,11 @@ public class CartDefinitions {
     boolean ordered;
     Order order;
 
-    @Given("the cart contains {int} cookies")
-    public void theCartContainsCookies(int number) {
+    @Given("the cart contains {int} cookies {word}")
+    public  void theCartContainsThisCookies(int number, String name){
         cart = new Cart();
-        if(number>0){
-            cart.addCookie(new Cookie("chocolat"), number);
-        }
+        try {cart.addCookie(new Cookie(name), number);}
+        catch (RuntimeException ignored){}
     }
 
     @And("the catalog contains the cookie {word}")
@@ -33,13 +32,9 @@ public class CartDefinitions {
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer amount, String cookie) {
         if(possible){
-            cart.addCookie(new Cookie( cookie), amount);
+            try {cart.addCookie(new Cookie(cookie), amount);}
+            catch (RuntimeException ignored){}
         }
-    }
-
-    @Then("the cart should contain {int} cookies")
-    public void the_cart_should_contain_cookies(Integer number) {
-        assert (cart.getNbCookies()==number);
     }
 
     @When("the client confirm the order")
@@ -52,6 +47,16 @@ public class CartDefinitions {
         }
     }
 
+    @Then("the cart should contain {int} cookies")
+    public void the_cart_should_contain_cookies(Integer number) {
+        assert (cart.getNbCookies()==number);
+    }
+
+    @Then("the cart should contain {int} cookies {word}")
+    public void theCartShouldContainThisCookies(int number, String name){
+       assert (cart.getCookies().get(name) == number);
+    }
+
     @Then("the client should receive a purchase order")
     public void theClientShouldReceiveAPurchaseOrder() {
         assert(order!=null);
@@ -61,4 +66,7 @@ public class CartDefinitions {
     public void theClientShouldGetNotifiedThatTheOrderIsEmpty() {
         assert(!ordered);
     }
+
+    @Then("the cart should be empty")
+    public void theCartIsEmpty(){assert (cart.getNbCookies() == 0);}
 }

@@ -102,6 +102,4 @@ public class OrderDefinitions {
     public void theOrderSStatusShouldBeTheSameAsBefore() {
         assert (client.getCurrentOrders().get(0).getCommandState() != CommandState.DELIVERED);
     }
-
-
 }
