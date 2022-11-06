@@ -7,6 +7,7 @@ import java.util.Map;
 public class Cart implements Cloneable{
     private Map<Cookie, Integer> cookies;
     private double price;
+    private double cookingTime = 15;
 
     public Cart() {
         this.cookies = new HashMap<>();
@@ -21,6 +22,7 @@ public class Cart implements Cloneable{
             cookies.put(cookie, number);
         }
         price += cookie.getPrice()*number;
+        cookingTime =cookie.getCookingTime()*number;
     }
 
     public Map<Cookie, Integer> getCookies() {
@@ -30,6 +32,8 @@ public class Cart implements Cloneable{
     public double getPrice() {
         return price;
     }
+
+    public double cookingTime() {return cookingTime;}
 
     public int getNbCookies(){
         int sum = 0;
