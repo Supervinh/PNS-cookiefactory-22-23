@@ -1,8 +1,11 @@
 package fr.unice.polytech.cf;
 
+import java.util.Random;
+
 public class Order {
     private Cart cart;
     //private Store store;
+    private int CommandNumber;
 
     private CommandState commandState;
 
@@ -14,11 +17,20 @@ public class Order {
     public Order(Cart cart){
         this.commandState=CommandState.UNPAID;
         this.cart=cart;
+        this.CommandNumber= new Random().nextInt(1,2000000);
 
     }
 
     public CommandState getCommandState() {
         return commandState;
+    }
+
+    public int getCommandNumber() {
+        if(commandState!=CommandState.UNPAID){
+        return CommandNumber;}
+        else{
+            return 0;
+        }
     }
 
     public void setCommandState(CommandState commandState) {
