@@ -1,5 +1,5 @@
 package fr.unice.polytech.cf.ingredients;
-public enum Topping {
+public enum Topping implements Ingredient {
     WHITECHOCOLATE(1.5),
     MILKCHOCOLATE(2.5),
     MMS(3.5),
@@ -19,7 +19,7 @@ public enum Topping {
         this.price = price;
     }
 
-    public static double getPrice(String topping) {
+    public double getPrice(String topping) {
         for (Dough t : Dough.values()) {
             if (t.name().equals(topping)) {
                 return t.getPrice();

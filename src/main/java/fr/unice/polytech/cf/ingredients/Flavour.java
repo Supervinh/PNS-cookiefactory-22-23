@@ -1,5 +1,5 @@
 package fr.unice.polytech.cf.ingredients;
-public enum Flavour {
+public enum Flavour implements Ingredient {
     VANILLA(2),
     CINNAMON(2.5),
     CHILI(3);
@@ -18,7 +18,7 @@ public enum Flavour {
         this.price = price;
     }
 
-    public static double getPrice(String flavor) {
+    public double getPrice(String flavor) {
         for (Flavour f : Flavour.values()) {
             if (f.name().equals(flavor)) {
                 return f.getPrice();

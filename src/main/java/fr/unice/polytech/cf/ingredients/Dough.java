@@ -1,5 +1,5 @@
 package fr.unice.polytech.cf.ingredients;
-public enum Dough {
+public enum Dough implements Ingredient {
     PLAIN(2.2),
     CHOCOLATE(3),
     PEANUTBUTTER(1.5),
@@ -19,7 +19,7 @@ public enum Dough {
         this.price = price;
     }
 
-    public static double getPrice(String dough) {
+    public double getPrice(String dough) {
         for (Dough d : Dough.values()) {
             if (d.name().equals(dough)) {
                 return d.getPrice();

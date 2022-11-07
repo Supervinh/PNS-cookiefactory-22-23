@@ -51,4 +51,24 @@ public class Cookie {
     public double getPrice() {
         return price;
     }
+
+    public Flavour getFlavour() {
+        return flavour;
+    }
+
+    public Dough getDough() {
+        return dough;
+    }
+
+    public List<Topping> getTopping() {
+        return topping;
+    }
+
+    public List<Ingredient> getIngredients() {
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(dough);
+        ingredients.add(flavour);
+        ingredients.addAll(topping);
+        return ingredients;
+    }
 }
