@@ -11,9 +11,12 @@ public class Cookie {
     private double cookingTime;
     private Cooking cooking;
     private Dough dough;
+    private IngredientTest doughTest;
     private Flavour flavour;
+    private IngredientTest flavourTest;
     private Mix mix;
     private List<Topping> topping;
+    private List<IngredientTest> toppingTest;
 
     public Cookie(String name) {
         this.name = name;
@@ -40,6 +43,20 @@ public class Cookie {
         this.topping = new ArrayList<>(topping);
         this.price = this.dough.getPrice() + this.flavour.getPrice() + this.topping.stream().mapToDouble(Topping::getPrice).sum();
         this.cookingTime = cookingTime;
+    }
+
+    public Cookie(String name, Cooking cooking, IngredientTest dough, IngredientTest flavour, Mix mix, List<IngredientTest> toppings){
+        this.name = name;
+        this.cooking = cooking;
+        this.doughTest = dough;
+        this.flavourTest = flavour;
+        this.mix = mix;
+        this.topping = new ArrayList<>();
+        for(IngredientTest t : toppings){
+            this.toppingTest.add(t);
+        }
+        this.price = this.doughTest.getPrice() + this.flavourTest.getPrice() + this.toppingTest.stream().mapToDouble(IngredientTest::getPrice).sum();
+        this.cookingTime = 5;
     }
 
     public String getName() {

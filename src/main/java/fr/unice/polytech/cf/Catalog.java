@@ -1,9 +1,6 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.ingredients.Cooking;
-import fr.unice.polytech.cf.ingredients.Dough;
-import fr.unice.polytech.cf.ingredients.Flavour;
-import fr.unice.polytech.cf.ingredients.Mix;
+import fr.unice.polytech.cf.ingredients.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,9 @@ public class Catalog {
 
     private void initCatalog() {
         this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, Dough.CHOCOLATE, Flavour.CINNAMON, Mix.MIXED, new ArrayList<>()));
+        ArrayList<IngredientTest> toppings = new ArrayList<>();
+        //this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, new IngredientTest("Dough", "Chocolat", 3),
+                //new IngredientTest("Flavour", "Cinnamon", 2.5), Mix.MIXED, toppings));
     }
 
 
