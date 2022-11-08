@@ -46,7 +46,9 @@ public class Cookie {
         return name;
     }
 
-    public double getCookingTime() {return cookingTime;}
+    public double getCookingTime() {
+        return cookingTime;
+    }
 
     public double getPrice() {
         return price;

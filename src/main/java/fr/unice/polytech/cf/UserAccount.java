@@ -6,31 +6,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAccount {
+    private final List<Order> currentOrders;
     private String name;
     private boolean isVIP;
     private String surname;
     private String mail;
-    private final List<Order> currentOrders;
 
-    public UserAccount(){
+    public UserAccount() {
         currentOrders = new ArrayList<>();
     }
 
-    public List<Order> getCurrentOrders(){
+    public List<Order> getCurrentOrders() {
         return new ArrayList<>(currentOrders);
     }
 
-    public void addOrder(Order newOrder){
+    public void addOrder(Order newOrder) {
         currentOrders.add(newOrder);
     }
+
     public void retrieveOrder() throws OrderNotReadyException {    // Pour le moment nous récupérons la première commande de la liste
-        if(currentOrders.get(0).getCommandState() != CommandState.READY){
+        if (currentOrders.get(0).getCommandState() != CommandState.READY) {
             throw new OrderNotReadyException();
-        }else{
+        } else {
             currentOrders.get(0).Delivered();    // TODO: rajouter la commande terminer à l'historique des commandes et la supprimer des commandes actuelles
         }
     }
-    public void utiliseReduction(){
+
+    public void utiliseReduction() {
         //TODO
     }
 }

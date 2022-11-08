@@ -6,7 +6,7 @@ public class Store {
     private final String name;
     private final LocalTime openingTime;
     private final LocalTime closingTime;
-    private Stock stock;
+    private final Stock stock;
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
