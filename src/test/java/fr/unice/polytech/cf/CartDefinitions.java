@@ -54,7 +54,9 @@ public class CartDefinitions {
 
     @Then("the cart should contain {int} cookies {word}")
     public void theCartShouldContainThisCookies(int number, String name){
-       assert (cart.getCookies().get(name) == number);
+        for (Cookie cookie : cart.getCookies().keySet()) {
+            if(cookie.getName()==(name)) assert (cart.getCookies().get(cookie) == number);
+        }
     }
 
     @Then("the client should receive a purchase order")
