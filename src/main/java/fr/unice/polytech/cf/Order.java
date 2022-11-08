@@ -36,21 +36,12 @@ public class Order {
     public void setCommandState(CommandState commandState) {
         this.commandState = commandState;
     }
-    public void paycommand(){
-        if(commandState==CommandState.UNPAID){
-            commandState=CommandState.PAID;
+    public void paycommand() {
+        if (commandState == CommandState.UNPAID) {
+            commandState = CommandState.PAID;
         }
     }
-    public void StartCook(){
-        if(commandState==CommandState.PAID){
-            commandState=CommandState.WORKING_ON_IT;
-        }
-    }
-    public void Ready(){
-        if(commandState==CommandState.WORKING_ON_IT){
-            commandState=CommandState.READY;
-        }
-    }
+
     public void Delivered(){
         if(commandState==CommandState.READY){
             commandState=CommandState.DELIVERED;
