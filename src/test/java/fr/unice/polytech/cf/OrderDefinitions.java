@@ -85,6 +85,7 @@ public class OrderDefinitions {
         Random rnd = new Random();
         List<CommandState> possibleStates = new ArrayList<>( Arrays.asList(CommandState.values()));
         possibleStates.remove(CommandState.DELIVERED);
+        possibleStates.remove(CommandState.READY);
         CommandState randomState = possibleStates.get(rnd.nextInt(possibleStates.size()-1));
         client.getCurrentOrders().get(0).setCommandState(randomState);
     }
