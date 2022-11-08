@@ -20,6 +20,15 @@ public class Catalog {
         this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, Dough.CHOCOLATE, Flavour.CINNAMON, Mix.MIXED, new ArrayList<>()));
     }
 
+    public Cookie getCookie(String name){
+        for(Cookie c : this.cookies){
+            if (c.getName().equals(name)){
+                return c;
+            }
+        }
+        throw new RuntimeException("Cookie recipe does not exist");
+    }
+
     public void addCookie(Cookie cookie){
         this.cookies.add(cookie);
     }

@@ -29,7 +29,7 @@ public class CookAccount {
             order.setCommandState(CommandState.READY);
         }
     }
-    
+
     public Order getOrder(){
         return this.order;
     }
