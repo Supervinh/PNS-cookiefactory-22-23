@@ -1,6 +1,9 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.ingredients.Ingredient;
+
 import java.time.LocalTime;
+import java.util.Map;
 
 public class Store {
     private final String name;
@@ -27,29 +30,21 @@ public class Store {
         return closingTime;
     }
 
-    /*public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void addIngredient(Ingredient ingredient) {
-        ingredients.add(ingredient);
+    public Map<Ingredient, Integer> getIngredients() {
+        return stock.getIngredients();
     }
 
     public void addStock(Ingredient ingredient, int quantity) {
-        stock.put(ingredient, quantity);
-    }
-
-    public int getStock(Ingredient ingredient) {
-        return stock.getOrDefault(ingredient, 0);
-    }
-
-    public boolean isIngredientAvailable(Ingredient ingredient) {
-        return getStock(ingredient) > 0;
+        stock.addIngredient(ingredient, quantity);
     }
 
     public void removeStock(Ingredient ingredient, int quantity) {
-        stock.put(ingredient, getStock(ingredient) - quantity);
-    }*/
+        stock.removeIngredient(ingredient, quantity);
+    }
+
+    public boolean isCookieAvailable(Cookie cookie) {
+        return stock.canBeRemoved(cookie);
+    }
 
     public boolean isClosed(LocalTime time) {
         return time.isBefore(openingTime) || time.isAfter(closingTime);

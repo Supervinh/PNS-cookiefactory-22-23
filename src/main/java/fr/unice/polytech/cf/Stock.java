@@ -9,14 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Stock {
-
-    /*public int getAmount() {
-        return amount;
-    }
-
-    private int amount;*/
-
-    private Map<Ingredient, Integer> stock;
+    private final Map<Ingredient, Integer> stock;
 
 
     public Stock() {
@@ -41,16 +34,41 @@ public class Stock {
     }
 
 
+    public Map<Ingredient, Integer> getIngredients() {
+        return stock;
+    }
+
+    public void addIngredient(Ingredient ingredient, int quantity) {
+        if (quantity < 1) throw new RuntimeException("Not a positive number of cookies");
+        if (stock.containsKey(ingredient)) {
+            stock.replace(ingredient, stock.get(ingredient) + quantity);
+        } else {
+            stock.put(ingredient, quantity);
+        }
+    }
+
+    public void removeIngredient(Ingredient ingredient, int quantity) {
+        if (quantity < 1) throw new RuntimeException("Not a positive number of ingredients");
+        if (stock.containsKey(ingredient)) {
+            if (stock.get(ingredient) >= quantity) {
+                stock.replace(ingredient, stock.get(ingredient) - quantity);
+            } else {
+                throw new RuntimeException("Not enough ingredients in stock");
+            }
+        } else {
+            throw new RuntimeException("No ingredients in stock");
+        }
+    }
+
     /**
      * modify pAmount to the stock.
      * When pAmount is negative, the amount is retracted.
      *
-     * @param pAmount
-     * <code>true</code> otherwise.
+     * @param pAmount <code>true</code> otherwise.
      */
     public void removeFromStock(int pAmount, Ingredient pIngredient) {
-            int newAmount = stock.get(pIngredient) - pAmount;
-            stock.replace(pIngredient, newAmount);
+        int newAmount = stock.get(pIngredient) - pAmount;
+        stock.replace(pIngredient, newAmount);
     }
 
     public boolean removeCookieFromStock(Cookie pCookie) {
@@ -66,7 +84,7 @@ public class Stock {
     public boolean canBeRemoved(Cookie pCookie) {
         for (Ingredient ingredient : pCookie.getIngredients()) {
             if (stock.get(ingredient) < 1) {
-                throw new RuntimeException("Not enough ingredients");
+                throw new RuntimeException("Not enough ingredients, try another store");
             }
         }
         return true;
