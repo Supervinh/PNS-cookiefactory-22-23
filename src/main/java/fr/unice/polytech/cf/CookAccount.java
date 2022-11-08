@@ -21,15 +21,15 @@ public class CookAccount {
 
     public void prepareOrder() {
       if (order.getCommandState() == CommandState.PAID){
-          order.StartCook();
+          order.setCommandState(CommandState.WORKING_ON_IT);
       }
     }
     public void finishOrder(){
         if (order.getCommandState() == CommandState.WORKING_ON_IT){
-            order.Ready();
+            order.setCommandState(CommandState.READY);
         }
     }
-
+    
     public Order getOrder(){
         return this.order;
     }

@@ -5,7 +5,7 @@ import java.util.Random;
 public class Order {
     private Cart cart;
     //private Store store;
-    private int CommandNumber;
+    private int CommandNumber=1;
 
     private CommandState commandState;
 
@@ -17,7 +17,7 @@ public class Order {
     public Order(Cart cart){
         this.commandState=CommandState.UNPAID;
         this.cart=cart;
-        this.CommandNumber= new Random().nextInt(1,2000000);
+        //this.CommandNumber= new Random().nextInt(1,2000000);
 
     }
 
@@ -32,25 +32,20 @@ public class Order {
             return 0;
         }
     }
+    public void getreceipt(){
+        System.out.println(cart.getCookies());
+        System.out.println(cart.getPrice());
+    }
 
     public void setCommandState(CommandState commandState) {
         this.commandState = commandState;
     }
-    public void paycommand(){
-        if(commandState==CommandState.UNPAID){
-            commandState=CommandState.PAID;
+    public void paycommand() {
+        if (commandState == CommandState.UNPAID) {
+            commandState = CommandState.PAID;
         }
     }
-    public void StartCook(){
-        if(commandState==CommandState.PAID){
-            commandState=CommandState.WORKING_ON_IT;
-        }
-    }
-    public void Ready(){
-        if(commandState==CommandState.WORKING_ON_IT){
-            commandState=CommandState.READY;
-        }
-    }
+
     public void Delivered(){
         if(commandState==CommandState.READY){
             commandState=CommandState.DELIVERED;
