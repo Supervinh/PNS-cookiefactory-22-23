@@ -17,8 +17,8 @@ public class Catalog {
         this.cookies.add(new Cookie("chocolate", Cooking.CRUNCHY, Dough.CHOCOLATE, Flavour.CINNAMON, Mix.MIXED, new ArrayList<>()));
         this.cookies.add(new Cookie("caramel", Cooking.CRUNCHY, Dough.PLAIN, Flavour.VANILLA, Mix.MIXED, new ArrayList<>()));
         ArrayList<IngredientTest> toppings = new ArrayList<>();
-        //this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, new IngredientTest("Dough", "Chocolat", 3),
-                //new IngredientTest("Flavour", "Cinnamon", 2.5), Mix.MIXED, toppings));
+        this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, new IngredientTest(IngredientEnum.DOUGH, "Chocolat", 3),
+                new IngredientTest(IngredientEnum.FLAVOUR, "Cinnamon", 2.5), Mix.MIXED, toppings));
     }
 
 

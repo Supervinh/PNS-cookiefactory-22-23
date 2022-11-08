@@ -51,7 +51,7 @@ public class Cookie {
         this.doughTest = dough;
         this.flavourTest = flavour;
         this.mix = mix;
-        this.topping = new ArrayList<>();
+        this.toppingTest = new ArrayList<>();
         for(IngredientTest t : toppings){
             this.toppingTest.add(t);
         }
