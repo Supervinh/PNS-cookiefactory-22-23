@@ -39,3 +39,8 @@ Feature: Order management
     And the client's order is not ready
     When the client comes to retrieve the order
     Then the order's status should be the same as before
+
+   Scenario: the client want a receipt
+     Given  the client has made an order
+     And  the order is paid
+     Then the client receive a receipt for his last order

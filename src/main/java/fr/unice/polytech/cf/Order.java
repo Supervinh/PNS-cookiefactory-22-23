@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class Order {
@@ -32,9 +34,20 @@ public class Order {
             return 0;
         }
     }
-    public void getreceipt(){
-        System.out.println(cart.getCookies());
-        System.out.println(cart.getPrice());
+    public String getreceipt(){
+        if(commandState!=CommandState.UNPAID){
+        String info=cart.getPrice()+"\n";
+            Map<Cookie,Integer> allcookie=cart.getCookies();
+            for (Map.Entry mapentry : allcookie.entrySet()){
+                Cookie b=(Cookie)mapentry.getKey();
+                info=info+b.getName()+"\n";
+            }
+        return info;
+        }
+        else{
+            return("commande non validé");
+        }
+
     }
 
     public void setCommandState(CommandState commandState) {

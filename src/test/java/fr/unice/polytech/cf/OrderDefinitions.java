@@ -64,6 +64,15 @@ public class OrderDefinitions {
         cook.setOrder(unpaidOrder);
         cook.prepareOrder();
     }
+    @And("the order is paid")
+    public void theLastOrderIsPaid(){
+        Cart cart=new Cart();
+        cart.addCookie(new Cookie("sablé"),1);
+        Order paidOrder = new Order(cart);
+        paidOrder.setCommandState(CommandState.PAID);
+        client.addOrder(paidOrder);
+        client.getCurrentOrders().get(client.getCurrentOrders().size()-1).setCommandState(CommandState.PAID);
+    }
 
     @When("the cook finishes to prepare the order")
     public void theCookFinishesToPrepareTheOrder() {
@@ -102,5 +111,9 @@ public class OrderDefinitions {
     @Then("the order's status should be the same as before")
     public void theOrderSStatusShouldBeTheSameAsBefore() {
         assert (client.getCurrentOrders().get(0).getCommandState() != CommandState.DELIVERED);
+    }
+    @Then("the client receive a receipt for his last order")
+    public void theClientReceiveAReceipt(){
+        assert(client.getCurrentOrders().get(client.getCurrentOrders().size()-1).getreceipt().equals("5.0"+"\n"+"sablé"+"\n"));
     }
 }
