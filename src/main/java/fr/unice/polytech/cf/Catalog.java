@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Catalog {
-    private List<Cookie> cookies;
+    private final List<Cookie> cookies;
 
     public Catalog() {
         this.cookies = new ArrayList<>();
@@ -20,17 +20,17 @@ public class Catalog {
         this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, Dough.CHOCOLATE, Flavour.CINNAMON, Mix.MIXED, new ArrayList<>()));
     }
 
-    public void addCookie(Cookie cookie) {
-    public Cookie getCookie(String name){
-        for(Cookie c : this.cookies){
-            if (c.getName().equals(name)){
+
+    public Cookie getCookie(String name) {
+        for (Cookie c : this.cookies) {
+            if (c.getName().equals(name)) {
                 return c;
             }
         }
         throw new RuntimeException("Cookie recipe does not exist");
     }
 
-    public void addCookie(Cookie cookie){
+    public void addCookie(Cookie cookie) {
         this.cookies.add(cookie);
     }
 
