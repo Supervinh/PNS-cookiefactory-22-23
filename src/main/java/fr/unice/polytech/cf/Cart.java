@@ -8,11 +8,12 @@ import java.util.Map;
 public class Cart implements Cloneable {
     private Map<Cookie, Integer> cookies;
     private double price;
-    private double cookingTime = 15;
+    private double cookingTime;
 
     public Cart() {
         this.cookies = new HashMap<>();
         price = 0;
+        cookingTime = 15;
     }
 
     public void addCookie(Cookie cookie, int number) {

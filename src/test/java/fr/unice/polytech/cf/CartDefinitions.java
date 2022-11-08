@@ -16,25 +16,31 @@ public class CartDefinitions {
     @Given("the cart contains {int} cookies {word}")
     public  void theCartContainsThisCookies(int number, String name){
         cart = new Cart();
-        try {cart.addCookie(new Cookie(name), number);}
+        catalog = new Catalog();
+        for (Cookie c:catalog.getCookies()) {
+            System.out.println(c.getName());
+        }
+        System.out.println();
+        try {cart.addCookie(catalog.getCookie(name), number);}
         catch (RuntimeException ignored){}
+        System.out.println("init cart" + cart.getCookies().values());
     }
 
     @And("the catalog contains the cookie {word}")
     public void the_catalog_contains_cookie(String cookie) {
-        catalog = new Catalog();
         if (!catalog.hasCookie(cookie))
-            catalog.addCookie(new Cookie("chocolate"));
+            catalog.addCookie(new Cookie("bland"));
         possible = true;
         assert(catalog.hasCookie(cookie));
     }
 
     @When("the client add {int} {word} to the cart")
-    public void the_client_add_cookie_s_to_the_cart(Integer amount, String cookie) {
+    public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
         if(possible){
-            try {cart.addCookie(new Cookie(cookie), amount);}
+            try {cart.addCookie(catalog.getCookie(name), number);}
             catch (RuntimeException ignored){}
         }
+        System.out.println("init cart" + cart.getCookies().values());
     }
 
     @When("the client confirm the order")
@@ -54,9 +60,8 @@ public class CartDefinitions {
 
     @Then("the cart should contain {int} cookies {word}")
     public void theCartShouldContainThisCookies(int number, String name){
-        for (Cookie cookie : cart.getCookies().keySet()) {
-            if(cookie.getName()==(name)) assert (cart.getCookies().get(cookie) == number);
-        }
+        System.out.println("init cart" + cart.getCookies().values());
+        if(catalog.hasCookie(name)) assert (cart.getCookies().get(catalog.getCookie(name)) == number);
     }
 
     @Then("the client should receive a purchase order")
