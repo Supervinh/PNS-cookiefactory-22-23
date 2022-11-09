@@ -9,7 +9,6 @@ import io.cucumber.java.en.When;
 public class CartDefinitions {
     Cart cart ;
     Catalog catalog;
-    boolean possible;
     boolean ordered;
     Order order;
 
@@ -17,30 +16,26 @@ public class CartDefinitions {
     public  void theCartContainsThisCookies(int number, String name){
         cart = new Cart();
         catalog = new Catalog();
-        for (Cookie c:catalog.getCookies()) {
-            System.out.println(c.getName());
-        }
-        System.out.println();
         try {cart.addCookie(catalog.getCookie(name), number);}
         catch (RuntimeException ignored){}
-        System.out.println("init cart" + cart.getCookies().values());
+        System.out.println(catalog.getCookie(name).getName() + catalog.getCookie(name).getCookingTime() + catalog.getCookie(name).getPrice());
     }
 
-    @And("the catalog contains the cookie {word}")
-    public void the_catalog_contains_cookie(String cookie) {
-        if (!catalog.hasCookie(cookie))
-            catalog.addCookie(new Cookie("bland"));
-        possible = true;
-        assert(catalog.hasCookie(cookie));
+    @And("the cookie {word} price is {double}")
+    public void theCookiePriceIs(String name, double price){
+        assert catalog.getCookie(name).getPrice() == price;
+    }
+
+    @And("the cookie {word} cooking time is {double}")
+    public void theCookieTimeIs(String name, double time){
+        assert catalog.getCookie(name).getCookingTime() == time;
     }
 
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
-        if(possible){
-            try {cart.addCookie(catalog.getCookie(name), number);}
-            catch (RuntimeException ignored){}
-        }
-        System.out.println("init cart" + cart.getCookies().values());
+        try {cart.addCookie(catalog.getCookie(name), number);}
+        catch (RuntimeException ignored){}
+        System.out.println("add to cart" + cart.getCookies().values());
     }
 
     @When("the client confirm the order")
@@ -76,4 +71,12 @@ public class CartDefinitions {
 
     @Then("the cart should be empty")
     public void theCartIsEmpty(){assert (cart.getNbCookies() == 0);}
+
+    @Then("the cart's price should be {double}")
+    public void thePriceShouldBe(double price){
+        System.out.println(cart.getPrice());
+        assert cart.getPrice() == price;}
+
+    @Then("the coocking time should be {double}")
+    public void theCookingTimeshouldBe(double time){assert cart.cookingTime()==time;}
 }

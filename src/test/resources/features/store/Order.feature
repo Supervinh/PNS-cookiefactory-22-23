@@ -2,14 +2,14 @@ Feature: Order management
 
   Scenario: adding a cookie not contained in the catalog to an empty cart
     Given the cart contains 0 cookies chocolate
-    And the catalog does not contains the cookie skdq
-    When the client add 1 chocolate to the cart
+    And the catalog does not contains the cookie cramberry
+    When the client add 1 cramberry to the cart
     Then the cart should contain 0 cookies
 
   Scenario: adding a cookie not contained in the catalog to a cart already containing cookies
     Given the cart contains 3 cookies chocolate
     And the catalog does not contains the cookie cramberry
-    When the client add 1 chocolate to the cart
+    When the client add 1 cramberry to the cart
     Then the cart should contain 3 cookies
 
   Scenario: The cook receive an order
