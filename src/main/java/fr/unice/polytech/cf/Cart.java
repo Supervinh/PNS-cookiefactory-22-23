@@ -24,7 +24,7 @@ public class Cart implements Cloneable {
             cookies.put(cookie, number);
         }
         price += cookie.getPrice() * number;
-        cookingTime = cookie.getCookingTime() * number;
+        cookingTime += cookie.getCookingTime() * number;
     }
 
     public Map<Cookie, Integer> getCookies() {

@@ -41,14 +41,26 @@ Feature: Cart management
     Then the client should receive a purchase order
     And the cart should contain 0 cookies
 
-  Scenario: adding cookie to cart
+  Scenario: checking price when adding cookie to cart
     Given the cart contains 3 cookies chocolate
     And the cookie chocolate price is 5.5
     Then the cart's price should be 16.5
 
-  Scenario: adding cookie to cart
+  Scenario: checking price when adding cookie to cart
     Given the cart contains 3 cookies chocolate
     And the cookie chocolate price is 5.5
     And the cookie caramel price is 4.2
     When the client add 2 caramel to the cart
     Then the cart's price should be 24.9
+
+  Scenario: checking time when adding cookie to cart
+    Given the cart contains 3 cookies chocolate
+    And the cookie chocolate cooking time is 5.0
+    Then the cart's coocking time should be 30.0
+
+  Scenario: checking time when adding cookie to cart
+    Given the cart contains 3 cookies chocolate
+    And the cookie chocolate cooking time is 5.0
+    And the cookie caramel cooking time is 5.0
+    When the client add 2 caramel to the cart
+    Then the cart's coocking time should be 40.0

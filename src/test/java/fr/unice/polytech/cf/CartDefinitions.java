@@ -73,10 +73,10 @@ public class CartDefinitions {
     public void theCartIsEmpty(){assert (cart.getNbCookies() == 0);}
 
     @Then("the cart's price should be {double}")
-    public void thePriceShouldBe(double price){
-        System.out.println(cart.getPrice());
-        assert cart.getPrice() == price;}
+    public void thePriceShouldBe(double price){assert cart.getPrice() == price;}
 
-    @Then("the coocking time should be {double}")
-    public void theCookingTimeshouldBe(double time){assert cart.cookingTime()==time;}
+    @Then("the cart's coocking time should be {double}")
+    public void theCookingTimeshouldBe(double time){
+        System.out.println(cart.cookingTime());
+        assert cart.cookingTime()==time;}
 }
