@@ -1,6 +1,7 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -70,7 +71,11 @@ public class OrderDefinitions {
         cart.addCookie(new Cookie("sablé"),1);
         Order paidOrder = new Order(cart);
         paidOrder.setCommandState(CommandState.PAID);
-        client.addOrder(paidOrder);
+        try {
+            client.addOrder(paidOrder);
+        } catch (OrderCancelledTwiceException e) {
+            e.printStackTrace();
+        }
         client.getCurrentOrders().get(client.getCurrentOrders().size()-1).setCommandState(CommandState.PAID);
     }
 
@@ -81,7 +86,11 @@ public class OrderDefinitions {
 
     @Given("the client has made an order")
     public void theClientHasMadeAnOrder() {
-        client.addOrder(new Order(new Cart()));
+        try {
+            client.addOrder(new Order(new Cart()));
+        } catch (OrderCancelledTwiceException e) {
+            e.printStackTrace();
+        }
     }
 
     @And("the client's order is ready")
