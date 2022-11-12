@@ -1,11 +1,9 @@
 package fr.unice.polytech.cf;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class Order {
-    private Cart cart;
+    private final Cart cart;
     //private Store store;
     private int CommandNumber=1;
 
@@ -74,9 +72,7 @@ public class Order {
         }
     }
 
-
-
-
-
+    public int getNbCookies(){return cart.getNbCookies();}
+    public double getPrice(){return cart.getPrice();}
 
 }

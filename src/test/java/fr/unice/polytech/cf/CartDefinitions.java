@@ -11,6 +11,7 @@ public class CartDefinitions {
     Catalog catalog;
     boolean ordered;
     Order order;
+    boolean isVIP;
 
     @Given("the cart contains {int} cookies {word}")
     public  void theCartContainsThisCookies(int number, String name){
@@ -31,6 +32,12 @@ public class CartDefinitions {
         assert catalog.getCookie(name).getCookingTime() == time;
     }
 
+    @And("the client is VIP")
+    public void theClientIsVIP(){isVIP=true;}
+
+    @And("the client isn't VIP")
+    public void theClientIsntVIP(){isVIP=false;}
+
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
         try {cart.addCookie(catalog.getCookie(name), number);}
@@ -42,7 +49,8 @@ public class CartDefinitions {
     public void theClientConfirmTheOrder() throws CloneNotSupportedException {
         try {
             ordered = true;
-            order = cart.confirmOrder();
+            if(isVIP) order= cart.confirmOrder(isVIP);
+            else order = cart.confirmOrder();
         }catch (EmptyCartException e){
             ordered = false;
         }
@@ -75,8 +83,13 @@ public class CartDefinitions {
     @Then("the cart's price should be {double}")
     public void thePriceShouldBe(double price){assert cart.getPrice() == price;}
 
-    @Then("the cart's coocking time should be {double}")
+    @Then("the cart's cooking time should be {double}")
     public void theCookingTimeshouldBe(double time){
         System.out.println(cart.cookingTime());
         assert cart.cookingTime()==time;}
+
+    @Then("the price should be {double}")
+    public void thePriceShouldBe(int price){
+        assert order.getPrice()==price;
+    }
 }

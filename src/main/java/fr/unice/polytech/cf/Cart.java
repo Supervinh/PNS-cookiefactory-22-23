@@ -47,7 +47,10 @@ public class Cart implements Cloneable {
         return sum;
     }
 
-    public Order confirmOrder() throws EmptyCartException, CloneNotSupportedException {
+    public Order confirmOrder() throws EmptyCartException, CloneNotSupportedException {return confirmOrder(false);}
+
+    public Order confirmOrder(boolean isVIP) throws EmptyCartException, CloneNotSupportedException {
+        if(isVIP) price = price - (price*0.1);
         if (!cookies.isEmpty()) {
             Order order = new Order((Cart) this.clone());
             this.cookies = new HashMap<>();

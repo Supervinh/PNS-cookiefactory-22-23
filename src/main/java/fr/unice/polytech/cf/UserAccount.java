@@ -11,9 +11,13 @@ public class UserAccount {
     private boolean isVIP;
     private String surname;
     private String mail;
+    private final OrderHistory Orders;
+    private int cookiesForVIP;
 
     public UserAccount() {
         currentOrders = new ArrayList<>();
+        Orders = new OrderHistory();
+        cookiesForVIP = 0;
     }
 
     public List<Order> getCurrentOrders() {
@@ -23,7 +27,8 @@ public class UserAccount {
     public void addOrder(Order newOrder) {
         currentOrders.add(newOrder);
     }
-    public void printReceipt(Order order){
+
+    public void printReceipt(Order order) {
         order.getreceipt();
     }
 
@@ -31,11 +36,26 @@ public class UserAccount {
         if (currentOrders.get(0).getCommandState() != CommandState.READY) {
             throw new OrderNotReadyException();
         } else {
-            currentOrders.get(0).Delivered();    // TODO: rajouter la commande terminer à l'historique des commandes et la supprimer des commandes actuelles
+            currentOrders.get(0).Delivered();
+            Orders.addOrder(currentOrders.get(0));
+            cookiesForVIP += currentOrders.get(0).getNbCookies();
+            currentOrders.remove(0);
+            if (isVIP) {
+                isVIP = false;
+                cookiesForVIP = 0;
+            }
+
         }
     }
 
-    public void utiliseReduction() {
-        //TODO
+    public void subscribeVIP() {
+        if (cookiesForVIP >= 30 && !isVIP) isVIP = true;
     }
+
+    public void setCookiesForVIP(int nb){cookiesForVIP = nb;}
+
+    public boolean isVIP(){return isVIP;}
+    public void setIsVIP(boolean b){isVIP=b;}
+
+    public OrderHistory getOrderHistory() {return Orders;}
 }

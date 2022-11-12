@@ -54,7 +54,7 @@ public class OrderDefinitions {
         if (cook.getOrder() != null)
             assert (cook.getOrder().getCommandState()==CommandState.valueOf(status));
         else
-            assert (client.getCurrentOrders().get(0).getCommandState()==CommandState.valueOf(status));
+            assert (client.getOrderHistory().getOrder(0).getCommandState()==CommandState.valueOf(status));
     }
 
     @And("the order is not paid")
