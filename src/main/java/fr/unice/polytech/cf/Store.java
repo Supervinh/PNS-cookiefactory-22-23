@@ -2,13 +2,15 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.ingredients.Ingredient;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.Map;
 
 public class Store {
     private final String name;
-    private final LocalTime openingTime;
-    private final LocalTime closingTime;
+    private LocalTime openingTime;
+    private LocalTime closingTime;
     private final Stock stock;
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
@@ -26,8 +28,16 @@ public class Store {
         return openingTime;
     }
 
+    public void setOpeningTime(LocalTime newOpeningTime){
+        openingTime = newOpeningTime;
+    }
+
     public LocalTime getClosingTime() {
         return closingTime;
+    }
+
+    public void setClosingTime(LocalTime newClosingTime){
+        closingTime = newClosingTime;
     }
 
     public Map<Ingredient, Integer> getIngredients() {
