@@ -13,8 +13,8 @@ public class StockDefinition {
     @Given("I want to order {int} cookie")
     public void iWantToOrderCookie(int nbCookies) {
         cart = new Cart();
-        catalog = new Catalog();
         stock = new Stock();
+        catalog = new Catalog(stock);
         cookie = catalog.getCookies().get(0);
     }
 
@@ -27,6 +27,7 @@ public class StockDefinition {
 
     @When("the ingredients used for the cookies aren't available")
     public void theIngredientsUsedForTheCookiesArenTAvailable() {
+        stock.removeIngredient(cookie.getFlavour(), 4);
         try {
             stock.removeCookieFromStock(cookie);
         } catch (RuntimeException e) {

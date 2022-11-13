@@ -10,31 +10,17 @@ public class Cookie {
     private final double price;
     private double cookingTime;
     private Cooking cooking;
-    private Dough dough;
-    private IngredientTest doughTest;
-    private Flavour flavour;
-    private IngredientTest flavourTest;
+    private Ingredient dough;
+    private Ingredient flavour;
     private Mix mix;
-    private List<Topping> topping;
-    private List<IngredientTest> toppingTest;
+    private List<Ingredient> topping;
 
     public Cookie(String name) {
         this.name = name;
         this.price = 5;
     }
 
-    public Cookie(String name, Cooking cooking, Dough dough, Flavour flavour, Mix mix, List<Topping> topping) {
-        this.name = name;
-        this.cooking = cooking;
-        this.dough = dough;
-        this.flavour = flavour;
-        this.mix = mix;
-        this.topping = new ArrayList<>(topping);
-        this.price = this.dough.getPrice() + this.flavour.getPrice() + this.topping.stream().mapToDouble(Topping::getPrice).sum();
-        this.cookingTime = 5;
-    }
-
-    public Cookie(String name, Cooking cooking, Dough dough, Flavour flavour, Mix mix, List<Topping> topping, int cookingTime) {
+    /*public Cookie(String name, Cooking cooking, Dough dough, Flavour flavour, Mix mix, List<Topping> topping, int cookingTime) {
         this.name = name;
         this.cooking = cooking;
         this.dough = dough;
@@ -43,19 +29,19 @@ public class Cookie {
         this.topping = new ArrayList<>(topping);
         this.price = this.dough.getPrice() + this.flavour.getPrice() + this.topping.stream().mapToDouble(Topping::getPrice).sum();
         this.cookingTime = cookingTime;
-    }
+    }*/
 
-    public Cookie(String name, Cooking cooking, IngredientTest dough, IngredientTest flavour, Mix mix, List<IngredientTest> toppings){
+    public Cookie(String name, Cooking cooking, Ingredient dough, Ingredient flavour, Mix mix, List<Ingredient> toppings) {
         this.name = name;
         this.cooking = cooking;
-        this.doughTest = dough;
-        this.flavourTest = flavour;
+        this.dough = dough;
+        this.flavour = flavour;
         this.mix = mix;
-        this.toppingTest = new ArrayList<>();
-        for(IngredientTest t : toppings){
-            this.toppingTest.add(t);
+        this.topping = new ArrayList<>();
+        for (Ingredient t : toppings) {
+            this.topping.add(t);
         }
-        this.price = this.doughTest.getPrice() + this.flavourTest.getPrice() + this.toppingTest.stream().mapToDouble(IngredientTest::getPrice).sum();
+        this.price = this.dough.getPrice() + this.flavour.getPrice() + this.topping.stream().mapToDouble(Ingredient::getPrice).sum();
         this.cookingTime = 5;
     }
 
@@ -71,23 +57,33 @@ public class Cookie {
         return price;
     }
 
-    public Flavour getFlavour() {
-        return flavour;
+    public Cooking getCooking() {
+        return cooking;
     }
 
-    public Dough getDough() {
+    public Ingredient getDough() {
         return dough;
     }
 
-    public List<Topping> getTopping() {
-        return topping;
+    public Ingredient getFlavour() {
+        return flavour;
+    }
+
+    public Mix getMix() {
+        return mix;
+    }
+
+    public List<Ingredient> getTopping() {
+        return new ArrayList<>(topping);
     }
 
     public List<Ingredient> getIngredients() {
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(dough);
         ingredients.add(flavour);
-        ingredients.addAll(topping);
+        for (Ingredient t : topping) {
+            ingredients.add(t);
+        }
         return ingredients;
     }
 }

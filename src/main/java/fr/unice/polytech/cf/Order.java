@@ -9,15 +9,9 @@ public class Order {
 
     private CommandState commandState;
 
-    /*public Order(Cart panier,Store store){
-        this.commandState=CommandState.UNPAID;
-        this.cart=panier;
-        this.store=store;
-    }*/
     public Order(Cart cart){
         this.commandState=CommandState.UNPAID;
         this.cart=cart;
-        //this.CommandNumber= new Random().nextInt(1,2000000);
 
     }
 

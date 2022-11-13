@@ -1,12 +1,8 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.ingredients.Dough;
-import fr.unice.polytech.cf.ingredients.Flavour;
-import fr.unice.polytech.cf.ingredients.Ingredient;
-import fr.unice.polytech.cf.ingredients.Topping;
+import fr.unice.polytech.cf.ingredients.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Stock {
     private final Map<Ingredient, Integer> stock;
@@ -18,23 +14,27 @@ public class Stock {
     }
 
     private void initStock() {
-        stock.put(Dough.PLAIN, 5);
-        stock.put(Dough.CHOCOLATE, 4);
-        stock.put(Dough.PEANUTBUTTER, 3);
-        stock.put(Dough.OATMEAL, 2);
+        stock.put(new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),5);
+        stock.put(new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),4);
+        stock.put(new Ingredient(IngredientEnum.DOUGH, "Peanutbutter", 1.5),3);
+        stock.put(new Ingredient(IngredientEnum.DOUGH, "Oatmeal", 2),2);
 
-        stock.put(Flavour.VANILLA, 7);
-        stock.put(Flavour.CINNAMON, 4);
-        stock.put(Flavour.CHILI, 5);
+        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),7);
+        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),4);
+        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Chili", 3),5);
 
-        stock.put(Topping.WHITECHOCOLATE, 3);
-        stock.put(Topping.MILKCHOCOLATE, 7);
-        stock.put(Topping.MMS, 8);
-        stock.put(Topping.REESESBUTTERCUP, 4);
+        stock.put(new Ingredient(IngredientEnum.TOPPING, "Whitechocolate", 1.5),3);
+        stock.put(new Ingredient(IngredientEnum.TOPPING, "Milkchocolate", 2.5),7);
+        stock.put(new Ingredient(IngredientEnum.TOPPING, "Mms", 3.5),8);
+        stock.put(new Ingredient(IngredientEnum.TOPPING, "Reesesbuttercup", 1.5),4);
     }
 
 
-    public Map<Ingredient, Integer> getIngredients() {
+    public Set<Ingredient> getIngredients() {
+        return this.stock.keySet();
+    }
+
+    public Map<Ingredient, Integer> getStock() {
         return stock;
     }
 

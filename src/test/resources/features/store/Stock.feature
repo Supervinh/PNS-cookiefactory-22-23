@@ -1,4 +1,4 @@
-Feature: Cart management
+Feature: Stock management
 
   Scenario: There is enough ingredients
     And I want to order 1 cookie

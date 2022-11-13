@@ -7,18 +7,30 @@ import java.util.List;
 
 public class Catalog {
     private final List<Cookie> cookies;
+    private Stock stock;
 
     public Catalog() {
         this.cookies = new ArrayList<>();
+        this.stock = new Stock();
+        initCatalog();
+    }
+
+    public Catalog(Stock stock) {
+        this.cookies = new ArrayList<>();
+        this.stock = stock;
         initCatalog();
     }
 
     private void initCatalog() {
-        this.cookies.add(new Cookie("chocolate", Cooking.CRUNCHY, Dough.CHOCOLATE, Flavour.CINNAMON, Mix.MIXED, new ArrayList<>()));
-        this.cookies.add(new Cookie("caramel", Cooking.CRUNCHY, Dough.PLAIN, Flavour.VANILLA, Mix.MIXED, new ArrayList<>()));
-        ArrayList<IngredientTest> toppings = new ArrayList<>();
-        this.cookies.add(new Cookie("Chocolate Chip", Cooking.CRUNCHY, new IngredientTest(IngredientEnum.DOUGH, "Chocolat", 3),
-                new IngredientTest(IngredientEnum.FLAVOUR, "Cinnamon", 2.5), Mix.MIXED, toppings));
+        ArrayList<Ingredient> toppings = new ArrayList<>();
+        this.cookies.add(new Cookie("chocolate", Cooking.CRUNCHY,
+                stock.getIngredients().stream().filter(i -> i.getName().equals("Chocolate")).findFirst().get(),
+                stock.getIngredients().stream().filter(i -> i.getName().equals("Cinnamon")).findFirst().get(),
+                Mix.MIXED, toppings));
+        this.cookies.add(new Cookie("caramel", Cooking.CRUNCHY,
+                new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
+                new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2), Mix.MIXED, toppings));
+
     }
 
 
