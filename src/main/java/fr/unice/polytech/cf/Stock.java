@@ -60,12 +60,6 @@ public class Stock {
         }
     }
 
-    /**
-     * modify pAmount to the stock.
-     * When pAmount is negative, the amount is retracted.
-     *
-     * @param pAmount <code>true</code> otherwise.
-     */
     public void removeFromStock(int pAmount, Ingredient pIngredient) {
         int newAmount = stock.get(pIngredient) - pAmount;
         stock.replace(pIngredient, newAmount);

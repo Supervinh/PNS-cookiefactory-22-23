@@ -28,8 +28,9 @@ public class Catalog {
                 stock.getIngredients().stream().filter(i -> i.getName().equals("Cinnamon")).findFirst().get(),
                 Mix.MIXED, toppings));
         this.cookies.add(new Cookie("caramel", Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
-                new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2), Mix.MIXED, toppings));
+                stock.getIngredients().stream().filter(i -> i.getName().equals("Plain")).findFirst().get(),
+                stock.getIngredients().stream().filter(i -> i.getName().equals("Vanilla")).findFirst().get(),
+                Mix.MIXED, toppings));
 
     }
 
