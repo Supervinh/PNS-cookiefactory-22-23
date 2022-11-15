@@ -85,4 +85,8 @@ public class Cart implements Cloneable {
             throw new EmptyCartException();
         }
     }
+
+    public Store getStore() {
+        return store;
+    }
 }

@@ -78,7 +78,7 @@ public class Store {
     public void removeCookiesFromStock(Map<Cookie, Integer> cookies) {
         for(Cookie cookie : cookies.keySet()) {
             for (int i = 0 ; i < cookies.get(cookie); i++)
-                removeCookie(cookie);
+                removeCookieFromStock(cookie);
         }
     }
 
@@ -113,7 +113,9 @@ public class Store {
         return stock.canBeRemove(cookiesIngredients);
     }
 
-
+    public Stock getStock(){
+        return stock;
+    }
 
 }
 

@@ -15,12 +15,12 @@ public class Stock {
 
     private void initStock() {
         stock.put(new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),5);
-        stock.put(new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),4);
+        stock.put(new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),10);
         stock.put(new Ingredient(IngredientEnum.DOUGH, "Peanutbutter", 1.5),3);
         stock.put(new Ingredient(IngredientEnum.DOUGH, "Oatmeal", 2),2);
 
         stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),7);
-        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),4);
+        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),10);
         stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Chili", 3),5);
 
         stock.put(new Ingredient(IngredientEnum.TOPPING, "Whitechocolate", 1.5),3);
