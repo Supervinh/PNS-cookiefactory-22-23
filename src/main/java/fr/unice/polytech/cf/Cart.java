@@ -78,6 +78,7 @@ public class Cart implements Cloneable {
         if(isVIP) price = price - (price*0.1);
         if (!cookies.isEmpty()) {
             Order order = new Order((Cart) this.clone());
+            store.removeCookiesFromStock(this.cookies);
             this.cookies = new HashMap<>();
             return order;
         } else {

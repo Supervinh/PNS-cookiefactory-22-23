@@ -75,9 +75,10 @@ public class Store {
         stock.removeCookieFromStock(cookie);
     }
 
-    public void removeCookiesFromStock(List<Cookie> cookies) {
-        for(Cookie c : cookies) {
-            removeCookieFromStock(c);
+    public void removeCookiesFromStock(Map<Cookie, Integer> cookies) {
+        for(Cookie cookie : cookies.keySet()) {
+            for (int i = 0 ; i < cookies.get(cookie); i++)
+                removeCookie(cookie);
         }
     }
 

@@ -3,6 +3,10 @@ package fr.unice.polytech.cf;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
+import fr.unice.polytech.cf.ingredients.Cooking;
+import fr.unice.polytech.cf.ingredients.Ingredient;
+import fr.unice.polytech.cf.ingredients.IngredientEnum;
+import fr.unice.polytech.cf.ingredients.Mix;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -68,7 +72,10 @@ public class OrderDefinitions {
     @And("the order is paid")
     public void theLastOrderIsPaid(){
         Cart cart=new Cart();
-        cart.addCookie(new Cookie("sablé"),1);
+        cart.addCookie(new Cookie("chocolate", Cooking.CRUNCHY,
+                new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
+                new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                Mix.MIXED, new ArrayList<>()),1);
         Order paidOrder = new Order(cart);
         paidOrder.setCommandState(CommandState.PAID);
         try {
@@ -123,6 +130,6 @@ public class OrderDefinitions {
     }
     @Then("the client receive a receipt for his last order")
     public void theClientReceiveAReceipt(){
-        assert(client.getCurrentOrders().get(client.getCurrentOrders().size()-1).getreceipt().equals("5.0"+"\n"+"sablé"+"\n"));
+        assert(client.getCurrentOrders().get(client.getCurrentOrders().size()-1).getreceipt().equals("5.5"+"\n"+"chocolate"+"\n"));
     }
 }
