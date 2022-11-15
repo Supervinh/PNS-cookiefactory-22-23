@@ -46,19 +46,6 @@ public class Store {
         return stock.getStock();
     }
 
-    public void addCookie(Cookie cookie) {
-        if (stock.canBeRemoved(cookie)) {
-            catalog.addCookie(cookie);
-        }
-        else {
-            throw new RuntimeException("Not enough ingredients to add this cookie to the catalog");
-        }
-    }
-
-    public void removeCookie(Cookie cookie) {
-        catalog.removeCookie(cookie);
-    }
-
     public boolean hasCookie(String name) {
         return catalog.hasCookie(name);
     }

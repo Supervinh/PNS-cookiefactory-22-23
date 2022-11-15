@@ -55,7 +55,6 @@ public class UserAccount {
                 isVIP = false;
                 cookiesForVIP = 0;
             }
-
         }
     }
 
