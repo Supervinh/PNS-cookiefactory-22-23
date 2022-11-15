@@ -2,7 +2,10 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Cart implements Cloneable {
@@ -10,21 +13,43 @@ public class Cart implements Cloneable {
     private double price;
     private double cookingTime;
 
+    private Store store;
+
     public Cart() {
         this.cookies = new HashMap<>();
-        price = 0;
-        cookingTime = 15;
+        this.price = 0;
+        this.cookingTime = 15;
+        this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
     }
 
-    public void addCookie(Cookie cookie, int number) {
+    public Cart(Store store) {
+        this.cookies = new HashMap<>();
+        this.price = 0;
+        this.cookingTime = 15;
+        this.store = store;
+    }
+
+    public void addCookie(Cookie cookie, int number) {  //TODO check the store's opening time
         if (number < 1) throw new RuntimeException("Not a positive number of cookies");
-        if (cookies.containsKey(cookie)) {
-            cookies.replace(cookie, cookies.get(cookie) + number);
-        } else {
-            cookies.put(cookie, number);
+        if (isEnoughIngredientsInStock(cookie)) {
+            if (cookies.containsKey(cookie)) {
+                cookies.replace(cookie, cookies.get(cookie) + number);
+            } else {
+                cookies.put(cookie, number);
+            }
+            price += cookie.getPrice() * number;
+            cookingTime += cookie.getCookingTime() * number;
         }
-        price += cookie.getPrice() * number;
-        cookingTime += cookie.getCookingTime() * number;
+    }
+
+    private boolean isEnoughIngredientsInStock(Cookie cookie) {
+        List<Cookie> cookiesToCheck = new ArrayList<>();
+        cookiesToCheck.add(cookie);
+        for (Cookie aCookie : cookies.keySet()){
+            for (int i = 0; i< cookies.get(aCookie); i++)
+                cookiesToCheck.add(aCookie);
+        }
+        return store.checkStock(cookiesToCheck);
     }
 
     public Map<Cookie, Integer> getCookies() {

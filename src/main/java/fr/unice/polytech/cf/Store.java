@@ -3,6 +3,8 @@ package fr.unice.polytech.cf;
 import fr.unice.polytech.cf.ingredients.Ingredient;
 
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Store {
@@ -87,6 +89,17 @@ public class Store {
 
     public boolean isOpen() {
         return isOpen(LocalTime.now());
+    }
+
+    public boolean checkStock(List<Cookie> cookiesToCheck) {
+        Map<Ingredient, Integer> cookiesIngredients = new HashMap<>();
+        for (Cookie cookie : cookiesToCheck){
+            for(Ingredient ingredient : cookie.getIngredients()){
+                cookiesIngredients.put(ingredient, 1);
+            }
+
+        }
+        return stock.canBeRemove(cookiesIngredients);
     }
 
 

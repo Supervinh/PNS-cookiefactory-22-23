@@ -4,7 +4,6 @@ import java.util.Map;
 
 public class Order {
     private final Cart cart;
-    //private Store store;
     private int CommandNumber=1;
 
     private CommandState commandState;

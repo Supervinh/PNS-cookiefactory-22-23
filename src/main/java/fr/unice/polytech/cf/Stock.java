@@ -83,4 +83,12 @@ public class Stock {
         }
         return true;
     }
+
+    public boolean canBeRemove(Map<Ingredient, Integer> ingredientsToRemove){
+        for (Ingredient ingredient : ingredientsToRemove.keySet()){
+            if (stock.get(ingredient) < 1)
+                return false;
+        }
+        return true;
+    }
 }
