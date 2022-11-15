@@ -7,15 +7,17 @@ import java.util.Map;
 
 public class Store {
     private final String name;
-    private final Stock stock;
+    private Stock stock;
     private LocalTime openingTime;
     private LocalTime closingTime;
+    private Catalog catalog;
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.stock = new Stock();
+        this.catalog = new Catalog();
     }
 
     public String getName() {
@@ -42,16 +44,33 @@ public class Store {
         return stock.getStock();
     }
 
-    public void addStock(Ingredient ingredient, int quantity) {
+    public void addCookie(Cookie cookie) {
+        if (stock.canBeRemoved(cookie)) {
+            catalog.addCookie(cookie);
+        }
+        else {
+            throw new RuntimeException("Not enough ingredients to add this cookie to the catalog");
+        }
+    }
+
+    public void removeCookie(Cookie cookie) {
+        catalog.removeCookie(cookie);
+    }
+
+    public boolean hasCookie(String name) {
+        return catalog.hasCookie(name);
+    }
+
+    public void addIngredient(Ingredient ingredient, int quantity) {
         stock.addIngredient(ingredient, quantity);
     }
 
-    public void removeStock(Ingredient ingredient, int quantity) {
+    public void removeIngredient(Ingredient ingredient, int quantity) {
         stock.removeIngredient(ingredient, quantity);
     }
 
     public boolean isCookieAvailable(Cookie cookie) {
-        return stock.canBeRemoved(cookie);
+        return hasCookie(cookie.getName()) && stock.canBeRemoved(cookie);
     }
 
     public boolean isClosed(LocalTime time) {
@@ -70,21 +89,6 @@ public class Store {
         return isOpen(LocalTime.now());
     }
 
-    /*public boolean isIngredientAvailable(Ingredient ingredient, int quantity) {
-        return getStock(ingredient) >= quantity;
-    }
-
-    public boolean isIngredientAvailable(Ingredient ingredient, int quantity, LocalTime time) {
-        return isOpen(time) && isIngredientAvailable(ingredient, quantity);
-    }
-
-    public boolean isIngredientAvailable(Ingredient ingredient, int quantity, boolean isClosed) {
-        return isClosed || isIngredientAvailable(ingredient, quantity);
-    }
-
-    public boolean isIngredientAvailable(Ingredient ingredient, int quantity, LocalTime time, boolean isClosed) {
-        return isIngredientAvailable(ingredient, quantity, isClosed) && isOpen(time);
-    }*/
 
 
 }
