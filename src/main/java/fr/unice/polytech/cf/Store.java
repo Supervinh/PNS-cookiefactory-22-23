@@ -71,6 +71,16 @@ public class Store {
         stock.removeIngredient(ingredient, quantity);
     }
 
+    public void removeCookieFromStock(Cookie cookie) {
+        stock.removeCookieFromStock(cookie);
+    }
+
+    public void removeCookiesFromStock(List<Cookie> cookies) {
+        for(Cookie c : cookies) {
+            removeCookieFromStock(c);
+        }
+    }
+
     public boolean isCookieAvailable(Cookie cookie) {
         return hasCookie(cookie.getName()) && stock.canBeRemoved(cookie);
     }
