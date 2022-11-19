@@ -44,7 +44,7 @@ public class UserAccount {
     }
 
     public void retrieveOrder() throws OrderNotReadyException {    // Pour le moment nous récupérons la première commande de la liste
-        if (currentOrders.get(0).getCommandState() != CommandState.READY) {
+        if (currentOrders.get(0).getOrderState() != OrderState.READY) {
             throw new OrderNotReadyException();
         } else {
             currentOrders.get(0).Delivered();
@@ -59,7 +59,7 @@ public class UserAccount {
     }
 
     public void cancelOrder() throws OrderNotPaidException {
-        if (currentOrders.get(0).getCommandState() != CommandState.PAID) {
+        if (currentOrders.get(0).getOrderState() != OrderState.PAID) {
             throw new OrderNotPaidException();
         } else {
             currentOrders.get(0).cancelOrder();

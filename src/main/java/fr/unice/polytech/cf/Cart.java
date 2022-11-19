@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
+import fr.unice.polytech.cf.cookies.PartyCookie;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 
 import java.time.LocalTime;
@@ -19,7 +21,7 @@ public class Cart implements Cloneable {
         this.cookies = new HashMap<>();
         this.price = 0;
         this.cookingTime = 15;
-        this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
+        this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30), new ArrayList<CookAccount>());
     }
 
     public Cart(Store store) {
@@ -31,13 +33,14 @@ public class Cart implements Cloneable {
 
     public void addCookie(Cookie cookie, int number) {  //TODO check the store's opening time
         if (number < 1) throw new RuntimeException("Not a positive number of cookies");
+        if(cookie.getClass()==PartyCookie.class && !store.canMakePartyCookie()) throw new RuntimeException("This store can't make party cookies");
         if (isEnoughIngredientsInStock(cookie)) {
             if (cookies.containsKey(cookie)) {
                 cookies.replace(cookie, cookies.get(cookie) + number);
             } else {
                 cookies.put(cookie, number);
             }
-            price += cookie.getPrice() * number;
+            price += Math.floor(cookie.getPrice() * (1 + store.getTaxes()) * 100 * number)/100.0;
             cookingTime += cookie.getCookingTime() * number;
         }
     }

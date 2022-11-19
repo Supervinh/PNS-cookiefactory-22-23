@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
+
 public class BrandOwner {
     Catalog catalog;
 

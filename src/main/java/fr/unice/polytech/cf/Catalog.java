@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
+import fr.unice.polytech.cf.cookies.PartyCookie;
 import fr.unice.polytech.cf.ingredients.*;
 
 import java.util.ArrayList;
@@ -28,7 +30,10 @@ public class Catalog {
                 new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
                 new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
                 Mix.MIXED, toppings));
-
+        this.cookies.add(new PartyCookie("XLcaramel", Cooking.CRUNCHY,
+                new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
+                new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
+                Mix.MIXED, toppings, 5, "birthday", "fairies"));
     }
 
 

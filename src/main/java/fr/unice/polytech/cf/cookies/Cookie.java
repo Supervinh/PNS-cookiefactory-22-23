@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cookies;
 
 import fr.unice.polytech.cf.ingredients.*;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Cookie {
     private final String name;
-    private final double price;
+    private double price;
     private double cookingTime;
     private Cooking cooking;
     private Ingredient dough;
@@ -61,6 +61,8 @@ public class Cookie {
     public Mix getMix() {
         return mix;
     }
+
+    protected void setPrice(int i){price=i;}
 
     public List<Ingredient> getTopping() {
         return new ArrayList<>(topping);

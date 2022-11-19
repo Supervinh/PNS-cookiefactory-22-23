@@ -39,7 +39,7 @@ public class UserAccountDefinitions {
 
     @And("his order is ready")
     public void hisOrderIsReady() {
-        userAccount.getCurrentOrders().get(0).setCommandState(CommandState.READY);
+        userAccount.getCurrentOrders().get(0).setOrderState(OrderState.READY);
     }
 
     @And("his current order should have {int} orders")
@@ -68,7 +68,7 @@ public class UserAccountDefinitions {
 
     @Given("his order is paid")
     public void his_order_is_paid() {
-            userAccount.getCurrentOrders().get(0).setCommandState(CommandState.PAID);
+            userAccount.getCurrentOrders().get(0).setOrderState(OrderState.PAID);
     }
     @When("he cancels the order")
     public void he_cancels_the_order() {
@@ -85,20 +85,20 @@ public class UserAccountDefinitions {
 
     @Given("his order is working_on_it")
     public void his_order_is_working_on_it() {
-        userAccount.getCurrentOrders().get(0).setCommandState(CommandState.WORKING_ON_IT);
+        userAccount.getCurrentOrders().get(0).setOrderState(OrderState.WORKING_ON_IT);
     }
 
     @Then("the CommandState should be working_on_it")
     public void the_command_state_should_be_working_on_it() {
-        assert (userAccount.getCurrentOrders().get(0).getCommandState()==CommandState.WORKING_ON_IT);
+        assert (userAccount.getCurrentOrders().get(0).getOrderState()== OrderState.WORKING_ON_IT);
     }
 
     @And("the customer is forbidden to order")
     public void the_customer_is_forbidden_to_order() {
         try {
             userAccount.addOrder(new Order(new Cart()));
-            userAccount.getCurrentOrders().get(0).setCommandState(CommandState.PAID);
-            userAccount.getCurrentOrders().get(1).setCommandState(CommandState.PAID);
+            userAccount.getCurrentOrders().get(0).setOrderState(OrderState.PAID);
+            userAccount.getCurrentOrders().get(1).setOrderState(OrderState.PAID);
         } catch (OrderCancelledTwiceException e) {
             e.printStackTrace();
         }

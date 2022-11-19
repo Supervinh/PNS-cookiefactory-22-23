@@ -2,6 +2,8 @@ package fr.unice.polytech.cf;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import fr.unice.polytech.cf.cookies.Cookie;
+
 import java.util.Map;
 
 public class Order {
@@ -10,9 +12,11 @@ public class Order {
     private final LocalDateTime retrieve;
 
     private CommandState commandState;
+    private int orderNumber =1;
+    private OrderState orderState;
 
     public Order(Cart cart){
-        this.commandState=CommandState.UNPAID;
+        this.orderState = OrderState.UNPAID;
         this.cart=cart;
         retrieve = LocalDateTime.now().plusHours(1);
     }
@@ -23,19 +27,20 @@ public class Order {
         this.retrieve = retrieve;
     }
 
-    public CommandState getCommandState() {
-        return commandState;
+    public OrderState getOrderState() {
+        return orderState;
     }
 
-    public int getCommandNumber() {
-        if(commandState!=CommandState.UNPAID){
-        return CommandNumber;}
+    public int getOrderNumber() {
+        if(orderState != OrderState.UNPAID){
+        return orderNumber;}
         else{
             return 0;
         }
     }
+
     public String getreceipt(){
-        if(commandState!=CommandState.UNPAID){
+        if(orderState !=OrderState.UNPAID){
         String info=cart.getPrice()+"\n";
             Map<Cookie,Integer> allcookie=cart.getCookies();
             for (Map.Entry mapentry : allcookie.entrySet()){
@@ -50,24 +55,25 @@ public class Order {
 
     }
 
-    public void setCommandState(CommandState commandState) {
-        this.commandState = commandState;
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
     }
+
     public void paycommand() {
-        if (commandState == CommandState.UNPAID) {
-            commandState = CommandState.PAID;
+        if (orderState == OrderState.UNPAID) {
+            orderState = OrderState.PAID;
         }
     }
 
     public void Delivered(){
-        if(commandState==CommandState.READY){
-            commandState=CommandState.DELIVERED;
+        if(orderState == OrderState.READY){
+            orderState = OrderState.DELIVERED;
         }
     }
 
     public void cancelOrder(){
-        if(commandState==CommandState.PAID || commandState==CommandState.UNPAID ){
-            commandState=CommandState.CANCELLED;
+        if(orderState == OrderState.PAID || orderState == OrderState.UNPAID ){
+            orderState = OrderState.CANCELLED;
         }
         else{
             System.out.println("your order can't be cancelled, it's already being prepared or ready");

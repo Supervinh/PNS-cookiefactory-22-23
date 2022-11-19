@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
 import fr.unice.polytech.cf.ingredients.*;
 
 import java.util.*;
@@ -39,7 +40,7 @@ public class Stock {
     }
 
     public void addIngredient(Ingredient ingredient, int quantity) {
-        if (quantity < 1) throw new RuntimeException("Not a positive number of cookies");
+        if (quantity < 1) throw new RuntimeException("Not a positive number of ingredients");
         if (stock.containsKey(ingredient)) {
             stock.replace(ingredient, stock.get(ingredient) + quantity);
         } else {

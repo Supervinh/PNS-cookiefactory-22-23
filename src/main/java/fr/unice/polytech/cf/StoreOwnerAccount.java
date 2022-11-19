@@ -1,16 +1,17 @@
 package fr.unice.polytech.cf;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class StoreOwnerAccount {
     private final Store ownedStore;
 
     public StoreOwnerAccount(){
-        ownedStore = new Store("Unnamed Store", LocalTime.of(8,0), LocalTime.of(21,0));
+        ownedStore = new Store("Unnamed Store", LocalTime.of(8,0), LocalTime.of(21,0), new ArrayList<CookAccount>());
     }
 
     public StoreOwnerAccount(String storeName){
-        ownedStore = new Store(storeName, LocalTime.of(8,0), LocalTime.of(21,0));
+        ownedStore = new Store(storeName, LocalTime.of(8,0), LocalTime.of(21,0), new ArrayList<CookAccount>());
     }
 
     public void changeStoreOpeningTime(LocalTime newOpeningTime){

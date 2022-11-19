@@ -36,6 +36,7 @@ public class CookAccount {
     public SortedMap<TimeSlot, Order> getCookSchedule() {
         return cookSchedule;
     }
+    private boolean canMakePartyCookie;
 
     private SortedMap<TimeSlot, Order> cookSchedule;
 
@@ -44,6 +45,14 @@ public class CookAccount {
         this.startwork = startwork.getHour() * 60 + startwork.getMinute();
         this.endwork = endwork.getHour() * 60 + endwork.getMinute();
         cookSchedule = new TreeMap<>();
+        canMakePartyCookie = false;
+    }
+    public CookAccount(String name, LocalTime startwork, LocalTime endwork, boolean canMakePartyCookie) {
+        this.name = name;
+        this.startwork = startwork.getHour() * 60 + startwork.getMinute();
+        this.endwork = endwork.getHour() * 60 + endwork.getMinute();
+        cookSchedule = new TreeMap<>();
+        this.canMakePartyCookie = canMakePartyCookie;
     }
 
     boolean isFree(TimeSlot ts){
@@ -89,4 +98,5 @@ public class CookAccount {
     }
 
 
+    public boolean canMakePartyCookie(){return canMakePartyCookie;}
 }
