@@ -14,14 +14,36 @@ public class Store {
     private LocalTime closingTime;
     private Catalog catalog;
 
+    private double taxes;
+
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.stock = new Stock();
         this.catalog = new Catalog();
+        this.taxes = 0.2;
+        this.applyTaxesToStock();
     }
 
+    public Store(String name, double taxes, LocalTime openingTime, LocalTime closingTime) {
+        this.name = name;
+        this.openingTime = openingTime;
+        this.closingTime = closingTime;
+        this.stock = new Stock();
+        this.catalog = new Catalog();
+        this.taxes = taxes;
+        this.applyTaxesToStock();
+    }
+
+    public void setTaxes(double taxes) {
+        this.taxes = taxes;
+        this.applyTaxesToStock();
+    }
+
+    public double getTaxes() {
+        return taxes;
+    }
     public String getName() {
         return name;
     }
@@ -98,6 +120,12 @@ public class Store {
 
         }
         return stock.canBeRemove(cookiesIngredients);
+    }
+
+    private void applyTaxesToStock(){
+        for(Ingredient ingredient : stock.getStock().keySet()){
+            ingredient.setPrice(ingredient.getPrice() * (1 + taxes));
+        }
     }
 
     public Stock getStock(){
