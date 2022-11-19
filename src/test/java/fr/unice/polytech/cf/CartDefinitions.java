@@ -27,8 +27,8 @@ public class CartDefinitions {
         assert catalog.getCookie(name).getPrice() == price;
     }
 
-    @And("the cookie {word} cooking time is {double}")
-    public void theCookieTimeIs(String name, double time){
+    @And("the cookie {word} cooking time is {int}")
+    public void theCookieTimeIs(String name, int time){
         assert catalog.getCookie(name).getCookingTime() == time;
     }
 
@@ -83,10 +83,10 @@ public class CartDefinitions {
     @Then("the cart's price should be {double}")
     public void thePriceShouldBe(double price){assert cart.getPrice() == price;}
 
-    @Then("the cart's cooking time should be {double}")
-    public void theCookingTimeshouldBe(double time){
-        System.out.println(cart.cookingTime());
-        assert cart.cookingTime()==time;}
+    @Then("the cart's cooking time should be {int}")
+    public void theCookingTimeshouldBe(int time){
+        System.out.println(cart.getCookingTime());
+        assert cart.getCookingTime()==time;}
 
     @Then("the price should be {double}")
     public void thePriceShouldBe(int price){

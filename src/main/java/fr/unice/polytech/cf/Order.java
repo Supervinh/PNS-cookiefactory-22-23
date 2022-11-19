@@ -1,17 +1,26 @@
 package fr.unice.polytech.cf;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 
 public class Order {
     private final Cart cart;
     private int CommandNumber=1;
+    private final LocalDateTime retrieve;
 
     private CommandState commandState;
 
     public Order(Cart cart){
         this.commandState=CommandState.UNPAID;
         this.cart=cart;
+        retrieve = LocalDateTime.now().plusHours(1);
+    }
 
+    public Order(Cart cart, LocalDateTime retrieve){
+        this.commandState=CommandState.UNPAID;
+        this.cart=cart;
+        this.retrieve = retrieve;
     }
 
     public CommandState getCommandState() {
@@ -65,6 +74,9 @@ public class Order {
         }
     }
 
+
+    public LocalDateTime getRetrieveDate(){return retrieve;}
+    public int getCookingTime(){return cart.getCookingTime();}
     public int getNbCookies(){return cart.getNbCookies();}
     public double getPrice(){return cart.getPrice();}
 

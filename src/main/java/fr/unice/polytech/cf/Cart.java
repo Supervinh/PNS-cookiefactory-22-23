@@ -11,7 +11,7 @@ import java.util.Map;
 public class Cart implements Cloneable {
     private Map<Cookie, Integer> cookies;
     private double price;
-    private double cookingTime;
+    private int cookingTime;
 
     private Store store;
 
@@ -60,7 +60,7 @@ public class Cart implements Cloneable {
         return price;
     }
 
-    public double cookingTime() {
+    public int getCookingTime() {
         return cookingTime;
     }
 

@@ -12,12 +12,14 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.time.LocalTime;
 import java.util.*;
 
 public class OrderDefinitions {
+    Order currentOrder;
     Catalog catalog;
     boolean possible;
-    CookAccount cook = new CookAccount("Gordon");
+    CookAccount cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
     UserAccount client = new UserAccount();
 
     @And("the catalog does not contains the cookie {word}")
@@ -38,36 +40,36 @@ public class OrderDefinitions {
     @Given("the cook is working and has {int} order")
     public void theCookIsWorkingAndHasOrder(int nbOrders) {
         if (nbOrders == 0)
-            cook = new CookAccount("Gordon");
+            cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         else{
-            Order cookOrder = new Order(new Cart());
-            cookOrder.setCommandState(CommandState.WORKING_ON_IT);
-            cook = new CookAccount("Gordon", cookOrder);
+            for(int i =0; i<nbOrders; i++){
+                currentOrder = new Order(new Cart());
+                currentOrder.setCommandState(CommandState.WORKING_ON_IT);
+            }
+            cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         }
     }
 
     @When("the cook receive an order")
     public void theCookReceiveAnOrder() {
-        Order receivedOrder = new Order(new Cart());
-        receivedOrder.setCommandState(CommandState.PAID);
-        cook.setOrder(receivedOrder);
-        cook.prepareOrder();
+        currentOrder = new Order(new Cart());
+        currentOrder.setCommandState(CommandState.PAID);
+        cook.addOrder(currentOrder);
+        cook.prepareOrder(currentOrder);
     }
 
     @Then("the order's status should be {word}")
     public void theOrderSStatusShouldBe(String status) {
-        if (cook.getOrder() != null)
-            assert (cook.getOrder().getCommandState()==CommandState.valueOf(status));
-        else
-            assert (client.getOrderHistory().getOrder(0).getCommandState()==CommandState.valueOf(status));
+            assert (currentOrder.getCommandState()==CommandState.valueOf(status));
     }
 
     @And("the order is not paid")
     public void theOrderIsNotPaid() {
-        Order unpaidOrder = new Order(new Cart());
+        currentOrder.setCommandState(CommandState.UNPAID);
+      /*Order unpaidOrder = new Order(new Cart());
         unpaidOrder.setCommandState(CommandState.UNPAID);
-        cook.setOrder(unpaidOrder);
-        cook.prepareOrder();
+        cook.addOrder(unpaidOrder);
+        cook.prepareOrder(unpaidOrder);*/
     }
     @And("the order is paid")
     public void theLastOrderIsPaid(){
@@ -88,13 +90,13 @@ public class OrderDefinitions {
 
     @When("the cook finishes to prepare the order")
     public void theCookFinishesToPrepareTheOrder() {
-        cook.finishOrder();
+        cook.finishOrder(currentOrder);
     }
 
     @Given("the client has made an order")
     public void theClientHasMadeAnOrder() {
         try {
-            client.addOrder(new Order(new Cart()));
+            client.addOrder(currentOrder = new Order(new Cart()));
         } catch (OrderCancelledTwiceException e) {
             e.printStackTrace();
         }
@@ -102,7 +104,7 @@ public class OrderDefinitions {
 
     @And("the client's order is ready")
     public void theClientSOrderIsReady() {
-        client.getCurrentOrders().get(0).setCommandState(CommandState.READY);
+        currentOrder.setCommandState(CommandState.READY);
     }
 
     @And("the client's order is not ready")

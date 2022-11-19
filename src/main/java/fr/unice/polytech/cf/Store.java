@@ -3,6 +3,7 @@ package fr.unice.polytech.cf;
 import fr.unice.polytech.cf.ingredients.Ingredient;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,12 @@ public class Store {
     private LocalTime openingTime;
     private LocalTime closingTime;
     private Catalog catalog;
-
+    private CookScheduler storeSchedule;
     private double taxes;
+
+    public CookScheduler getStoreSchedule() {
+        return storeSchedule;
+    }
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -24,6 +29,7 @@ public class Store {
         this.catalog = new Catalog();
         this.taxes = 0.0;
         this.applyTaxesToStock();
+        storeSchedule = new CookScheduler(openingTime,closingTime, new ArrayList<>());
     }
 
     public Store(String name, double taxes, LocalTime openingTime, LocalTime closingTime) {
@@ -34,6 +40,7 @@ public class Store {
         this.catalog = new Catalog();
         this.taxes = taxes;
         this.applyTaxesToStock();
+        storeSchedule = new CookScheduler(openingTime,closingTime, new ArrayList<>());
     }
 
     public void setTaxes(double taxes) {
@@ -41,6 +48,9 @@ public class Store {
         this.applyTaxesToStock();
     }
 
+    public boolean assignOrder(Order o){
+        return storeSchedule.assignOrder(o);
+    }
     public double getTaxes() {
         return taxes;
     }
