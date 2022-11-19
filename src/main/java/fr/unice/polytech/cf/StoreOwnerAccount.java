@@ -7,11 +7,11 @@ public class StoreOwnerAccount {
     private final Store ownedStore;
 
     public StoreOwnerAccount(){
-        ownedStore = new Store("Unnamed Store", LocalTime.of(8,0), LocalTime.of(21,0), new ArrayList<CookAccount>());
+        ownedStore = new Store("Unnamed Store", LocalTime.of(8,0), LocalTime.of(21,0));
     }
 
     public StoreOwnerAccount(String storeName){
-        ownedStore = new Store(storeName, LocalTime.of(8,0), LocalTime.of(21,0), new ArrayList<CookAccount>());
+        ownedStore = new Store(storeName, LocalTime.of(8,0), LocalTime.of(21,0));
     }
 
     public void changeStoreOpeningTime(LocalTime newOpeningTime){

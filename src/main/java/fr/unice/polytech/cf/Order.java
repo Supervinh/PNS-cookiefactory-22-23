@@ -11,7 +11,7 @@ public class Order {
     private int CommandNumber=1;
     private final LocalDateTime retrieve;
 
-    private CommandState commandState;
+    private OrderState commandState;
     private int orderNumber =1;
     private OrderState orderState;
 
@@ -22,7 +22,7 @@ public class Order {
     }
 
     public Order(Cart cart, LocalDateTime retrieve){
-        this.commandState=CommandState.UNPAID;
+        this.commandState=OrderState.UNPAID;
         this.cart=cart;
         this.retrieve = retrieve;
     }

@@ -86,14 +86,14 @@ public class CookAccount {
     }
 
     void prepareOrder(Order o){
-        if(o.getCommandState() == CommandState.PAID){
-            o.setCommandState(CommandState.WORKING_ON_IT);
+        if(o.getOrderState() == OrderState.PAID){
+            o.setOrderState(OrderState.WORKING_ON_IT);
         }
     }
 
     void finishOrder(Order o){
-        if(o.getCommandState() == CommandState.WORKING_ON_IT){
-            o.setCommandState(CommandState.READY);
+        if(o.getOrderState() == OrderState.WORKING_ON_IT){
+            o.setOrderState(OrderState.READY);
         }
     }
 

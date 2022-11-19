@@ -32,6 +32,7 @@ public class CookScheduler{
     void addcook(CookAccount newcook){
         cooks.add(newcook);
     }
+    void addcook(List<CookAccount> newcook){cooks.addAll(newcook);}
 
     void removecook(CookAccount cook){
         cooks.remove(cook);

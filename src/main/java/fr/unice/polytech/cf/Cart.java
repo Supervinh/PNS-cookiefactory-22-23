@@ -21,7 +21,7 @@ public class Cart implements Cloneable {
         this.cookies = new HashMap<>();
         this.price = 0;
         this.cookingTime = 15;
-        this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30), new ArrayList<CookAccount>());
+        this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
     }
 
     public Cart(Store store) {

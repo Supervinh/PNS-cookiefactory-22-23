@@ -21,18 +21,20 @@ public class PartyCookieDefinitions {
     @Given("the store can make party cookies")
     public void canMake(){
         List<CookAccount> cook = new ArrayList<CookAccount>();
-        cook.add(new CookAccount("name", true));
-        store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30), cook);
-        assert store.canMakePartyCookie()==true;
+        cook.add(new CookAccount("name",LocalTime.of(10,0), LocalTime.of(19,30),true));
+        store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
+        store.getStoreSchedule().addcook(cook);
+        assert store.canMakePartyCookie();
     }
 
     @Given("the store can't make party cookies")
     public void cantMake(){
         catalog = new Catalog();
         List<CookAccount> cook = new ArrayList<CookAccount>();
-        cook.add(new CookAccount("name", false));
-        store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30), cook);
-        assert store.canMakePartyCookie()==false;
+        cook.add(new CookAccount("name",LocalTime.of(10,0), LocalTime.of(19,30), false));
+        store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
+        store.getStoreSchedule().addcook(cook);
+        assert !store.canMakePartyCookie();
     }
 
     @And("a {word} cookie's price is {double}")

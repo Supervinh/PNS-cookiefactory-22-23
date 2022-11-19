@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
@@ -44,7 +45,7 @@ public class OrderDefinitions {
         else{
             for(int i =0; i<nbOrders; i++){
                 currentOrder = new Order(new Cart());
-                currentOrder.setCommandState(CommandState.WORKING_ON_IT);
+                currentOrder.setOrderState(OrderState.WORKING_ON_IT);
             }
             cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         }
@@ -53,21 +54,21 @@ public class OrderDefinitions {
     @When("the cook receive an order")
     public void theCookReceiveAnOrder() {
         currentOrder = new Order(new Cart());
-        currentOrder.setCommandState(CommandState.PAID);
+        currentOrder.setOrderState(OrderState.PAID);
         cook.addOrder(currentOrder);
         cook.prepareOrder(currentOrder);
     }
 
     @Then("the order's status should be {word}")
     public void theOrderSStatusShouldBe(String status) {
-            assert (currentOrder.getCommandState()==CommandState.valueOf(status));
+            assert (currentOrder.getOrderState()==OrderState.valueOf(status));
     }
 
     @And("the order is not paid")
     public void theOrderIsNotPaid() {
-        currentOrder.setCommandState(CommandState.UNPAID);
+        currentOrder.setOrderState(OrderState.UNPAID);
       /*Order unpaidOrder = new Order(new Cart());
-        unpaidOrder.setCommandState(CommandState.UNPAID);
+        unpaidOrder.setOrderState(OrderState.UNPAID);
         cook.addOrder(unpaidOrder);
         cook.prepareOrder(unpaidOrder);*/
     }
@@ -79,13 +80,13 @@ public class OrderDefinitions {
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()),1);
         Order paidOrder = new Order(cart);
-        paidOrder.setCommandState(CommandState.PAID);
+        paidOrder.setOrderState(OrderState.PAID);
         try {
             client.addOrder(paidOrder);
         } catch (OrderCancelledTwiceException e) {
             e.printStackTrace();
         }
-        client.getCurrentOrders().get(client.getCurrentOrders().size()-1).setCommandState(CommandState.PAID);
+        client.getCurrentOrders().get(client.getCurrentOrders().size()-1).setOrderState(OrderState.PAID);
     }
 
     @When("the cook finishes to prepare the order")
@@ -104,17 +105,17 @@ public class OrderDefinitions {
 
     @And("the client's order is ready")
     public void theClientSOrderIsReady() {
-        currentOrder.setCommandState(CommandState.READY);
+        currentOrder.setOrderState(OrderState.READY);
     }
 
     @And("the client's order is not ready")
     public void theClientSOrderIsNotReady() {
         Random rnd = new Random();
-        List<CommandState> possibleStates = new ArrayList<>( Arrays.asList(CommandState.values()));
-        possibleStates.remove(CommandState.DELIVERED);
-        possibleStates.remove(CommandState.READY);
-        CommandState randomState = possibleStates.get(rnd.nextInt(possibleStates.size()-1));
-        client.getCurrentOrders().get(0).setCommandState(randomState);
+        List<OrderState> possibleStates = new ArrayList<>( Arrays.asList(OrderState.values()));
+        possibleStates.remove(OrderState.DELIVERED);
+        possibleStates.remove(OrderState.READY);
+        OrderState randomState = possibleStates.get(rnd.nextInt(possibleStates.size()-1));
+        client.getCurrentOrders().get(0).setOrderState(randomState);
     }
 
     @When("the client comes to retrieve the order")
@@ -128,7 +129,7 @@ public class OrderDefinitions {
 
     @Then("the order's status should be the same as before")
     public void theOrderSStatusShouldBeTheSameAsBefore() {
-        assert (client.getCurrentOrders().get(0).getCommandState() != CommandState.DELIVERED);
+        assert (client.getCurrentOrders().get(0).getOrderState() != OrderState.DELIVERED);
     }
     @Then("the client receive a receipt for his last order")
     public void theClientReceiveAReceipt(){
