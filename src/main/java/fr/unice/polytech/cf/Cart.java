@@ -40,7 +40,7 @@ public class Cart implements Cloneable {
             } else {
                 cookies.put(cookie, number);
             }
-            price += cookie.getPrice() * number;
+            price += Math.floor(cookie.getPrice() * (1 + store.getTaxes()) * 100 * number)/100.0;
             cookingTime += cookie.getCookingTime() * number;
         }
     }

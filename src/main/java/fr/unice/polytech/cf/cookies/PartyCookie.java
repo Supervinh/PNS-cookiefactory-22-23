@@ -33,6 +33,11 @@ public class PartyCookie extends Cookie {
         return ingredients;
     }
 
+    @Override
+    public double getPrice(){
+        return Math.floor((super.getPrice() *(1 + 0.25) * 100.0)) / 100.0;
+    }
+
     public String getOccasion(){return occasion;}
     public String getTheme(){return theme;}
 

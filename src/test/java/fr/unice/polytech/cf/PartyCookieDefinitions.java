@@ -53,6 +53,7 @@ public class PartyCookieDefinitions {
 
     @Then("the {word} cookie's price should be {double}")
     public void priceIs(String cookie, double i){
+        System.out.println(catalog.getCookie(cookie).getPrice());
         assert catalog.getCookie(cookie).getPrice()==i;
     }
 
