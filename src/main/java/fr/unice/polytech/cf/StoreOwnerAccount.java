@@ -24,4 +24,8 @@ public class StoreOwnerAccount {
     public Store getOwnedStore(){
         return ownedStore;
     }
+
+    public void changeStoreTaxes(double storeTaxes){
+        ownedStore.setTaxes(storeTaxes);
+    }
 }

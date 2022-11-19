@@ -1,9 +1,13 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.ingredients.Ingredient;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalTime;
 
 public class StoreOwnerAccountDefinitions {
@@ -42,5 +46,31 @@ public class StoreOwnerAccountDefinitions {
         Store ownedStore = storeOwnerAccount.getOwnedStore();
         System.out.println(ownedStore.getClosingTime());
         assert( ownedStore.getClosingTime().equals(LocalTime.of(hours,minutes)));
+    }
+
+    @Given("the store's taxes are {int}%")
+    public void theStoreSTaxesAre(int taxes) {
+        Store ownedStore = storeOwnerAccount.getOwnedStore();
+        ownedStore.setTaxes(taxes/100.0);
+    }
+
+    @When("I change the taxes to {int}%")
+    public void iChangeTheTaxesTo(int taxes) {
+        storeOwnerAccount.changeStoreTaxes(taxes/100.0);
+    }
+
+    @Then("the store's taxes should be {int}%")
+    public void theStoreSTaxesShouldBe(int expectedTaxeRate) {
+        Store ownedStore = storeOwnerAccount.getOwnedStore();
+        assert( ownedStore.getTaxes() == expectedTaxeRate/100.0);
+    }
+
+    @And("the ingredients' prices should be taxed by {int}%")
+    public void theIngredientsPricesShouldBeTaxedBy(int taxAppliedToIngredients) {
+        Store ownedStore = storeOwnerAccount.getOwnedStore();
+        for (Ingredient ingredient : ownedStore.getIngredients().keySet()) {
+            double expectedPrice = Math.floor(ingredient.getBasePrice() * (1 + taxAppliedToIngredients/100.0) * 100) / 100;
+            assert(ingredient.getPrice() == expectedPrice);
+        }
     }
 }

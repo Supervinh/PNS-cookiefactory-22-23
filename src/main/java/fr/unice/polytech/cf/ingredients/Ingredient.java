@@ -8,26 +8,40 @@ public class Ingredient {
     private final String name;
     private double price;
 
+    private double storeTax;
+
     public Ingredient(IngredientEnum type, String name, double price) {
         this.type = type;
         this.name = name;
         this.price = price;
+        this.storeTax = 0.0;
     }
 
-    public double getPrice() {
+    public Ingredient(IngredientEnum type, String name, double price, double storeTax) {
+        this.type = type;
+        this.name = name;
+        this.price = price;
+        this.storeTax = storeTax;
+    }
+
+    public double getBasePrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setUntaxedPrice(double price) {
         this.price = price;
     }
 
-    public double getPrice(String ingredient) {
-        return price;
+    public double getPrice() {
+        return Math.floor((price*(1 + storeTax) * 100.0)) / 100.0;
     }
 
-    public void addTaxe(double taxe) {
-        this.price += taxe;
+    public void setStoreTax(double taxe) {
+        this.storeTax = taxe;
+    }
+
+    public double getStoreTax() {
+        return this.storeTax;
     }
 
     public String getName() {

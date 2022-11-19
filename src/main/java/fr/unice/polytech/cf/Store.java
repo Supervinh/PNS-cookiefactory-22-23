@@ -22,7 +22,7 @@ public class Store {
         this.closingTime = closingTime;
         this.stock = new Stock();
         this.catalog = new Catalog();
-        this.taxes = 0.2;
+        this.taxes = 0.0;
         this.applyTaxesToStock();
     }
 
@@ -124,7 +124,7 @@ public class Store {
 
     private void applyTaxesToStock(){
         for(Ingredient ingredient : stock.getStock().keySet()){
-            ingredient.setPrice(ingredient.getPrice() * (1 + taxes));
+            ingredient.setStoreTax(taxes);
         }
     }
 
