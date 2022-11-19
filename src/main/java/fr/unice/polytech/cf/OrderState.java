@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf;
 
-public enum CommandState {
+public enum OrderState {
     UNPAID,
     PAID,
     DELIVERED,

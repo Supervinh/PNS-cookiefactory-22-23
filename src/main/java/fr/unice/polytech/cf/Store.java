@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
 import fr.unice.polytech.cf.ingredients.Ingredient;
-
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.List;
@@ -13,18 +13,21 @@ public class Store {
     private LocalTime openingTime;
     private LocalTime closingTime;
     private Catalog catalog;
-
+    private List<CookAccount> cooks;
+    private boolean canMakePartyCookie;
     private double taxes;
 
-    public Store(String name, LocalTime openingTime, LocalTime closingTime) {
+   public Store(String name, LocalTime openingTime, LocalTime closingTime, List<CookAccount> cookAccounts) {
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
         this.stock = new Stock();
         this.catalog = new Catalog();
+        cooks = cookAccounts;
+        canMakePartyCookie=canMakeCookie();
         this.taxes = 0.0;
         this.applyTaxesToStock();
-    }
+   }
 
     public Store(String name, double taxes, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -132,5 +135,13 @@ public class Store {
         return stock;
     }
 
+    private boolean canMakeCookie(){
+        for (CookAccount c:cooks) {
+            if(c.canMakePartyCookie()) return true;
+        }
+        return false;
+    }
+
+    public boolean canMakePartyCookie(){return canMakePartyCookie;}
 }
 

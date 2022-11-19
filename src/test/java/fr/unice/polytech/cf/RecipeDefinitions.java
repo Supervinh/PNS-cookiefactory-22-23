@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.cookies.Cookie;
 import fr.unice.polytech.cf.ingredients.Cooking;
 import fr.unice.polytech.cf.ingredients.Ingredient;
 import fr.unice.polytech.cf.ingredients.IngredientEnum;
