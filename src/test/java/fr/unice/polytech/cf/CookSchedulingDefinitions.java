@@ -51,11 +51,11 @@ public class CookSchedulingDefinitions {
         cook = new CookAccount("Ramsey", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         store.getStoreSchedule().addcook(cook1);
         store.getStoreSchedule().addcook(cook);
-        store.assignOrder(new Order(new Cart())); // should occupy cook1
+        store.assignOrder(new Order(new Cart(), LocalDateTime.of(2022,11,20,11,14,30,2))); // should occupy cook1
     }
     @And("a new order comes in")
     public void a_new_order_comes_in() {
-        isaccepted = store.assignOrder(new Order(new Cart()));
+        isaccepted = store.assignOrder(new Order(new Cart(), LocalDateTime.of(2022,11,20,11,14,30,2)));
     }
     @Then("the available cook should have the order assigned to him")
     public void the_available_cook_should_have_the_order_assigned_to_him() {
