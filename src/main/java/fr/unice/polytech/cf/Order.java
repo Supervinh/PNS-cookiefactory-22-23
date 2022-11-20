@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import fr.unice.polytech.cf.cookies.Cookie;
 
+import java.util.List;
 import java.util.Map;
 
 public class Order {
@@ -85,5 +86,7 @@ public class Order {
     public int getCookingTime(){return cart.getCookingTime();}
     public int getNbCookies(){return cart.getNbCookies();}
     public double getPrice(){return cart.getPrice();}
+
+    public Map<Cookie, Integer> getCookies(){return cart.getCookies();}
 
 }

@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Cart implements Cloneable {
-    private Map<Cookie, Integer> cookies;
-    private double price;
-    private int cookingTime;
+    protected Map<Cookie, Integer> cookies;
+    double price;
+    int cookingTime;
 
     private Store store;
 

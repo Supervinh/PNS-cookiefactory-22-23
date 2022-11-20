@@ -18,6 +18,11 @@ public class Catalog {
     public Catalog(Stock stock) {
         this.cookies = new ArrayList<>();
         initCatalog();
+        updateCatalog(stock);
+    }
+
+    public void updateCatalog(Stock stock) {
+        cookies.removeIf(c -> !stock.canBeRemoved(c));
     }
 
     private void initCatalog() {
