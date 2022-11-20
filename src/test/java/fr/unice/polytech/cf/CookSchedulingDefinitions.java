@@ -59,7 +59,7 @@ public class CookSchedulingDefinitions {
     }
     @Then("the available cook should have the order assigned to him")
     public void the_available_cook_should_have_the_order_assigned_to_him() {
-        assert (cook.getCookSchedule().keySet().isEmpty());
+        assert (!cook.getCookSchedule().keySet().isEmpty());
     }
 
 }

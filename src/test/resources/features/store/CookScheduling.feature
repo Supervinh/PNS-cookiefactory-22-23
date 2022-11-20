@@ -1,4 +1,4 @@
-Feature: Catalog management
+Feature: CookScheduling management
 
   Scenario: A cook is available and chosen for the next order
     Given the store is open
