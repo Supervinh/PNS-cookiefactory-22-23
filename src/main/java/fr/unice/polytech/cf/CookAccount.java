@@ -10,6 +10,9 @@ public class CookAccount {
 
     private String name;
     private int startwork;
+    private int endwork;
+    private SortedMap<TimeSlot, Order> cookSchedule;
+    private boolean canMakePartyCookie;
 
     public void setStartwork(int startwork) {
         this.startwork = startwork;
@@ -19,7 +22,7 @@ public class CookAccount {
         this.endwork = endwork;
     }
 
-    private int endwork;
+
 
     public String getName() {
         return name;
@@ -36,9 +39,9 @@ public class CookAccount {
     public SortedMap<TimeSlot, Order> getCookSchedule() {
         return cookSchedule;
     }
-    private boolean canMakePartyCookie;
 
-    private SortedMap<TimeSlot, Order> cookSchedule;
+
+
 
     public CookAccount(String name, LocalTime startwork, LocalTime endwork) {
         this.name = name;
