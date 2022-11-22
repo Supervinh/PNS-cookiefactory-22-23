@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.cookies.Cookie;
-import fr.unice.polytech.cf.cookies.PartyCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 
 import java.time.LocalTime;

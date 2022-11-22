@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.cookies.Cookie;
-import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
 import fr.unice.polytech.cf.ingredients.Cooking;

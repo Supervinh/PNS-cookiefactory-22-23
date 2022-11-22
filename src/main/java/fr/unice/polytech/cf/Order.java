@@ -1,10 +1,9 @@
 package fr.unice.polytech.cf;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import fr.unice.polytech.cf.cookies.Cookie;
 
-import java.util.List;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
+
 import java.util.Map;
 
 public class Order {

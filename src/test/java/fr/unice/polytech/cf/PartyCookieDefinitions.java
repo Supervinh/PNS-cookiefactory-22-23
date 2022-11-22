@@ -1,6 +1,7 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.cookies.PartyCookie;
+import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
