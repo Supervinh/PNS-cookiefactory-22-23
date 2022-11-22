@@ -1,5 +1,7 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.entities.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 

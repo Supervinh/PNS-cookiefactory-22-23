@@ -1,6 +1,7 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
+import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotPaidException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;

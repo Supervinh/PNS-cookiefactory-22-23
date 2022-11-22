@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.Order;
+import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.Store;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
