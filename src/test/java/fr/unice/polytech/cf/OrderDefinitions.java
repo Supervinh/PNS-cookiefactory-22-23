@@ -23,7 +23,7 @@ public class OrderDefinitions {
     Catalog catalog;
     boolean possible;
     CookAccount cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-    UserAccount client = new UserAccount();
+    UserAccount client = new UserAccount("Tom", "Bevan", "tom.bevan@etu.unice.fr");
 
     @And("the catalog does not contains the cookie {word}")
     public void the_catalog_does_not_contains_cookie(String cookie) {

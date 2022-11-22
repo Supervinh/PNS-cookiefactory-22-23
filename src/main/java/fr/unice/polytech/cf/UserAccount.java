@@ -21,7 +21,7 @@ public class UserAccount {
     private Date lastCancel;
     private Date forbiddenToOrder;
 
-    public UserAccount() {
+    public UserAccount(String name, String surname, String mail) {
         currentOrders = new ArrayList<>();
         Orders = new OrderHistory();
         cookiesForVIP = 0;

@@ -16,13 +16,13 @@ public class UserAccountDefinitions {
 
     @Given("the account has ordered {int} cookies")
     public void theAccountHasCookies(int i){
-        userAccount = new UserAccount();
+        userAccount = new UserAccount("Tom", "Bevan", "tom.bevan@etu.unice.fr");
         userAccount.setCookiesForVIP(i);
     }
 
     @Given("he has made an order")
     public void heHasMadeAnOrder() {
-        userAccount = new UserAccount();
+        userAccount = new UserAccount("Tom", "Bevan", "tom.bevan@etu.unice.fr");
         try {
             userAccount.addOrder(new Order(new CartHandler()));
         } catch (OrderCancelledTwiceException e) {
