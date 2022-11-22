@@ -1,11 +1,11 @@
 package fr.unice.polytech.cf.repositories;
 
-import fr.univcotedazur.repositories.BasicRepositoryImpl;
-import fr.univcotedazur.vscf.entities.Customer;
+import fr.unice.polytech.cf.UserAccount;
+import fr.unice.polytech.repositories.BasicRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
-public class CustomerRepository extends BasicRepositoryImpl<Customer, UUID> {
+public class CustomerRepository extends BasicRepositoryImpl<UserAccount, UUID> {
 }

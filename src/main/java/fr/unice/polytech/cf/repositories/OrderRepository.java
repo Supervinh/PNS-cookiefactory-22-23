@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf.repositories;
 
-import fr.univcotedazur.repositories.BasicRepositoryImpl;
-import fr.univcotedazur.vscf.entities.Order;
+import fr.unice.polytech.cf.Order;
+import fr.unice.polytech.repositories.BasicRepositoryImpl;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
