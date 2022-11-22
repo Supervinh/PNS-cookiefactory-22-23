@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import io.cucumber.java.en.And;
@@ -13,7 +14,7 @@ import java.util.List;
 public class PartyCookieDefinitions {
     Catalog catalog=new Catalog();
     Store store;
-    Cart cart;
+    CartHandler cartHandler;
     boolean isAdded;
 
     @Given("the catalog does has the cookie {word}")
@@ -45,10 +46,10 @@ public class PartyCookieDefinitions {
 
     @And("the client decides to add the {word} cookie to the cart")
     public void addToCart(String cookie){
-        cart=new Cart(store);
+        cartHandler =new CartHandler(store);
         System.out.println(catalog.getCookie(cookie).getClass()==PartyCookie.class);
         try{
-            cart.addCookie(catalog.getCookie(cookie), 1);
+            cartHandler.addCookie(catalog.getCookie(cookie), 1);
             isAdded=true;
         }
         catch(RuntimeException e){isAdded=false;}

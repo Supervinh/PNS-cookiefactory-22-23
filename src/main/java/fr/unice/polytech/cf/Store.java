@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.ingredients.Ingredient;
@@ -19,7 +20,7 @@ public class Store {
     private List<Order> currentOrders;
     private OrderHistory storeOrderHistory;
 
-    private CartTooGoodToGo cartTooGoodToGo;
+    private CartHandlerTooGoodToGo cartTooGoodToGo;
     private CookScheduler storeSchedule;
     private boolean canMakePartyCookie;
     private double taxes;
@@ -183,7 +184,7 @@ public class Store {
                 currentOrders.remove(o);
             }
         }
-        sendCartTooGoodToGo(new CartTooGoodToGo(this, ordersToGoodToGo));
+        sendCartTooGoodToGo(new CartHandlerTooGoodToGo(this, ordersToGoodToGo));
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -208,7 +209,7 @@ public class Store {
         }, 1000*60*180);
     }
 
-    public void sendCartTooGoodToGo(CartTooGoodToGo cartTooGoodToGo){
+    public void sendCartTooGoodToGo(CartHandlerTooGoodToGo cartTooGoodToGo){
         this.cartTooGoodToGo = cartTooGoodToGo;
         System.out.println("Sending cart too good to go");
         System.out.println(cartTooGoodToGo);

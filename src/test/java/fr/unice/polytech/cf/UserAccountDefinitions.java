@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotPaidException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
@@ -22,7 +23,7 @@ public class UserAccountDefinitions {
     public void heHasMadeAnOrder() {
         userAccount = new UserAccount();
         try {
-            userAccount.addOrder(new Order(new Cart()));
+            userAccount.addOrder(new Order(new CartHandler()));
         } catch (OrderCancelledTwiceException e) {
             e.printStackTrace();
         }
@@ -96,7 +97,7 @@ public class UserAccountDefinitions {
     @And("the customer is forbidden to order")
     public void the_customer_is_forbidden_to_order() {
         try {
-            userAccount.addOrder(new Order(new Cart()));
+            userAccount.addOrder(new Order(new CartHandler()));
             userAccount.getCurrentOrders().get(0).setOrderState(OrderState.PAID);
             userAccount.getCurrentOrders().get(1).setOrderState(OrderState.PAID);
         } catch (OrderCancelledTwiceException e) {
@@ -112,7 +113,7 @@ public class UserAccountDefinitions {
     @When("he orders something")
     public void he_orders_something() {
         try {
-            userAccount.addOrder(new Order(new Cart()));
+            userAccount.addOrder(new Order(new CartHandler()));
         } catch (OrderCancelledTwiceException e) {
             receivedError = true;
         }

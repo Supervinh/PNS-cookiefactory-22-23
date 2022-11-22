@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
@@ -44,7 +45,7 @@ public class OrderDefinitions {
             cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         else{
             for(int i =0; i<nbOrders; i++){
-                currentOrder = new Order(new Cart());
+                currentOrder = new Order(new CartHandler());
                 currentOrder.setOrderState(OrderState.WORKING_ON_IT);
             }
             cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
@@ -53,7 +54,7 @@ public class OrderDefinitions {
 
     @When("the cook receive an order")
     public void theCookReceiveAnOrder() {
-        currentOrder = new Order(new Cart());
+        currentOrder = new Order(new CartHandler());
         currentOrder.setOrderState(OrderState.PAID);
         cook.addOrder(currentOrder);
         cook.prepareOrder(currentOrder);
@@ -74,12 +75,12 @@ public class OrderDefinitions {
     }
     @And("the order is paid")
     public void theLastOrderIsPaid(){
-        Cart cart=new Cart();
-        cart.addCookie(new Cookie("chocolate", Cooking.CRUNCHY,
+        CartHandler cartHandler =new CartHandler();
+        cartHandler.addCookie(new Cookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()),1);
-        Order paidOrder = new Order(cart);
+        Order paidOrder = new Order(cartHandler);
         paidOrder.setOrderState(OrderState.PAID);
         try {
             client.addOrder(paidOrder);
@@ -97,7 +98,7 @@ public class OrderDefinitions {
     @Given("the client has made an order")
     public void theClientHasMadeAnOrder() {
         try {
-            client.addOrder(currentOrder = new Order(new Cart()));
+            client.addOrder(currentOrder = new Order(new CartHandler()));
         } catch (OrderCancelledTwiceException e) {
             e.printStackTrace();
         }

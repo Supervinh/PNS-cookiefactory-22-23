@@ -1,8 +1,13 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.components;
 
+import fr.unice.polytech.cf.Order;
+import fr.unice.polytech.cf.Store;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.interfaces.CartModifier;
+import fr.unice.polytech.cf.interfaces.CartProcessor;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,27 +15,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Cart implements Cloneable {
+
+@Component
+public class CartHandler implements Cloneable, CartModifier, CartProcessor {
     protected Map<Cookie, Integer> cookies;
     double price;
-    int cookingTime;
+    protected int cookingTime;
 
     private Store store;
 
-    public Cart() {
+    public CartHandler() {
         this.cookies = new HashMap<>();
         this.price = 0;
         this.cookingTime = 15;
         this.store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
     }
 
-    public Cart(Store store) {
+    public CartHandler(Store store) {
         this.cookies = new HashMap<>();
         this.price = 0;
         this.cookingTime = 15;
         this.store = store;
     }
 
+    @Override
     public void addCookie(Cookie cookie, int number) {  //TODO check the store's opening time
         if (number < 1) throw new RuntimeException("Not a positive number of cookies");
         if(cookie.getClass()==PartyCookie.class && !store.canMakePartyCookie()) throw new RuntimeException("This store can't make party cookies");
@@ -55,18 +63,22 @@ public class Cart implements Cloneable {
         return store.checkStock(cookiesToCheck);
     }
 
+    @Override
     public Map<Cookie, Integer> getCookies() {
         return new HashMap<>(cookies);
     }
 
+    @Override
     public double getPrice() {
         return price;
     }
 
+    @Override
     public int getCookingTime() {
         return cookingTime;
     }
 
+    @Override
     public int getNbCookies() {
         int sum = 0;
         for (Integer e : cookies.values()) {
@@ -75,12 +87,11 @@ public class Cart implements Cloneable {
         return sum;
     }
 
-    public Order confirmOrder() throws EmptyCartException, CloneNotSupportedException {return confirmOrder(false);}
-
+    @Override
     public Order confirmOrder(boolean isVIP) throws EmptyCartException, CloneNotSupportedException {
         if(isVIP) price = price - (price*0.1);
         if (!cookies.isEmpty()) {
-            Order order = new Order((Cart) this.clone());
+            Order order = new Order((CartHandler) this.clone());
             store.removeCookiesFromStock(this.cookies);
             this.cookies = new HashMap<>();
             return order;
@@ -89,6 +100,7 @@ public class Cart implements Cloneable {
         }
     }
 
+    @Override
     public Store getStore() {
         return store;
     }

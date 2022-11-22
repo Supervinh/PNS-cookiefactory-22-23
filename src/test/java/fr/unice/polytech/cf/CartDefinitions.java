@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import io.cucumber.java.en.And;
@@ -8,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CartDefinitions {
-    Cart cart ;
+    CartHandler cartHandler;
     Catalog catalog;
     boolean ordered;
     Order order;
@@ -16,9 +17,10 @@ public class CartDefinitions {
 
     @Given("the cart contains {int} cookies {word}")
     public  void theCartContainsThisCookies(int number, String name){
-        cart = new Cart();
+        cartHandler = new CartHandler();
         catalog = new Catalog();
-        try {cart.addCookie(catalog.getCookie(name), number);}
+        try {
+            cartHandler.addCookie(catalog.getCookie(name), number);}
         catch (RuntimeException ignored){}
         System.out.println(catalog.getCookie(name).getName() + catalog.getCookie(name).getCookingTime() + catalog.getCookie(name).getPrice());
     }
@@ -41,17 +43,17 @@ public class CartDefinitions {
 
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
-        try {cart.addCookie(catalog.getCookie(name), number);}
+        try {
+            cartHandler.addCookie(catalog.getCookie(name), number);}
         catch (RuntimeException ignored){}
-        System.out.println("add to cart" + cart.getCookies().values());
+        System.out.println("add to cart" + cartHandler.getCookies().values());
     }
 
     @When("the client confirm the order")
     public void theClientConfirmTheOrder() throws CloneNotSupportedException {
         try {
             ordered = true;
-            if(isVIP) order= cart.confirmOrder(isVIP);
-            else order = cart.confirmOrder();
+            order= cartHandler.confirmOrder(isVIP);
         }catch (EmptyCartException e){
             ordered = false;
         }
@@ -59,13 +61,13 @@ public class CartDefinitions {
 
     @Then("the cart should contain {int} cookies")
     public void the_cart_should_contain_cookies(Integer number) {
-        assert (cart.getNbCookies()==number);
+        assert (cartHandler.getNbCookies()==number);
     }
 
     @Then("the cart should contain {int} cookies {word}")
     public void theCartShouldContainThisCookies(int number, String name){
-        System.out.println("init cart" + cart.getCookies().values());
-        if(catalog.hasCookie(name)) assert (cart.getCookies().get(catalog.getCookie(name)) == number);
+        System.out.println("init cart" + cartHandler.getCookies().values());
+        if(catalog.hasCookie(name)) assert (cartHandler.getCookies().get(catalog.getCookie(name)) == number);
     }
 
     @Then("the client should receive a purchase order")
@@ -79,15 +81,15 @@ public class CartDefinitions {
     }
 
     @Then("the cart should be empty")
-    public void theCartIsEmpty(){assert (cart.getNbCookies() == 0);}
+    public void theCartIsEmpty(){assert (cartHandler.getNbCookies() == 0);}
 
     @Then("the cart's price should be {double}")
-    public void thePriceShouldBe(double price){assert cart.getPrice() == price;}
+    public void thePriceShouldBe(double price){assert cartHandler.getPrice() == price;}
 
     @Then("the cart's cooking time should be {int}")
     public void theCookingTimeshouldBe(int time){
-        System.out.println(cart.getCookingTime());
-        assert cart.getCookingTime()==time;}
+        System.out.println(cartHandler.getCookingTime());
+        assert cartHandler.getCookingTime()==time;}
 
     @Then("the price should be {double}")
     public void thePriceShouldBe(int price){

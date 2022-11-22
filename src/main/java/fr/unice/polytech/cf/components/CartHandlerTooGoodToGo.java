@@ -1,13 +1,15 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.components;
 
+import fr.unice.polytech.cf.Order;
+import fr.unice.polytech.cf.Store;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.List;
 
-public class CartTooGoodToGo extends Cart{
+public class CartHandlerTooGoodToGo extends CartHandler {
     private double price;
 
-    public CartTooGoodToGo(Store store, List<Order> orderList) {
+    public CartHandlerTooGoodToGo(Store store, List<Order> orderList) {
         super(store);
         super.cookingTime = 0;
         for(Order o : orderList){

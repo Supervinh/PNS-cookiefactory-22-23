@@ -2,12 +2,13 @@ package fr.unice.polytech.cf;
 
 import java.time.LocalDateTime;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.Map;
 
 public class Order {
-    private final Cart cart;
+    private final CartHandler cartHandler;
     private int CommandNumber=1;
     private final LocalDateTime retrieve;
 
@@ -15,15 +16,15 @@ public class Order {
     private int orderNumber =1;
     private OrderState orderState;
 
-    public Order(Cart cart){
+    public Order(CartHandler cartHandler){
         this.orderState = OrderState.UNPAID;
-        this.cart=cart;
+        this.cartHandler = cartHandler;
         retrieve = LocalDateTime.now().plusHours(1);
     }
 
-    public Order(Cart cart, LocalDateTime retrieve){
+    public Order(CartHandler cartHandler, LocalDateTime retrieve){
         this.commandState=OrderState.UNPAID;
-        this.cart=cart;
+        this.cartHandler = cartHandler;
         this.retrieve = retrieve;
     }
 
@@ -41,8 +42,8 @@ public class Order {
 
     public String getreceipt(){
         if(orderState !=OrderState.UNPAID){
-        String info=cart.getPrice()+"\n";
-            Map<Cookie,Integer> allcookie=cart.getCookies();
+        String info= cartHandler.getPrice()+"\n";
+            Map<Cookie,Integer> allcookie= cartHandler.getCookies();
             for (Map.Entry mapentry : allcookie.entrySet()){
                 Cookie b=(Cookie)mapentry.getKey();
                 info=info+b.getName()+"\n";
@@ -82,10 +83,10 @@ public class Order {
 
 
     public LocalDateTime getRetrieveDate(){return retrieve;}
-    public int getCookingTime(){return cart.getCookingTime();}
-    public int getNbCookies(){return cart.getNbCookies();}
-    public double getPrice(){return cart.getPrice();}
+    public int getCookingTime(){return cartHandler.getCookingTime();}
+    public int getNbCookies(){return cartHandler.getNbCookies();}
+    public double getPrice(){return cartHandler.getPrice();}
 
-    public Map<Cookie, Integer> getCookies(){return cart.getCookies();}
+    public Map<Cookie, Integer> getCookies(){return cartHandler.getCookies();}
 
 }

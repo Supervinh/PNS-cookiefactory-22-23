@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import io.cucumber.java.en.Given;
@@ -7,14 +8,14 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class StockDefinition {
-    Cart cart ;
+    CartHandler cartHandler;
     Catalog catalog;
     Stock stock;
     Cookie cookie;
 
     @Given("I want to order {int} cookie")
     public void iWantToOrderCookie(int nbCookies) {
-        cart = new Cart();
+        cartHandler = new CartHandler();
         stock = new Stock();
         catalog = new Catalog(stock);
         cookie = catalog.getCookies().get(0);
@@ -23,7 +24,7 @@ public class StockDefinition {
     @When("the ingredients used for the cookies are available")
     public void theIngredientsUsedForTheCookiesAreAvailable() {
         if (stock.removeCookieFromStock(cookie))
-            cart.addCookie(cookie, 1);
+            cartHandler.addCookie(cookie, 1);
     }
 
 
@@ -39,6 +40,6 @@ public class StockDefinition {
 
     @Then("the cart should contain {int} cookie")
     public void the_cart_should_contain_cookies(Integer number) {
-        assert (cart.getNbCookies()==number);
+        assert (cartHandler.getNbCookies()==number);
     }
 }

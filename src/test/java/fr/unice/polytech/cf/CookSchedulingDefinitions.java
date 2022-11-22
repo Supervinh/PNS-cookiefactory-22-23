@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf;
 
+import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -28,7 +29,7 @@ public class CookSchedulingDefinitions {
     }
     @When("is assigned a {int} minutes order")
     public void is_assigned_a_minutes_order(Integer int1) {
-        Cart c = new Cart();
+        CartHandler c = new CartHandler();
         c.addCookie(catalog.getCookie("chocolate"), 2);
         store.assignOrder(new Order(c, LocalDateTime.of(2022,11,19,15,15,0,0)));
 
@@ -52,11 +53,11 @@ public class CookSchedulingDefinitions {
         cook = new CookAccount("Ramsey", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         store.getStoreSchedule().addcook(cook1);
         store.getStoreSchedule().addcook(cook);
-        store.assignOrder(new Order(new Cart(), LocalDateTime.of(2022,11,20,11,14,30,2))); // should occupy cook1
+        store.assignOrder(new Order(new CartHandler(), LocalDateTime.of(2022,11,20,11,14,30,2))); // should occupy cook1
     }
     @And("a new order comes in")
     public void a_new_order_comes_in() {
-        isaccepted = store.assignOrder(new Order(new Cart(), LocalDateTime.of(2022,11,20,11,14,30,2)));
+        isaccepted = store.assignOrder(new Order(new CartHandler(), LocalDateTime.of(2022,11,20,11,14,30,2)));
     }
     @Then("the available cook should have the order assigned to him")
     public void the_available_cook_should_have_the_order_assigned_to_him() {
