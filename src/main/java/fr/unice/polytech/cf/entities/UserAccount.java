@@ -1,9 +1,11 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotPaidException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
+import fr.unice.polytech.cf.repositories.OrderHistory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,9 @@ public class UserAccount {
     private Date forbiddenToOrder;
 
     public UserAccount(String name, String surname, String mail) {
+        this.name = name;
+        this.surname = surname;
+        this.mail = mail;
         currentOrders = new ArrayList<>();
         Orders = new OrderHistory();
         cookiesForVIP = 0;

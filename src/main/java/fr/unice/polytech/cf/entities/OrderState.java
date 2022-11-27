@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 public enum OrderState {
     UNPAID,

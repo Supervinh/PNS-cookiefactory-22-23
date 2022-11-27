@@ -1,13 +1,13 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.entities.StoreOwnerAccount;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.time.LocalTime;
 
 public class StoreOwnerAccountDefinitions {

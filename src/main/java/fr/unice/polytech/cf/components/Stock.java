@@ -1,7 +1,7 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.cookies.Cookie;
-import fr.unice.polytech.cf.ingredients.*;
+import fr.unice.polytech.cf.entities.ingredients.*;
 
 import java.util.*;
 

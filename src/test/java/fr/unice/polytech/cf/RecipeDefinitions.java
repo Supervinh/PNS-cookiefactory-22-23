@@ -1,11 +1,13 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.entities.BrandCook;
+import fr.unice.polytech.cf.entities.BrandOwner;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
-import fr.unice.polytech.cf.ingredients.Cooking;
-import fr.unice.polytech.cf.ingredients.Ingredient;
-import fr.unice.polytech.cf.ingredients.IngredientEnum;
-import fr.unice.polytech.cf.ingredients.Mix;
+import fr.unice.polytech.cf.entities.ingredients.Cooking;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
+import fr.unice.polytech.cf.entities.ingredients.Mix;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

@@ -1,6 +1,8 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.OrderState;
+import fr.unice.polytech.cf.entities.TimeSlot;
 
 import java.time.LocalTime;
 import java.util.*;
@@ -73,7 +75,7 @@ public class CookAccount {
         return true;
     }
 
-    boolean addOrder(Order o){
+    public boolean addOrder(Order o){
         List<TimeSlot> tslist = TimeSlot.orderToTimeSlot(o);
 
         for(TimeSlot ts1 : tslist){
@@ -87,13 +89,13 @@ public class CookAccount {
         return true;
     }
 
-    void prepareOrder(Order o){
+    public void prepareOrder(Order o){
         if(o.getOrderState() == OrderState.PAID){
             o.setOrderState(OrderState.WORKING_ON_IT);
         }
     }
 
-    void finishOrder(Order o){
+    public void finishOrder(Order o){
         if(o.getOrderState() == OrderState.WORKING_ON_IT){
             o.setOrderState(OrderState.READY);
             Timer timer = new Timer();

@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf.ingredients;
+package fr.unice.polytech.cf.entities.ingredients;
 
 public enum IngredientEnum {
     DOUGH,

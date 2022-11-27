@@ -1,7 +1,6 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class StoreOwnerAccount {
     private final Store ownedStore;

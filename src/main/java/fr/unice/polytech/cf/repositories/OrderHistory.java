@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.repositories;
 
 import fr.unice.polytech.cf.entities.Order;
 
@@ -8,7 +8,7 @@ import java.util.List;
 public class OrderHistory {
     private List<Order> Orders;
 
-    OrderHistory(){Orders = new ArrayList<Order>();}
+    public OrderHistory(){Orders = new ArrayList<Order>();}
 
     public void addOrder(Order o){
         Orders.add(o);

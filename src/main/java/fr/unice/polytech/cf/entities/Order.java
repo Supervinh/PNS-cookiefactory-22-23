@@ -2,7 +2,6 @@ package fr.unice.polytech.cf.entities;
 
 import java.time.LocalDateTime;
 
-import fr.unice.polytech.cf.OrderState;
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 

@@ -1,10 +1,15 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
 import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.Stock;
+import fr.unice.polytech.cf.entities.CookAccount;
+import fr.unice.polytech.cf.entities.CookScheduler;
 import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
-import fr.unice.polytech.cf.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
+import fr.unice.polytech.cf.repositories.OrderHistory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -175,7 +180,7 @@ public class Store {
     private void updateTooGoodToGo(){
         List<Order> ordersToGoodToGo = new ArrayList<>();
         for (Order o: currentOrders) {
-            if(o.getOrderState()==OrderState.TOO_GOOD_TO_GO){
+            if(o.getOrderState()== OrderState.TOO_GOOD_TO_GO){
                 ordersToGoodToGo.add(o);
                 storeOrderHistory.addOrder(o);
                 currentOrders.remove(o);

@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.entities.cookies;
 
-import fr.unice.polytech.cf.ingredients.*;
+import fr.unice.polytech.cf.entities.ingredients.*;
 
 import java.util.ArrayList;
 import java.util.List;

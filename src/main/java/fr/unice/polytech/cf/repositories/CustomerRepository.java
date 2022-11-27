@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.repositories;
 
-import fr.unice.polytech.cf.UserAccount;
+import fr.unice.polytech.cf.entities.UserAccount;
 import fr.unice.polytech.repositories.BasicRepositoryImpl;
 import org.springframework.stereotype.Repository;
 

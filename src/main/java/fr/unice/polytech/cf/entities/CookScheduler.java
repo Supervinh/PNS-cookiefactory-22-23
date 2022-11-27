@@ -1,5 +1,6 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
+import fr.unice.polytech.cf.entities.CookAccount;
 import fr.unice.polytech.cf.entities.Order;
 
 import java.time.LocalTime;
@@ -31,10 +32,10 @@ public class CookScheduler{
         this.cooks = cooks;
     }
 
-    void addcook(CookAccount newcook){
+    public void addcook(CookAccount newcook){
         cooks.add(newcook);
     }
-    void addcook(List<CookAccount> newcook){cooks.addAll(newcook);}
+    public void addcook(List<CookAccount> newcook){cooks.addAll(newcook);}
 
     void removecook(CookAccount cook){
         cooks.remove(cook);

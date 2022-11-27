@@ -1,8 +1,8 @@
 package fr.unice.polytech.cf.entities.cookies;
 
-import fr.unice.polytech.cf.ingredients.Cooking;
-import fr.unice.polytech.cf.ingredients.Ingredient;
-import fr.unice.polytech.cf.ingredients.Mix;
+import fr.unice.polytech.cf.entities.ingredients.Cooking;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.ingredients.Mix;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.Catalog;
 import fr.unice.polytech.cf.entities.cookies.Cookie;

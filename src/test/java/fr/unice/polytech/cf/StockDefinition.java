@@ -2,6 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.Stock;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

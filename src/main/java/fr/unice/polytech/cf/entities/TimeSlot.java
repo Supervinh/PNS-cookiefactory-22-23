@@ -1,6 +1,4 @@
-package fr.unice.polytech.cf;
-
-import fr.unice.polytech.cf.entities.Order;
+package fr.unice.polytech.cf.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

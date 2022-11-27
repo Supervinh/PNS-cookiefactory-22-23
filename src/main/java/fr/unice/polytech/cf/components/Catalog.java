@@ -1,9 +1,8 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.Stock;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
-import fr.unice.polytech.cf.ingredients.*;
+import fr.unice.polytech.cf.entities.ingredients.*;
 
 import java.util.ArrayList;
 import java.util.List;
