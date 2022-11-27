@@ -17,15 +17,16 @@ public class Catalog {
 
     public Catalog(Stock stock) {
         this.cookies = new ArrayList<>();
-        initCatalog();
         updateCatalog(stock);
     }
 
     public void updateCatalog(Stock stock) {
+        initCatalog();
         cookies.removeIf(c -> !stock.canBeRemoved(c));
     }
 
     private void initCatalog() {
+        this.cookies.clear();
         ArrayList<Ingredient> toppings = new ArrayList<>();
         this.cookies.add(new Cookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
