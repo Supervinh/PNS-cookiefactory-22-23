@@ -3,10 +3,12 @@ package fr.unice.polytech.cf.components;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import fr.unice.polytech.cf.entities.ingredients.*;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Catalog {
     private final List<Cookie> cookies;
 

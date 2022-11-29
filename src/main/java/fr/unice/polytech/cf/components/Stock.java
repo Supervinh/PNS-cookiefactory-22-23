@@ -2,9 +2,11 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.ingredients.*;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Component
 public class Stock {
     private final Map<Ingredient, Integer> stock;
 
