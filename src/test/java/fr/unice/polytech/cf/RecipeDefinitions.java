@@ -3,7 +3,7 @@ package fr.unice.polytech.cf;
 import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.BrandCook;
 import fr.unice.polytech.cf.entities.BrandOwner;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.Cooking;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
@@ -23,7 +23,7 @@ public class RecipeDefinitions {
 
     @Given("the brand's cook suggest a recipe {word}")
     public void suggestReipe(String cookie){
-        accepted = brandCook.addCookie(new Cookie(cookie, Cooking.CRUNCHY,
+        accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 0.5),
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()));
@@ -31,7 +31,7 @@ public class RecipeDefinitions {
     @Given("the brand's cook suggests a recipe {word}")
     public void suggestsReipe(String cookie){
         try {
-            accepted = brandCook.addCookie(new Cookie(cookie, Cooking.CRUNCHY,
+            accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
                     new Ingredient(IngredientEnum.DOUGH, "Chocolate", 5),
                     new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                     Mix.MIXED, new ArrayList<>()));

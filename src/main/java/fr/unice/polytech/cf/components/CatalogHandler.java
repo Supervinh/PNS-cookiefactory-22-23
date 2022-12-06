@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import fr.unice.polytech.cf.entities.ingredients.*;
 import org.springframework.stereotype.Component;
@@ -10,43 +10,43 @@ import java.util.List;
 
 @Component
 public class CatalogHandler {
-    private final List<Cookie> cookies;
+    private final List<BasicCookie> basicCookies;
 
     public CatalogHandler() {
-        this.cookies = new ArrayList<>();
+        this.basicCookies = new ArrayList<>();
         initCatalog();
     }
 
     public CatalogHandler(StockHandler stock) {
-        this.cookies = new ArrayList<>();
+        this.basicCookies = new ArrayList<>();
         updateCatalog(stock);
     }
 
     public void updateCatalog(StockHandler stock) {
         initCatalog();
-        cookies.removeIf(c -> !stock.canBeRemoved(c));
+        basicCookies.removeIf(c -> !stock.canBeRemoved(c));
     }
 
     private void initCatalog() {
-        this.cookies.clear();
+        this.basicCookies.clear();
         ArrayList<Ingredient> toppings = new ArrayList<>();
-        this.cookies.add(new Cookie("chocolate", Cooking.CRUNCHY,
+        this.basicCookies.add(new BasicCookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, toppings));
-        this.cookies.add(new Cookie("caramel", Cooking.CRUNCHY,
+        this.basicCookies.add(new BasicCookie("caramel", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
                 new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
                 Mix.MIXED, toppings));
-        this.cookies.add(new PartyCookie("XLcaramel", Cooking.CRUNCHY,
+        this.basicCookies.add(new PartyCookie("XLcaramel", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
                 new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
                 Mix.MIXED, toppings, 5, "birthday", "fairies"));
     }
 
 
-    public Cookie getCookie(String name) {
-        for (Cookie c : this.cookies) {
+    public BasicCookie getCookie(String name) {
+        for (BasicCookie c : this.basicCookies) {
             if (c.getName().equals(name)) {
                 return c;
             }
@@ -54,21 +54,21 @@ public class CatalogHandler {
         throw new RuntimeException("Cookie recipe does not exist");
     }
 
-    public void addCookie(Cookie cookie) {
-        this.cookies.add(cookie);
+    public void addCookie(BasicCookie basicCookie) {
+        this.basicCookies.add(basicCookie);
     }
 
-    public void removeCookie(Cookie cookie) {
-        this.cookies.remove(cookie);
+    public void removeCookie(BasicCookie basicCookie) {
+        this.basicCookies.remove(basicCookie);
     }
 
-    public List<Cookie> getCookies() {
-        return new ArrayList<>(this.cookies);
+    public List<BasicCookie> getCookies() {
+        return new ArrayList<>(this.basicCookies);
     }
 
     public boolean hasCookie(String name) {
-        for (Cookie cookie : this.cookies) {
-            if (cookie.getName().equals(name)) {
+        for (BasicCookie basicCookie : this.basicCookies) {
+            if (basicCookie.getName().equals(name)) {
                 return true;
             }
         }

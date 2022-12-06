@@ -5,8 +5,8 @@ import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.CookAccount;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.UserAccount;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.Customer;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
 import fr.unice.polytech.cf.entities.ingredients.Cooking;
@@ -26,7 +26,7 @@ public class OrderDefinitions {
     CatalogHandler catalog;
     boolean possible;
     CookAccount cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-    UserAccount client = new UserAccount("Tom", "Bevan", "tom.bevan@etu.unice.fr");
+    Customer client = new Customer("Tom", "Bevan", "tom.bevan@etu.unice.fr");
 
     @And("the catalog does not contains the cookie {word}")
     public void the_catalog_does_not_contains_cookie(String cookie) {
@@ -80,7 +80,7 @@ public class OrderDefinitions {
     @And("the order is paid")
     public void theLastOrderIsPaid(){
         CartHandler cartHandler =new CartHandler();
-        cartHandler.addCookie(new Cookie("chocolate", Cooking.CRUNCHY,
+        cartHandler.addCookie(new BasicCookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()),1);

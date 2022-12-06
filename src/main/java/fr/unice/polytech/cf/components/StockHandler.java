@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.*;
 import org.springframework.stereotype.Component;
 
@@ -68,9 +68,9 @@ public class StockHandler {
         stock.replace(pIngredient, newAmount);
     }
 
-    public boolean removeCookieFromStock(Cookie pCookie) {
-        if (canBeRemoved(pCookie)) {
-            for (Ingredient ingredient : pCookie.getIngredients()) {
+    public boolean removeCookieFromStock(BasicCookie pBasicCookie) {
+        if (canBeRemoved(pBasicCookie)) {
+            for (Ingredient ingredient : pBasicCookie.getIngredients()) {
                 removeFromStock(1, ingredient);
             }
             return true;
@@ -78,8 +78,8 @@ public class StockHandler {
         return false;
     }
 
-    public boolean canBeRemoved(Cookie pCookie) {
-        for (Ingredient ingredient : pCookie.getIngredients()) {
+    public boolean canBeRemoved(BasicCookie pBasicCookie) {
+        for (Ingredient ingredient : pBasicCookie.getIngredients()) {
             if (stock.get(ingredient) < 1) {
                 throw new RuntimeException("Not enough ingredients, try another store");
             }

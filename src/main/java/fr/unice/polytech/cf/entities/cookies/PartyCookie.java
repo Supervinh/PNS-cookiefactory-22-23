@@ -7,7 +7,7 @@ import fr.unice.polytech.cf.entities.ingredients.Mix;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PartyCookie extends Cookie {
+public class PartyCookie extends BasicCookie {
     private int multiplier;
     private String occasion;
     private String theme;

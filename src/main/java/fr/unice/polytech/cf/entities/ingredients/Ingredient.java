@@ -1,8 +1,11 @@
 package fr.unice.polytech.cf.entities.ingredients;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Ingredient {
+
+    private UUID id;
 
     private final IngredientEnum type;
     private final String name;
@@ -15,6 +18,7 @@ public class Ingredient {
         this.name = name;
         this.price = price;
         this.storeTax = 0.0;
+        this.id = UUID.randomUUID();
     }
 
     public Ingredient(IngredientEnum type, String name, double price, double storeTax) {
@@ -22,6 +26,7 @@ public class Ingredient {
         this.name = name;
         this.price = price;
         this.storeTax = storeTax;
+        this.id = UUID.randomUUID();
     }
 
     public double getBasePrice() {
@@ -50,6 +55,10 @@ public class Ingredient {
 
     public IngredientEnum getType() {
         return type;
+    }
+
+    public UUID getId() {
+        return id;
     }
 
 

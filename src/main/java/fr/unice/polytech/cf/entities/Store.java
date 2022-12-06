@@ -3,7 +3,7 @@ package fr.unice.polytech.cf.entities;
 import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
 import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.components.StockHandler;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.repositories.OrderHistory;
 
@@ -113,20 +113,20 @@ public class Store {
         stock.removeIngredient(ingredient, quantity);
     }
 
-    public void removeCookieFromStock(Cookie cookie) {
-        stock.removeCookieFromStock(cookie);
+    public void removeCookieFromStock(BasicCookie basicCookie) {
+        stock.removeCookieFromStock(basicCookie);
     }
 
-    public void removeCookiesFromStock(Map<Cookie, Integer> cookies) {
-        for(Cookie cookie : cookies.keySet()) {
-            for (int i = 0 ; i < cookies.get(cookie); i++)
-                removeCookieFromStock(cookie);
+    public void removeCookiesFromStock(Map<BasicCookie, Integer> cookies) {
+        for(BasicCookie basicCookie : cookies.keySet()) {
+            for (int i = 0; i < cookies.get(basicCookie); i++)
+                removeCookieFromStock(basicCookie);
         }
         catalog.updateCatalog(this.stock);
     }
 
-    public boolean isCookieAvailable(Cookie cookie) {
-        return hasCookie(cookie.getName()) && stock.canBeRemoved(cookie);
+    public boolean isCookieAvailable(BasicCookie basicCookie) {
+        return hasCookie(basicCookie.getName()) && stock.canBeRemoved(basicCookie);
     }
 
     public boolean isClosed(LocalTime time) {
@@ -145,10 +145,10 @@ public class Store {
         return isOpen(LocalTime.now());
     }
 
-    public boolean checkStock(List<Cookie> cookiesToCheck) {
+    public boolean checkStock(List<BasicCookie> cookiesToCheck) {
         Map<Ingredient, Integer> cookiesIngredients = new HashMap<>();
-        for (Cookie cookie : cookiesToCheck){
-            for(Ingredient ingredient : cookie.getIngredients()){
+        for (BasicCookie basicCookie : cookiesToCheck){
+            for(Ingredient ingredient : basicCookie.getIngredients()){
                 cookiesIngredients.put(ingredient, 1);
             }
 

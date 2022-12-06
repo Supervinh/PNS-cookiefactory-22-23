@@ -1,55 +1,47 @@
 package fr.unice.polytech.cf.entities;
 
-import fr.unice.polytech.cf.entities.Order;
-import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
-import fr.unice.polytech.cf.exceptions.OrderNotPaidException;
-import fr.unice.polytech.cf.exceptions.OrderNotReadyException;
-import fr.unice.polytech.cf.repositories.OrderHistory;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+public class Customer {
+    //private final List<Order> currentOrders;
 
-public class UserAccount {
-    private final List<Order> currentOrders;
+    private final UUID id;
     private String name;
     private boolean isVIP;
     private String surname;
     private String mail;
-    private final OrderHistory Orders;
+    //private final OrderHistory Orders;
     private int cookiesForVIP;
 
     private Date lastCancel;
     private Date forbiddenToOrder;
 
-    public UserAccount(String name, String surname, String mail) {
+    private Set<Item> cart;
+
+    public Customer(String name, String surname, String mail) {
         this.name = name;
         this.surname = surname;
         this.mail = mail;
-        currentOrders = new ArrayList<>();
-        Orders = new OrderHistory();
+        id= UUID.randomUUID();
         cookiesForVIP = 0;
         lastCancel = new Date(1); // sets the Date to an old one
         forbiddenToOrder = new Date(1); // sets the Date to an old one
+        cart = new HashSet<>();
+
     }
 
-    public List<Order> getCurrentOrders() {
+ /*   public List<Order> getCurrentOrders() {
         return new ArrayList<>(currentOrders);
     }
-
-    public void addOrder(Order newOrder) throws OrderCancelledTwiceException {
+*/
+    /*public void addOrder(Order newOrder) throws OrderCancelledTwiceException {
         if(((new Date().getTime()-forbiddenToOrder.getTime())/60000)<10){
             throw new OrderCancelledTwiceException();
         }
         currentOrders.add(newOrder);
-    }
+    }*/
 
-    public void printReceipt(Order order) {
-        order.getreceipt();
-    }
-
-    public void retrieveOrder() throws OrderNotReadyException {    // Pour le moment nous récupérons la première commande de la liste
+    /*public void retrieveOrder() throws OrderNotReadyException {    // Pour le moment nous récupérons la première commande de la liste
         if (currentOrders.get(0).getOrderState() != OrderState.READY) {
             throw new OrderNotReadyException();
         } else {
@@ -62,9 +54,9 @@ public class UserAccount {
                 cookiesForVIP = 0;
             }
         }
-    }
+    }*/
 
-    public void cancelOrder() throws OrderNotPaidException {
+/*    public void cancelOrder() throws OrderNotPaidException {
         if (currentOrders.get(0).getOrderState() != OrderState.PAID) {
             throw new OrderNotPaidException();
         } else {
@@ -75,16 +67,52 @@ public class UserAccount {
             }
             lastCancel = new Date();
         }
-    }
+    }*/
 
-    public void subscribeVIP() {
+    /*public void subscribeVIP() {
         if (cookiesForVIP >= 30 && !isVIP) isVIP = true;
-    }
+    }*/
 
     public void setCookiesForVIP(int nb){cookiesForVIP = nb;}
 
     public boolean isVIP(){return isVIP;}
     public void setIsVIP(boolean b){isVIP=b;}
 
-    public OrderHistory getOrderHistory() {return Orders;}
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public Set<Item> getCart() {
+        return cart;
+    }
+
+    public void setCart(Set<Item> cart) {
+        this.cart = cart;
+    }
+
+    //public OrderHistory getOrderHistory() {return Orders;}
 }

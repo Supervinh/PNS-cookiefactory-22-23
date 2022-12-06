@@ -3,7 +3,7 @@ package fr.unice.polytech.cf.entities;
 import java.time.LocalDateTime;
 
 import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 
 import java.util.Map;
 
@@ -43,9 +43,9 @@ public class Order {
     public String getreceipt(){
         if(orderState !=OrderState.UNPAID){
         String info= cartHandler.getPrice()+"\n";
-            Map<Cookie,Integer> allcookie= cartHandler.getCookies();
+            Map<BasicCookie,Integer> allcookie= cartHandler.getCookies();
             for (Map.Entry mapentry : allcookie.entrySet()){
-                Cookie b=(Cookie)mapentry.getKey();
+                BasicCookie b=(BasicCookie)mapentry.getKey();
                 info=info+b.getName()+"\n";
             }
         return info;
@@ -87,6 +87,6 @@ public class Order {
     public int getNbCookies(){return cartHandler.getNbCookies();}
     public double getPrice(){return cartHandler.getPrice();}
 
-    public Map<Cookie, Integer> getCookies(){return cartHandler.getCookies();}
+    public Map<BasicCookie, Integer> getCookies(){return cartHandler.getCookies();}
 
 }

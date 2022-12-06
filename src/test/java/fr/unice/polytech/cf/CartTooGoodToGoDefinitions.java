@@ -6,7 +6,7 @@ import fr.unice.polytech.cf.entities.CookAccount;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.Cooking;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
@@ -27,7 +27,7 @@ public class CartTooGoodToGoDefinitions {
     @Given("the client made an order")
     public void orderIsMade(){
         CartHandler cartHandler =new CartHandler();
-        cartHandler.addCookie(new Cookie("chocolate", Cooking.CRUNCHY,
+        cartHandler.addCookie(new BasicCookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()),1);
