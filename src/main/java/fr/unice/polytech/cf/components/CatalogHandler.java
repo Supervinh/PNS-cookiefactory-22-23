@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class Catalog {
+public class CatalogHandler {
     private final List<Cookie> cookies;
 
-    public Catalog() {
+    public CatalogHandler() {
         this.cookies = new ArrayList<>();
         initCatalog();
     }
 
-    public Catalog(Stock stock) {
+    public CatalogHandler(StockHandler stock) {
         this.cookies = new ArrayList<>();
         updateCatalog(stock);
     }
 
-    public void updateCatalog(Stock stock) {
+    public void updateCatalog(StockHandler stock) {
         initCatalog();
         cookies.removeIf(c -> !stock.canBeRemoved(c));
     }

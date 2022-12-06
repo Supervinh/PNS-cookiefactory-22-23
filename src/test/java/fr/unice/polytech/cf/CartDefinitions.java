@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import io.cucumber.java.en.And;
@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 
 public class CartDefinitions {
     CartHandler cartHandler;
-    Catalog catalog;
+    CatalogHandler catalog;
     boolean ordered;
     Order order;
     boolean isVIP;
@@ -19,7 +19,7 @@ public class CartDefinitions {
     @Given("the cart contains {int} cookies {word}")
     public  void theCartContainsThisCookies(int number, String name){
         cartHandler = new CartHandler();
-        catalog = new Catalog();
+        catalog = new CatalogHandler();
         try {
             cartHandler.addCookie(catalog.getCookie(name), number);}
         catch (RuntimeException ignored){}

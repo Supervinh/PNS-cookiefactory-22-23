@@ -1,12 +1,12 @@
 package fr.unice.polytech.cf.entities;
 
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 public class BrandOwner {
-    Catalog catalog;
+    CatalogHandler catalog;
 
-    public BrandOwner(Catalog c){
+    public BrandOwner(CatalogHandler c){
         catalog = c;
     }
 

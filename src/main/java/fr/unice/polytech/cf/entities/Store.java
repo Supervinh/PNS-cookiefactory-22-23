@@ -1,12 +1,8 @@
 package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
-import fr.unice.polytech.cf.components.Catalog;
-import fr.unice.polytech.cf.components.Stock;
-import fr.unice.polytech.cf.entities.CookAccount;
-import fr.unice.polytech.cf.entities.CookScheduler;
-import fr.unice.polytech.cf.entities.Order;
-import fr.unice.polytech.cf.entities.OrderState;
+import fr.unice.polytech.cf.components.CatalogHandler;
+import fr.unice.polytech.cf.components.StockHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.repositories.OrderHistory;
@@ -19,10 +15,10 @@ import java.util.*;
 
 public class Store {
     private final String name;
-    private Stock stock;
+    private StockHandler stock;
     private LocalTime openingTime;
     private LocalTime closingTime;
-    private Catalog catalog;
+    private CatalogHandler catalog;
     private List<Order> currentOrders;
     private OrderHistory storeOrderHistory;
 
@@ -41,8 +37,8 @@ public class Store {
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        this.stock = new Stock();
-        this.catalog = new Catalog(this.stock);
+        this.stock = new StockHandler();
+        this.catalog = new CatalogHandler(this.stock);
         this.currentOrders = new ArrayList<>();
         this.timer = new Timer();
         this.taxes = 0.0;
@@ -58,8 +54,8 @@ public class Store {
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-        this.stock = new Stock();
-        this.catalog = new Catalog(this.stock);
+        this.stock = new StockHandler();
+        this.catalog = new CatalogHandler(this.stock);
         this.currentOrders = new ArrayList<>();
         this.timer = new Timer();
         this.taxes = taxes;
@@ -166,7 +162,7 @@ public class Store {
         }
     }
 
-    public Stock getStock(){
+    public StockHandler getStock(){
         return stock;
     }
 

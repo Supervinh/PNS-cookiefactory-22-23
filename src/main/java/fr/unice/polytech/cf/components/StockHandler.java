@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class Stock {
+public class StockHandler {
     private final Map<Ingredient, Integer> stock;
 
 
-    public Stock() {
+    public StockHandler() {
         stock = new HashMap<>();
         initStock();
     }

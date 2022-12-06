@@ -1,8 +1,8 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.Catalog;
-import fr.unice.polytech.cf.components.Stock;
+import fr.unice.polytech.cf.components.CatalogHandler;
+import fr.unice.polytech.cf.components.StockHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,15 +10,15 @@ import io.cucumber.java.en.When;
 
 public class StockDefinition {
     CartHandler cartHandler;
-    Catalog catalog;
-    Stock stock;
+    CatalogHandler catalog;
+    StockHandler stock;
     Cookie cookie;
 
     @Given("I want to order {int} cookie")
     public void iWantToOrderCookie(int nbCookies) {
         cartHandler = new CartHandler();
-        stock = new Stock();
-        catalog = new Catalog(stock);
+        stock = new StockHandler();
+        catalog = new CatalogHandler(stock);
         cookie = catalog.getCookies().get(0);
     }
 

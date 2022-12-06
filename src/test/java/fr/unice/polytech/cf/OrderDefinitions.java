@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.CookAccount;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
@@ -23,14 +23,14 @@ import java.util.*;
 
 public class OrderDefinitions {
     Order currentOrder;
-    Catalog catalog;
+    CatalogHandler catalog;
     boolean possible;
     CookAccount cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
     UserAccount client = new UserAccount("Tom", "Bevan", "tom.bevan@etu.unice.fr");
 
     @And("the catalog does not contains the cookie {word}")
     public void the_catalog_does_not_contains_cookie(String cookie) {
-        catalog = new Catalog();
+        catalog = new CatalogHandler();
         possible = false;
         assert(!catalog.hasCookie(cookie));
 

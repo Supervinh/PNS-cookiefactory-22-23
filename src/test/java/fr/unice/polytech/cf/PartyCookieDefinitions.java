@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.CookAccount;
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartyCookieDefinitions {
-    Catalog catalog=new Catalog();
+    CatalogHandler catalog=new CatalogHandler();
     Store store;
     CartHandler cartHandler;
     boolean isAdded;
@@ -33,7 +33,7 @@ public class PartyCookieDefinitions {
 
     @Given("the store can't make party cookies")
     public void cantMake(){
-        catalog = new Catalog();
+        catalog = new CatalogHandler();
         List<CookAccount> cook = new ArrayList<CookAccount>();
         cook.add(new CookAccount("name",LocalTime.of(10,0), LocalTime.of(19,30), false));
         store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));

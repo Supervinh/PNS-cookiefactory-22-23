@@ -13,7 +13,7 @@
     <node x="492.6588895134009" y="368.0281559348564">fr.unice.polytech.cf.CommandState</node>
     <node x="-4.341110486599121" y="1467.0281559348564">fr.unice.polytech.cf.entities.UserAccount</node>
     <node x="248.65888951340088" y="1190.0281559348564">fr.unice.polytech.cf.entities.CookAccount</node>
-    <node x="764.6588895134009" y="-162.9718440651436">fr.unice.polytech.cf.components.Stock</node>
+    <node x="764.6588895134009" y="-162.9718440651436">fr.unice.polytech.cf.components.StockHandler</node>
   </nodes>
   <notes />
   <edges>
@@ -37,7 +37,7 @@
       <point x="0.0" y="-225.5" />
       <point x="0.0" y="82.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.Stock" relationship="CREATE">
+    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.StockHandler" relationship="CREATE">
       <point x="-16.5" y="-93.5" />
       <point x="341.1588895134009" y="311.5281559348564" />
       <point x="484.6588895134009" y="311.5281559348564" />
@@ -59,7 +59,7 @@
       <point x="117.65888951340088" y="1135.5281559348564" />
       <point x="0.0" y="148.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.Stock" relationship="TO_ONE">
+    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.StockHandler" relationship="TO_ONE">
       <point x="13.5" y="-93.5" />
       <point x="371.1588895134009" y="212.5281559348564" />
       <point x="917.6588895134009" y="212.5281559348564" />
@@ -73,13 +73,13 @@
       <point x="15.0" y="-225.5" />
       <point x="15.0" y="82.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.Stock" relationship="CREATE">
+    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.StockHandler" relationship="CREATE">
       <point x="-153.0" y="-196.0" />
       <point x="484.6588895134009" y="276.5281559348564" />
       <point x="484.6588895134009" y="-47.471844065143614" />
       <point x="-153.0" y="0.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.Stock" relationship="TO_ONE">
+    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.StockHandler" relationship="TO_ONE">
       <point x="0.0" y="-203.5" />
       <point x="0.0" y="115.5" />
     </edge>
@@ -108,7 +108,7 @@
   </edges>
   <settings layout="Hierarchic Compact" zoom="0.4227605118829982" showDependencies="true" x="528.0" y="834.0" />
   <SelectedNodes>
-    <node>fr.unice.polytech.cf.components.Stock</node>
+    <node>fr.unice.polytech.cf.components.StockHandler</node>
     <node>fr.unice.polytech.cf.repositories.OrderHistory</node>
     <node>fr.unice.polytech.cf.Cookie</node>
     <node>fr.unice.polytech.cf.CommandState</node>

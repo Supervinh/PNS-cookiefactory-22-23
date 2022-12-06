@@ -1,17 +1,17 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 public class CatalogDefinitions {
-    Catalog catalog;
+    CatalogHandler catalog;
 
     @Given("we create a catalog")
     public void we_create_a_catalog(){
-        catalog=new Catalog();
+        catalog=new CatalogHandler();
 
     }
     @And("the catalog contains the cookie {word}")

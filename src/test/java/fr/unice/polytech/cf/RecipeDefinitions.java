@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.components.Catalog;
+import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.BrandCook;
 import fr.unice.polytech.cf.entities.BrandOwner;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
@@ -16,7 +16,7 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 
 public class RecipeDefinitions {
-    Catalog c = new Catalog();
+    CatalogHandler c = new CatalogHandler();
     BrandOwner brandOwner = new BrandOwner(c);
     BrandCook brandCook = new BrandCook(brandOwner, c);
     boolean accepted= false;
