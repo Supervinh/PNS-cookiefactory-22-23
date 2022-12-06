@@ -1,5 +1,6 @@
 package fr.unice.polytech.cf.entities;
 
+import fr.unice.polytech.cf.components.OrderHandler;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class UserAccount {
     private final List<Order> currentOrders;
+
     private String name;
     private boolean isVIP;
     private String surname;
@@ -32,6 +34,7 @@ public class UserAccount {
         cookiesForVIP = 0;
         lastCancel = new Date(1); // sets the Date to an old one
         forbiddenToOrder = new Date(1); // sets the Date to an old one
+
     }
 
     public List<Order> getCurrentOrders() {
