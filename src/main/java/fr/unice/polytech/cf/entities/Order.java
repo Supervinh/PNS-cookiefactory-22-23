@@ -4,89 +4,71 @@ import java.time.LocalDateTime;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 public class Order {
-    private final CartHandler cartHandler;
-    private int CommandNumber=1;
+    private UUID id;
+
+    private UUID storeId;
+
+    private Customer customer;
+
+    private Set<Item> items;
+
     private final LocalDateTime retrieve;
 
     private OrderState commandState;
     private int orderNumber =1;
     private OrderState orderState;
 
-    public Order(CartHandler cartHandler){
+    public Order(Customer customer, Set<Item> cart, UUID storeId){
         this.orderState = OrderState.UNPAID;
-        this.cartHandler = cartHandler;
+        this.customer = customer;
+        this.items = cart;
+        this.storeId = storeId;
         retrieve = LocalDateTime.now().plusHours(1);
+        this.id = UUID.randomUUID();
     }
 
-    public Order(CartHandler cartHandler, LocalDateTime retrieve){
+    public Order(Customer customer, Set<Item> cart, UUID storeId, LocalDateTime retrieve){
         this.commandState=OrderState.UNPAID;
-        this.cartHandler = cartHandler;
+        this.customer = customer;
+        this.items = cart;
+        this.storeId = storeId;
         this.retrieve = retrieve;
+        this.id= UUID.randomUUID();
     }
 
     public OrderState getOrderState() {
         return orderState;
     }
 
-    public int getOrderNumber() {
-        if(orderState != OrderState.UNPAID){
-        return orderNumber;}
-        else{
-            return 0;
-        }
+    public Set<Item> getItems(){
+        return items;
     }
 
-    public String getreceipt(){
-        if(orderState !=OrderState.UNPAID){
-        String info= cartHandler.getPrice()+"\n";
-            Map<BasicCookie,Integer> allcookie= cartHandler.getCookies();
-            for (Map.Entry mapentry : allcookie.entrySet()){
-                BasicCookie b=(BasicCookie)mapentry.getKey();
-                info=info+b.getName()+"\n";
-            }
-        return info;
-        }
-        else{
-            return("commande non validé");
-        }
-
-    }
 
     public void setOrderState(OrderState orderState) {
         this.orderState = orderState;
     }
 
-    public void paycommand() {
-        if (orderState == OrderState.UNPAID) {
-            orderState = OrderState.PAID;
-        }
-    }
-
-    public void Delivered(){
-        if(orderState == OrderState.READY){
-            orderState = OrderState.DELIVERED;
-        }
-    }
-
-    public void cancelOrder(){
-        if(orderState == OrderState.PAID || orderState == OrderState.UNPAID ){
-            orderState = OrderState.CANCELLED;
-        }
-        else{
-            System.out.println("your order can't be cancelled, it's already being prepared or ready");
-        }
-    }
-
 
     public LocalDateTime getRetrieveDate(){return retrieve;}
-    public int getCookingTime(){return cartHandler.getCookingTime();}
-    public int getNbCookies(){return cartHandler.getNbCookies();}
-    public double getPrice(){return cartHandler.getPrice();}
+    public int getCookingTime(){return items.stream().mapToInt(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();}
+    public int getNbCookies(){return items.stream().mapToInt(Item::getQuantity).sum();}
+    public double getPrice(){return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum();}
 
-    public Map<BasicCookie, Integer> getCookies(){return cartHandler.getCookies();}
+    public UUID getId() {
+        return id;
+    }
 
+    public UUID getStoreId() {
+        return storeId;
+    }
 }

@@ -11,7 +11,7 @@ public abstract class Cookie {
 
     String name;
     double price;
-    double cookingTime;
+    int cookingTime;
     Cooking cooking;
     Ingredient dough;
     Ingredient flavour;
@@ -22,12 +22,20 @@ public abstract class Cookie {
         return name;
     }
 
-    public double getCookingTime() {
+    public int getCookingTime() {
         return cookingTime;
     }
 
     public double getPrice() {
         return price;
+    }
+
+    public double setPrice(double price) {
+        return this.price = price;
+    }
+
+    public void setCookingTime(int cookingTime) {
+        this.cookingTime = cookingTime;
     }
 
     public Ingredient getDough() {

@@ -1,10 +1,8 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.Cook;
-import fr.unice.polytech.cf.entities.Order;
-import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.entities.*;
 import fr.unice.polytech.cf.interfaces.OrderProcessing;
+import fr.unice.polytech.cf.repositories.OrderRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.TimerTask;
 public class Kitchen implements OrderProcessing {
     private final CookScheduler cookScheduler;
 
-    public Kitchen(CookScheduler cookScheduler) {
+    public Kitchen(CookScheduler cookScheduler, OrderRepository orderRepository) {
         this.cookScheduler = cookScheduler;
     }
 
