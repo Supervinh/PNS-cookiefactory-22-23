@@ -2,7 +2,6 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
@@ -21,13 +20,13 @@ public class OrderHandler {
     }
 
 
-    public void paycommand() {
+    public void payCommand() {
         if (order.getOrderState() == OrderState.UNPAID) {
             order.setOrderState(OrderState.PAID) ;
         }
     }
 
-    public void Delivered(){
+    public void delivered(){
         if(order.getOrderState() == OrderState.READY){
             order.setOrderState(OrderState.DELIVERED);
         }

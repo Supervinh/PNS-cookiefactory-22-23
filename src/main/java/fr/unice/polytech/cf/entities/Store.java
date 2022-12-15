@@ -14,6 +14,8 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class Store {
+
+    private UUID id;
     private final String name;
     private StockHandler stock;
     private LocalTime openingTime;
@@ -34,6 +36,7 @@ public class Store {
     }
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
@@ -110,7 +113,7 @@ public class Store {
     }
 
     public void removeIngredient(Ingredient ingredient, int quantity) {
-        stock.removeIngredient(ingredient, quantity);
+        stock.removeIngredientByName(ingredient, quantity);
     }
 
     public void removeCookieFromStock(BasicCookie basicCookie) {
@@ -215,6 +218,14 @@ public class Store {
         this.cartTooGoodToGo = cartTooGoodToGo;
         System.out.println("Sending cart too good to go");
         System.out.println(cartTooGoodToGo);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
 

@@ -31,16 +31,16 @@ public class CatalogHandler {
         this.basicCookies.clear();
         ArrayList<Ingredient> toppings = new ArrayList<>();
         this.basicCookies.add(new BasicCookie("chocolate", Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
-                new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 3),
+                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, toppings));
         this.basicCookies.add(new BasicCookie("caramel", Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
-                new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
+                new Ingredient(storeId, IngredientEnum.DOUGH, "Plain", 2.2),
+                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Vanilla", 2),
                 Mix.MIXED, toppings));
         this.basicCookies.add(new PartyCookie("XLcaramel", Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),
-                new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),
+                new Ingredient(storeId, IngredientEnum.DOUGH, "Plain", 2.2),
+                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Vanilla", 2),
                 Mix.MIXED, toppings, 5, "birthday", "fairies"));
     }
 

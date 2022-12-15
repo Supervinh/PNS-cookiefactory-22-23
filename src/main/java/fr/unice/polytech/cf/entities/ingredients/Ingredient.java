@@ -7,13 +7,15 @@ public class Ingredient {
 
     private UUID id;
 
+    private UUID storeId;
     private final IngredientEnum type;
     private final String name;
     private double price;
 
     private double storeTax;
 
-    public Ingredient(IngredientEnum type, String name, double price) {
+    public Ingredient(UUID storeId, IngredientEnum type, String name, double price) {
+        this.storeId = storeId;
         this.type = type;
         this.name = name;
         this.price = price;
@@ -21,7 +23,8 @@ public class Ingredient {
         this.id = UUID.randomUUID();
     }
 
-    public Ingredient(IngredientEnum type, String name, double price, double storeTax) {
+    public Ingredient(UUID storeId, IngredientEnum type, String name, double price, double storeTax) {
+        this.storeId = storeId;
         this.type = type;
         this.name = name;
         this.price = price;
@@ -74,4 +77,9 @@ public class Ingredient {
     public int hashCode() {
         return Objects.hash(name);
     }
+
+    public UUID getStoreId() {
+        return storeId;
+    }
+
 }

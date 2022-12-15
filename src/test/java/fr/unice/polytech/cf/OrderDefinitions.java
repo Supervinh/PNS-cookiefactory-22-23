@@ -81,8 +81,8 @@ public class OrderDefinitions {
     public void theLastOrderIsPaid(){
         CartHandler cartHandler =new CartHandler();
         cartHandler.addCookie(new BasicCookie("chocolate", Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),
-                new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 3),
+                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()),1);
         Order paidOrder = new Order(cartHandler);
         paidOrder.setOrderState(OrderState.PAID);

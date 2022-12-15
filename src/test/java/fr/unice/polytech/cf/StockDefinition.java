@@ -31,7 +31,7 @@ public class StockDefinition {
 
     @When("the ingredients used for the cookies aren't available")
     public void theIngredientsUsedForTheCookiesArenTAvailable() {
-        stock.removeIngredient(basicCookie.getFlavour(), 4);
+        stock.removeIngredientByName(basicCookie.getFlavour(), 4);
         try {
             stock.removeCookieFromStock(basicCookie);
         } catch (RuntimeException e) {

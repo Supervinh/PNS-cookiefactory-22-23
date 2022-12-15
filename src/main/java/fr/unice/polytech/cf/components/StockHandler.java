@@ -1,97 +1,111 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.*;
+import fr.unice.polytech.cf.exceptions.IngredientNotInStockException;
+import fr.unice.polytech.cf.interfaces.StockExplorer;
+import fr.unice.polytech.cf.interfaces.StockModifier;
+import fr.unice.polytech.cf.repositories.IngredientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 @Component
-public class StockHandler {
-    private final Map<Ingredient, Integer> stock;
+public class StockHandler implements StockModifier, StockExplorer {
 
+    private IngredientRepository ingredientRepository;
 
-    public StockHandler() {
-        stock = new HashMap<>();
-        initStock();
+    @Autowired
+    public StockHandler(IngredientRepository ingredientRepository) {
+        this.ingredientRepository = ingredientRepository;
     }
 
-    private void initStock() {
-        stock.put(new Ingredient(IngredientEnum.DOUGH, "Plain", 2.2),5);
-        stock.put(new Ingredient(IngredientEnum.DOUGH, "Chocolate", 3),10);
-        stock.put(new Ingredient(IngredientEnum.DOUGH, "Peanutbutter", 1.5),3);
-        stock.put(new Ingredient(IngredientEnum.DOUGH, "Oatmeal", 2),2);
-
-        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Vanilla", 2),7);
-        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),10);
-        stock.put(new Ingredient(IngredientEnum.FLAVOUR, "Chili", 3),5);
-
-        stock.put(new Ingredient(IngredientEnum.TOPPING, "Whitechocolate", 1.5),3);
-        stock.put(new Ingredient(IngredientEnum.TOPPING, "Milkchocolate", 2.5),7);
-        stock.put(new Ingredient(IngredientEnum.TOPPING, "Mms", 3.5),8);
-        stock.put(new Ingredient(IngredientEnum.TOPPING, "Reesesbuttercup", 1.5),4);
+    @Override
+    public Iterable<Ingredient> findAllIngredients() {
+        return ingredientRepository.findAll();
     }
 
-
-    public Set<Ingredient> getIngredients() {
-        return this.stock.keySet();
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        if (findIngredientById(ingredient.getId()).isPresent()) {
+            throw new RuntimeException("Ingredient already exists");
+        }
+        ingredientRepository.save(ingredient, ingredient.getId());
     }
 
-    public Map<Ingredient, Integer> getStock() {
-        return stock;
-    }
-
-    public void addIngredient(Ingredient ingredient, int quantity) {
-        if (quantity < 1) throw new RuntimeException("Not a positive number of ingredients");
-        if (stock.containsKey(ingredient)) {
-            stock.replace(ingredient, stock.get(ingredient) + quantity);
-        } else {
-            stock.put(ingredient, quantity);
+    @Override
+    public void addIngredients(List<Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients) {
+            addIngredient(ingredient);
         }
     }
 
-    public void removeIngredient(Ingredient ingredient, int quantity) {
-        if (quantity < 1) throw new RuntimeException("Not a positive number of ingredients");
-        if (stock.containsKey(ingredient)) {
-            if (stock.get(ingredient) >= quantity) {
-                stock.replace(ingredient, stock.get(ingredient) - quantity);
-            } else {
-                throw new RuntimeException("Not enough ingredients in stock");
-            }
-        } else {
-            throw new RuntimeException("No ingredients in stock");
+    @Override
+    public Ingredient removeIngredientByName(String ingredientName, UUID storeId) throws IngredientNotInStockException {
+        Optional<Ingredient> ingredientToRemove = findIngredientByStoreId(storeId).stream()
+                .filter(ingredient -> ingredient.getName().equals(ingredientName))
+                .findAny();
+        if (ingredientToRemove.isEmpty()) {
+            throw new IngredientNotInStockException(ingredientName);
         }
+        ingredientRepository.deleteById(ingredientToRemove.get().getId());
+        return ingredientToRemove.get();
     }
 
-    public void removeFromStock(int pAmount, Ingredient pIngredient) {
-        int newAmount = stock.get(pIngredient) - pAmount;
-        stock.replace(pIngredient, newAmount);
-    }
-
-    public boolean removeCookieFromStock(BasicCookie pBasicCookie) {
-        if (canBeRemoved(pBasicCookie)) {
-            for (Ingredient ingredient : pBasicCookie.getIngredients()) {
-                removeFromStock(1, ingredient);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public boolean canBeRemoved(BasicCookie pBasicCookie) {
-        for (Ingredient ingredient : pBasicCookie.getIngredients()) {
-            if (stock.get(ingredient) < 1) {
-                throw new RuntimeException("Not enough ingredients, try another store");
+    @Override
+    public List<Ingredient> removeIngredientsFromStock(List<Ingredient> ingredientsToRemove, UUID storeId) {
+        List<Ingredient> removedIngredients = new ArrayList<>();
+        if (ingredientsCanBeRemovedFromStock(ingredientsToRemove, storeId)) {
+            for (Ingredient ingredient : ingredientsToRemove) {
+                try {
+                    removedIngredients.add(removeIngredientByName(ingredient.getName(), storeId));
+                } catch (IngredientNotInStockException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        return true;
+        return removedIngredients;
     }
 
-    public boolean canBeRemove(Map<Ingredient, Integer> ingredientsToRemove){
-        for (Ingredient ingredient : ingredientsToRemove.keySet()){
-            if (stock.get(ingredient) < 1)
+    @Override
+    public boolean ingredientsCanBeRemovedFromStock(List<Ingredient> ingredientsToRemove, UUID storeId) {
+        List<Ingredient> removedIngredients = new ArrayList<>();
+        Ingredient removedIngredient;
+        for (Ingredient ingredient : ingredientsToRemove) {
+            try {
+                removedIngredient = removeIngredientByName(ingredient.getName(), storeId);
+            } catch (IngredientNotInStockException e) {
+                e.printStackTrace();
+                for (Ingredient ingredientToReAdd : removedIngredients) {
+                    addIngredient(ingredientToReAdd);
+                }
                 return false;
+            }
+            removedIngredients.add(removedIngredient);
+        }
+        for (Ingredient ingredientToReAdd : removedIngredients) {
+            addIngredient(ingredientToReAdd);
         }
         return true;
+    }
+
+
+    @Override
+    public Optional<Ingredient> findIngredientById(UUID id) {
+        return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
+                .filter(i -> id.equals(i.getId())).findAny();
+    }
+
+    @Override
+    public Optional<Ingredient> findIngredientByName(String name) {
+        return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
+                .filter(i -> name.equals(i.getName())).findAny();
+    }
+
+    @Override
+    public Optional<Ingredient> findIngredientByStoreId(UUID storeId) {
+        return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
+                .filter(i -> storeId.equals(i.getStoreId())).findAny();
     }
 }

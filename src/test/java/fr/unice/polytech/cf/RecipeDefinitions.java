@@ -24,16 +24,16 @@ public class RecipeDefinitions {
     @Given("the brand's cook suggest a recipe {word}")
     public void suggestReipe(String cookie){
         accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
-                new Ingredient(IngredientEnum.DOUGH, "Chocolate", 0.5),
-                new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 0.5),
+                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()));
     }
     @Given("the brand's cook suggests a recipe {word}")
     public void suggestsReipe(String cookie){
         try {
             accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
-                    new Ingredient(IngredientEnum.DOUGH, "Chocolate", 5),
-                    new Ingredient(IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                    new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 5),
+                    new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                     Mix.MIXED, new ArrayList<>()));
         } catch (RuntimeException e){}
     }
