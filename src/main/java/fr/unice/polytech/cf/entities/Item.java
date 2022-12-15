@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.entities;
 
-import fr.unice.polytech.cf.interfaces.Cookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.Objects;
 

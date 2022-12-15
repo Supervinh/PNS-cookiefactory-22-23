@@ -1,20 +1,11 @@
 package fr.unice.polytech.cf.entities.cookies;
 
 import fr.unice.polytech.cf.entities.ingredients.*;
-import fr.unice.polytech.cf.interfaces.Cookie;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicCookie implements Cookie {
-    private final String name;
-    private double price;
-    private double cookingTime;
-    private Cooking cooking;
-    private Ingredient dough;
-    private Ingredient flavour;
-    private Mix mix;
-    private List<Ingredient> topping;
+public class BasicCookie extends Cookie {
 
     public BasicCookie(String name) {
         this.name = name;
@@ -35,47 +26,6 @@ public class BasicCookie implements Cookie {
         this.cookingTime = 5;
     }
 
-    public String getName() {
-        return name;
-    }
+    public void setPrice(int i){price=i;}
 
-    public double getCookingTime() {
-        return cookingTime;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public Cooking getCooking() {
-        return cooking;
-    }
-
-    public Ingredient getDough() {
-        return dough;
-    }
-
-    public Ingredient getFlavour() {
-        return flavour;
-    }
-
-    public Mix getMix() {
-        return mix;
-    }
-
-    protected void setPrice(int i){price=i;}
-
-    public List<Ingredient> getTopping() {
-        return new ArrayList<>(topping);
-    }
-
-    public List<Ingredient> getIngredients() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(dough);
-        ingredients.add(flavour);
-        for (Ingredient t : topping) {
-            ingredients.add(t);
-        }
-        return ingredients;
-    }
 }

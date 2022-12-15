@@ -1,14 +1,14 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.*;
+import fr.unice.polytech.cf.entities.Customer;
+import fr.unice.polytech.cf.entities.Item;
+import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.interfaces.CartModifier;
 import fr.unice.polytech.cf.interfaces.CartProcessor;
-import fr.unice.polytech.cf.interfaces.Cookie;
-import fr.unice.polytech.cf.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,9 +17,9 @@ import java.util.*;
 
 @Component
 public class CartHandler implements CartModifier, CartProcessor {
-    CustomerRegistry customerRegistry;
-    StockHandler stock;
-    private Store store;
+    private final CustomerRegistry customerRegistry;
+    private final StockHandler stock;
+    private final Store store;
 
 
     @Autowired
@@ -40,7 +40,7 @@ public class CartHandler implements CartModifier, CartProcessor {
             if (existing.isPresent()) {
                 newQuantity += existing.get().getQuantity();
             }
-            if (newQuantity < 0){
+            if (newQuantity < 0) {
                 throw new RuntimeException("Not a positive number of cookies");
             } else {
                 existing.ifPresent(items::remove);
@@ -55,6 +55,7 @@ public class CartHandler implements CartModifier, CartProcessor {
 
     }
 
+    @Override
     public boolean isEnoughIngredientsInStock(Item item, Store store, Customer customer) {
         Set<Item> items = customer.getCart();
         items.add(item);

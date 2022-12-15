@@ -1,77 +1,77 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import fr.unice.polytech.cf.entities.cookies.PartyCookie;
-import fr.unice.polytech.cf.entities.ingredients.*;
+import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.interfaces.CatalogExplorer;
+import fr.unice.polytech.cf.interfaces.CatalogModifier;
+import fr.unice.polytech.cf.interfaces.StockExplorer;
+import fr.unice.polytech.cf.repositories.CatalogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @Component
-public class CatalogHandler {
-    private final List<BasicCookie> basicCookies;
+public class CatalogHandler implements CatalogExplorer, CatalogModifier {
+    private StockExplorer stock;
+    private CatalogRepository catalogRepository;
 
-    public CatalogHandler() {
-        this.basicCookies = new ArrayList<>();
-        initCatalog();
+    @Autowired
+    public CatalogHandler(StockExplorer stock, CatalogRepository catalogRepository) {
+        this.stock = stock;
+        this.catalogRepository = catalogRepository;
     }
 
-    public CatalogHandler(StockHandler stock) {
-        this.basicCookies = new ArrayList<>();
-        updateCatalog(stock);
-    }
-
-    public void updateCatalog(StockHandler stock) {
-        initCatalog();
-        basicCookies.removeIf(c -> !stock.canBeRemoved(c));
-    }
-
-    private void initCatalog() {
-        this.basicCookies.clear();
-        ArrayList<Ingredient> toppings = new ArrayList<>();
-        this.basicCookies.add(new BasicCookie("chocolate", Cooking.CRUNCHY,
-                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 3),
-                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
-                Mix.MIXED, toppings));
-        this.basicCookies.add(new BasicCookie("caramel", Cooking.CRUNCHY,
-                new Ingredient(storeId, IngredientEnum.DOUGH, "Plain", 2.2),
-                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Vanilla", 2),
-                Mix.MIXED, toppings));
-        this.basicCookies.add(new PartyCookie("XLcaramel", Cooking.CRUNCHY,
-                new Ingredient(storeId, IngredientEnum.DOUGH, "Plain", 2.2),
-                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Vanilla", 2),
-                Mix.MIXED, toppings, 5, "birthday", "fairies"));
-    }
-
-
-    public BasicCookie getCookie(String name) {
-        for (BasicCookie c : this.basicCookies) {
-            if (c.getName().equals(name)) {
-                return c;
+    @Override
+    public void updateCatalog(Store store) {
+        Iterable<CookieRecipe> cookies = catalogRepository.findAll();
+        cookies.forEach(cookie -> {
+            if (!stock.ingredientsCanBeRemovedFromStock(cookie.getIngredients(), store.getId())) {
+                catalogRepository.deleteById(cookie.getId());
             }
+        });
+    }
+
+    @Override
+    public CookieRecipe getCookie(String name) {
+        Optional<CookieRecipe> cookieRecipe = findByName(name);
+        if (cookieRecipe.isPresent()) {
+            return cookieRecipe.get();
         }
         throw new RuntimeException("Cookie recipe does not exist");
     }
 
-    public void addCookie(BasicCookie basicCookie) {
-        this.basicCookies.add(basicCookie);
+    @Override
+    public void addCookie(CookieRecipe cookieRecipe) {
+        catalogRepository.save(cookieRecipe, cookieRecipe.getId());
     }
 
-    public void removeCookie(BasicCookie basicCookie) {
-        this.basicCookies.remove(basicCookie);
+    @Override
+    public void removeCookie(CookieRecipe cookieRecipe) {
+        catalogRepository.deleteById(cookieRecipe.getId());
     }
 
-    public List<BasicCookie> getCookies() {
-        return new ArrayList<>(this.basicCookies);
-    }
-
-    public boolean hasCookie(String name) {
-        for (BasicCookie basicCookie : this.basicCookies) {
-            if (basicCookie.getName().equals(name)) {
-                return true;
-            }
+    @Override
+    public List<CookieRecipe> getCookies() {
+        Iterable<CookieRecipe> cookies = catalogRepository.findAll();
+        if (cookies == null) {
+            return new ArrayList<>();
         }
-        return false;
+        return StreamSupport.stream(cookies.spliterator(), false).toList();
     }
+
+    @Override
+    public boolean hasCookie(String name) {
+        return findByName(name).isPresent();
+    }
+
+    @Override
+    public Optional<CookieRecipe> findByName(String name) {
+        return StreamSupport.stream(catalogRepository.findAll().spliterator(), false)
+                .filter(i -> name.equals(i.getName())).findAny();
+    }
+
 }

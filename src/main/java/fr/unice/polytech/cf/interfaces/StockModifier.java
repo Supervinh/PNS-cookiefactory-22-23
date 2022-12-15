@@ -15,5 +15,5 @@ public interface StockModifier {
     Ingredient removeIngredientByName(String ingredientName, UUID storeId) throws IngredientNotInStockException;
     List<Ingredient> removeIngredientsFromStock(List<Ingredient> ingredientsToRemove, UUID storeId);
 
-    boolean ingredientsCanBeRemovedFromStock(List<Ingredient> ingredientsToRemove, UUID storeId);
+
 }

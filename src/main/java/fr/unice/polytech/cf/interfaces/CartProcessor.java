@@ -1,6 +1,7 @@
 package fr.unice.polytech.cf.interfaces;
 
 import fr.unice.polytech.cf.entities.Customer;
+import fr.unice.polytech.cf.entities.Item;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
@@ -18,4 +19,5 @@ public interface CartProcessor {
     int getNbCookies(Customer customer);
     List<Ingredient> getIngredientsFromCart(Customer customer);
     Order confirmOrder(Customer customer) throws EmptyCartException, CloneNotSupportedException;
+    boolean isEnoughIngredientsInStock(Item item, Store store, Customer customer);
 }
