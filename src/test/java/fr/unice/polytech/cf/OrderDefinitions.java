@@ -2,7 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.CookAccount;
+import fr.unice.polytech.cf.entities.Cook;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.Customer;
@@ -25,7 +25,7 @@ public class OrderDefinitions {
     Order currentOrder;
     CatalogHandler catalog;
     boolean possible;
-    CookAccount cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+    Cook cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
     Customer client = new Customer("Tom", "Bevan", "tom.bevan@etu.unice.fr");
 
     @And("the catalog does not contains the cookie {word}")
@@ -46,13 +46,13 @@ public class OrderDefinitions {
     @Given("the cook is working and has {int} order")
     public void theCookIsWorkingAndHasOrder(int nbOrders) {
         if (nbOrders == 0)
-            cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+            cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         else{
             for(int i =0; i<nbOrders; i++){
                 currentOrder = new Order(new CartHandler());
                 currentOrder.setOrderState(OrderState.WORKING_ON_IT);
             }
-            cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+            cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
         }
     }
 

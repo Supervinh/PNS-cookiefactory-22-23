@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Component
@@ -98,14 +99,14 @@ public class StockHandler implements StockModifier, StockExplorer {
     }
 
     @Override
-    public Optional<Ingredient> findIngredientByName(String name) {
+    public List<Ingredient> findIngredientByName(String name) {
         return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
-                .filter(i -> name.equals(i.getName())).findAny();
+                .filter(i -> name.equals(i.getName())).toList();
     }
 
     @Override
-    public Optional<Ingredient> findIngredientByStoreId(UUID storeId) {
+    public List<Ingredient> findIngredientByStoreId(UUID storeId) {
         return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
-                .filter(i -> storeId.equals(i.getStoreId())).findAny();
+                .filter(i -> storeId.equals(i.getStoreId())).toList();
     }
 }

@@ -18,9 +18,9 @@ import java.util.*;
 
 @Component
 public class CartHandler implements CartModifier, CartProcessor {
-    private final CustomerRepository customerRepository;
-    private final StockHandler stock;
-    private final Store store;
+    private CustomerRepository customerRepository;
+    private StockHandler stock;
+    private Store store;
 
 
     @Autowired

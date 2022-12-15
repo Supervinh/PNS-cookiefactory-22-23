@@ -2,6 +2,7 @@ package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
 import fr.unice.polytech.cf.components.CatalogHandler;
+import fr.unice.polytech.cf.components.CookScheduler;
 import fr.unice.polytech.cf.components.StockHandler;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
@@ -25,15 +26,10 @@ public class Store {
     private OrderHistory storeOrderHistory;
 
     private CartHandlerTooGoodToGo cartTooGoodToGo;
-    private CookScheduler storeSchedule;
     private boolean canMakePartyCookie;
     private double taxes;
 
     private Timer timer;
-
-    public CookScheduler getStoreSchedule() {
-        return storeSchedule;
-    }
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.id = UUID.randomUUID();
@@ -46,7 +42,6 @@ public class Store {
         this.timer = new Timer();
         this.taxes = 0.0;
         this.applyTaxesToStock();
-        storeSchedule = new CookScheduler(openingTime,closingTime, new ArrayList<>());
         canMakePartyCookie=canMakePartyCookie();
         updateTooGoodToGo();
 
@@ -63,7 +58,6 @@ public class Store {
         this.timer = new Timer();
         this.taxes = taxes;
         this.applyTaxesToStock();
-        storeSchedule = new CookScheduler(openingTime,closingTime, new ArrayList<>());
         canMakePartyCookie=canMakePartyCookie();
         updateTooGoodToGo();
     }
@@ -170,7 +164,7 @@ public class Store {
     }
 
     public boolean canMakePartyCookie(){
-        for (CookAccount c: getStoreSchedule().cooks) {
+        for (Cook c: getStoreSchedule().cooks) {
             if(c.canMakePartyCookie()) return true;
         }
         return false;

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class TimeSlot implements Comparable<TimeSlot> {
+public class TimeSlot implements Comparable<TimeSlot> {
     private LocalDateTime startSlot;
     private LocalDateTime endSlot;
 
@@ -16,21 +16,10 @@ class TimeSlot implements Comparable<TimeSlot> {
         return endSlot;
     }
 
-    TimeSlot(LocalDateTime date){
+    public TimeSlot(LocalDateTime date){
         int d = date.getHour()*60+date.getMinute();
         startSlot = date.minusMinutes(d%15).minusSeconds(date.getSecond()).minusNanos(date.getNano());
         endSlot = date.plusMinutes(15-d%15).minusSeconds(date.getSecond()).minusNanos(date.getNano());
-    }
-
-    public static List<TimeSlot> orderToTimeSlot(Order o){
-        ArrayList<TimeSlot> ret = new ArrayList<TimeSlot>();
-        LocalDateTime d = o.getRetrieveDate();
-        int cookingTime = o.getCookingTime();
-        while(cookingTime > 0){
-            ret.add(new TimeSlot(d.minusMinutes(cookingTime)));
-            cookingTime-=15;
-        }
-        return ret;
     }
 
     @Override

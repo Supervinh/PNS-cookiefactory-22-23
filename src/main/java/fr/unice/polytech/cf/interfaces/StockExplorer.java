@@ -10,7 +10,7 @@ public interface StockExplorer {
 
     Iterable<Ingredient> findAllIngredients();
     Optional<Ingredient> findIngredientById(UUID id);
-    Optional<Ingredient> findIngredientByName(String name);
-    Optional<Ingredient> findIngredientByStoreId(UUID storeId);
+    List<Ingredient> findIngredientByName(String name);
+    List<Ingredient> findIngredientByStoreId(UUID storeId);
     boolean ingredientsCanBeRemovedFromStock(List<Ingredient> ingredientsToRemove, UUID storeId);
 }

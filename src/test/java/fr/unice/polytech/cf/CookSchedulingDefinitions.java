@@ -2,7 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.CookAccount;
+import fr.unice.polytech.cf.entities.Cook;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.Store;
 import io.cucumber.java.en.And;
@@ -15,7 +15,7 @@ import java.time.LocalTime;
 
 public class CookSchedulingDefinitions {
     Store store;
-    CookAccount cook;
+    Cook cook;
     CatalogHandler catalog;
     boolean isaccepted;
 
@@ -27,8 +27,8 @@ public class CookSchedulingDefinitions {
 
     @Given("the cook has an empty schedule")
     public void the_cook_has_an_empty_schedule() {
-        cook = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-        store.getStoreSchedule().addcook(cook);
+        cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+        store.getStoreSchedule().addCook(cook);
     }
     @When("is assigned a {int} minutes order")
     public void is_assigned_a_minutes_order(Integer int1) {
@@ -52,10 +52,10 @@ public class CookSchedulingDefinitions {
 
     @And("a cook is available and another isn't")
     public void a_cook_is_available_and_another_isn_t() {
-        CookAccount cook1 = new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-        cook = new CookAccount("Ramsey", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-        store.getStoreSchedule().addcook(cook1);
-        store.getStoreSchedule().addcook(cook);
+        Cook cook1 = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+        cook = new Cook("Ramsey", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+        store.getStoreSchedule().addCook(cook1);
+        store.getStoreSchedule().addCook(cook);
         store.assignOrder(new Order(new CartHandler(), LocalDateTime.of(2022,11,20,11,14,30,2))); // should occupy cook1
     }
     @And("a new order comes in")

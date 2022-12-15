@@ -2,7 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.CookAccount;
+import fr.unice.polytech.cf.entities.Cook;
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.PartyCookie;
 import io.cucumber.java.en.And;
@@ -24,20 +24,20 @@ public class PartyCookieDefinitions {
 
     @Given("the store can make party cookies")
     public void canMake(){
-        List<CookAccount> cook = new ArrayList<CookAccount>();
-        cook.add(new CookAccount("name",LocalTime.of(10,0), LocalTime.of(19,30),true));
+        List<Cook> cook = new ArrayList<Cook>();
+        cook.add(new Cook("name",LocalTime.of(10,0), LocalTime.of(19,30),true));
         store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
-        store.getStoreSchedule().addcook(cook);
+        store.getStoreSchedule().addCooks(cook);
         assert store.canMakePartyCookie();
     }
 
     @Given("the store can't make party cookies")
     public void cantMake(){
         catalog = new CatalogHandler();
-        List<CookAccount> cook = new ArrayList<CookAccount>();
-        cook.add(new CookAccount("name",LocalTime.of(10,0), LocalTime.of(19,30), false));
+        List<Cook> cook = new ArrayList<Cook>();
+        cook.add(new Cook("name",LocalTime.of(10,0), LocalTime.of(19,30), false));
         store = new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
-        store.getStoreSchedule().addcook(cook);
+        store.getStoreSchedule().addCooks(cook);
         assert !store.canMakePartyCookie();
     }
 

@@ -2,7 +2,7 @@ package fr.unice.polytech.cf;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CartHandlerTooGoodToGo;
-import fr.unice.polytech.cf.entities.CookAccount;
+import fr.unice.polytech.cf.entities.Cook;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.Store;
@@ -22,7 +22,7 @@ public class CartTooGoodToGoDefinitions {
     Store store=new Store("Default Store", LocalTime.of(10,0), LocalTime.of(19,30));
     CartHandlerTooGoodToGo cartTooGoodToGo;
     Order order;
-    CookAccount cookAccount=new CookAccount("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));;
+    Cook cook =new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));;
     ArrayList<Order> listorder;
     @Given("the client made an order")
     public void orderIsMade(){
