@@ -1,24 +1,22 @@
-# Cookiefactory-22-23-Team-#template
-_Template for classroom SI4-COO_
+# Cookiefactory-22-23-Team-N
 
-## doc
+# doc
 Contient le rapport final
 
-## .github
+# .github
    1. Contient sous workflows/maven.yml, une version d'un fichier d'actions qui est déclenché dès que vous poussez du code. 
 Sur cette version initiale seule un test Junit5 est déclenché pour vérifier que tout fonctionne.
        - Github Actions (See in .github/workflows) to simply make a maven+test compilation
   2. Contient sous ISSUE_TEMPLATE, les modèles pour les issues user_story et bug. Vous pouvez le compléter à votre guise.
 
-## src
+# src
  - pom.xml : 
        - Cucumber 7 et JUnit 5
        - Maven compatible
        - JDK 17
 
 
-
-## User stories 
+# User stories 
 La liste des fonctionnalités livrées par user story.
 
 ## Sprint 1
@@ -31,7 +29,7 @@ Récupérer commande
 
 ## Sprint 3
 
-## Loyalty programm
+### Loyalty programm
 
 Issue #16
 
@@ -45,8 +43,7 @@ _**Scenario:**_ not subscribing correctly to VIP
 
 _**Scenario:**_ checking price's reduction
 
-
-## Annuler commande
+### Annuler commande
 
 Issue #17
 
@@ -61,7 +58,7 @@ _**Scenario:**_ The customer cancels an order being prepared
 _**Scenario:**_ The customer cancels a second order in 8 minutes
 
 
-## Creation et suppression de recette
+### Creation et suppression de recette
 
 Issue #18
 
@@ -75,7 +72,7 @@ _**Scenario:**_  not adding a recipe to the catalog
 
 _**Scenario:**_ The stock does not  contain the ingredient to be removed
 
-## Modifier les horraires d'ouverture
+### Modifier les horraires d'ouverture
 
 Issue #15
 
@@ -93,7 +90,7 @@ _**Scenario:**_ The store's closing hour is before the new closing hour
 
 ## Sprint 4
 
-## Cook scheduler
+### Cook scheduler
 
 Issue #20
 
@@ -108,8 +105,7 @@ _**Scenario:**_A store had no cook available
 _**Scenario:**_ A cook is available and another isn't
 
 
-
-## Party cookies
+### Party cookies
 
 Issue #19
 
