@@ -9,6 +9,7 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.interfaces.CartModifier;
 import fr.unice.polytech.cf.interfaces.CartProcessor;
+import fr.unice.polytech.cf.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +18,15 @@ import java.util.*;
 
 @Component
 public class CartHandler implements CartModifier, CartProcessor {
-    private final CustomerRegistry customerRegistry;
+    private final CustomerRepository customerRepository;
     private final StockHandler stock;
     private final Store store;
 
 
     @Autowired
-    public CartHandler(Store store, CustomerRegistry customerRegistry, StockHandler stock) {
+    public CartHandler(Store store, CustomerRepository customerRegistry, StockHandler stock) {
         this.store = store;
-        this.customerRegistry = customerRegistry;
+        this.customerRepository = customerRegistry;
         this.stock = stock;
     }
 
@@ -106,6 +107,7 @@ public class CartHandler implements CartModifier, CartProcessor {
             Order order = new Order((CartHandler) this.clone());
             stock.removeIngredientsFromStock(getIngredientsFromCart(customer), store.getId());
             customer.setCart(new HashSet<>());
+            customerRepository.save(customer, customer.getId());
             return order;
         } else {
             throw new EmptyCartException();
