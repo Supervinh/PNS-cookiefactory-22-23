@@ -7,57 +7,25 @@ import fr.unice.polytech.cf.entities.ingredients.Mix;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Cookie {
+public interface Cookie {
 
-    String name;
-    double price;
-    double cookingTime;
-    Cooking cooking;
-    Ingredient dough;
-    Ingredient flavour;
-    Mix mix;
-    List<Ingredient> topping;
+    public String getName();
 
-    public String getName() {
-        return name;
-    }
+    public double getCookingTime();
 
-    public double getCookingTime() {
-        return cookingTime;
-    }
+    public double getPrice();
 
-    public double getPrice() {
-        return price;
-    }
+    public void setPrice(double price);
 
-    public double setPrice(double price) {
-        return this.price = price;
-    }
+    public void setCookingTime(int cookingTime);
 
-    public void setCookingTime(int cookingTime) {
-        this.cookingTime = cookingTime;
-    }
+    public Ingredient getDough();
 
-    public Ingredient getDough() {
-        return dough;
-    }
+    public Ingredient getFlavour();
 
-    public Ingredient getFlavour() {
-        return flavour;
-    }
+    public List<Ingredient> getTopping();
 
-    public List<Ingredient> getTopping() {
-        return topping;
-    }
-
-    public List<Ingredient> getIngredients() {
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(dough);
-        ingredients.add(flavour);
-        for (Ingredient t : topping) {
-            ingredients.add(t);
-        }
-        return ingredients;
-    }
+    public List<Ingredient> getIngredients();
 }
+
 

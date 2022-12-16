@@ -66,9 +66,9 @@ public class CookSchedulingDefinitions {
     public void the_store_is_open() {
         store = storeModifier.addStore("store", LocalTime.of(8, 0, 0, 0),
                 LocalTime.of(17, 0, 0, 0));
-        catalogModifier.addCookie(new CookieRecipe("chocolate", 1, 1,
+        /*catalogModifier.addCookie(new CookieRecipe("chocolate", 1, 1,
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "dough", 1),
-                new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "flavour", 1), new ArrayList<>()));
+                new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "flavour", 1), new ArrayList<>()));*/
         customer = new Customer("John", "Doe", "John@Doe.com");
         item = new Item(catalogExplorer.getCookie("chocolate"), 2);
         //store = new Store("store",LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));

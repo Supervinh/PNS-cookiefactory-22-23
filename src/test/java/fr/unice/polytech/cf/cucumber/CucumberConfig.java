@@ -10,7 +10,5 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 @SpringBootTest
 public class CucumberConfig {
 
-    @Autowired // Bug in the Cucumber/Mockito/Spring coordination: needs to add @Autowired
-    @MockBean
-    private Bank bankMock;
+
 }
