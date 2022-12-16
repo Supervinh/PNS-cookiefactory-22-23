@@ -184,7 +184,7 @@ _**Cucumber.feature:**_ CookScheduling.feature
 
 _**Scenario:**_ A cook receives an order
 
-_**Scenario:**_A store had no cook available
+_**Scenario:**_ A store had no cook available
 
 _**Scenario:**_ A cook is available and another isn't
 
