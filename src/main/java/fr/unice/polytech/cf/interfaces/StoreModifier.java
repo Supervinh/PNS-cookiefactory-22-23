@@ -5,7 +5,7 @@ import fr.unice.polytech.cf.entities.Store;
 import java.time.LocalTime;
 
 public interface StoreModifier {
-    void addStore(String name, LocalTime OpeningTime, LocalTime ClosingTime);
+    Store addStore(String name, LocalTime OpeningTime, LocalTime ClosingTime);
 
     void changeStoreOpeningTime(Store store, LocalTime newOpeningTime);
 

@@ -10,7 +10,6 @@ import fr.unice.polytech.cf.interfaces.OrderFinder;
 import fr.unice.polytech.cf.interfaces.OrderModifier;
 import fr.unice.polytech.cf.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -21,7 +20,7 @@ import java.util.Set;
 @Component
 public class OrderHandler implements OrderModifier, OrderFinder {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
 
     @Autowired
@@ -36,7 +35,7 @@ public class OrderHandler implements OrderModifier, OrderFinder {
         } else {
             order.setOrderState(OrderState.CANCELLED);
             orderRepository.save(order, order.getId());
-            if(((new Date().getTime()-customer.getLastCancel().getTime())/60000)<8){ // less than 8 mins since last cancel
+            if (((new Date().getTime() - customer.getLastCancel().getTime()) / 60000) < 8) { // less than 8 mins since last cancel
                 customer.setForbiddenToOrder(new Date());
             }
             customer.setLastCancel(new Date());
@@ -59,16 +58,15 @@ public class OrderHandler implements OrderModifier, OrderFinder {
 
     @Override
     public String getReceipt(Order order) {
-        if(order.getOrderState() != OrderState.UNPAID){
-            String info= order.getPrice()+"\n";
+        if (order.getOrderState() != OrderState.UNPAID) {
+            String info = order.getPrice() + "\n";
             Set<Item> cookies = order.getItems();
-            for (Item item:cookies) {
-                info+=item.getQuantity()+" "+item.getCookie().getName()+"\n";
+            for (Item item : cookies) {
+                info += item.getQuantity() + " " + item.getCookie().getName() + "\n";
             }
             return info;
-        }
-        else{
-            return("commande non validée");
+        } else {
+            return ("commande non validée");
         }
 
     }

@@ -1,99 +1,173 @@
 package fr.unice.polytech.cf;
 
-import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.CatalogHandler;
+import fr.unice.polytech.cf.entities.Customer;
+import fr.unice.polytech.cf.entities.Item;
 import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
+import fr.unice.polytech.cf.exceptions.PaymentException;
+import fr.unice.polytech.cf.interfaces.*;
+import fr.unice.polytech.cf.repositories.CustomerRepository;
+import io.cucumber.java.Before;
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CartDefinitions {
-    CartHandler cartHandler;
-    CatalogHandler catalog;
-    boolean ordered;
-    Order order;
-    boolean isVIP;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    @Given("the cart contains {int} cookies {word}")
-    public  void theCartContainsThisCookies(int number, String name){
-        cartHandler = new CartHandler();
-        catalog = new CatalogHandler();
-        try {
-            cartHandler.addCookie(catalog.getCookie(name), number);}
-        catch (RuntimeException ignored){}
-        System.out.println(catalog.getCookie(name).getName() + catalog.getCookie(name).getCookingTime() + catalog.getCookie(name).getPrice());
+    @Autowired
+    private CartModifier cartModifier;
+
+    @Autowired
+    private CustomerRegistration customerRegistration;
+
+    @Autowired
+    private CatalogExplorer catalogExplorer;
+
+    @Autowired
+    private StoreModifier storeModifier;
+
+    @Autowired
+    private CartProcessor cartProcessor;
+
+    private boolean ordered;
+    private Order order;
+    //private boolean isVIP;
+    private Customer customer;
+    private Store store;
+    private Item item;
+
+
+    @Before
+    public void settingUpContext() {
+        customerRepository.deleteAll();
     }
 
+    @Given("the cart contains {int} cookies {word}")
+    public void theCartContainsThisCookies(int number, String name) throws AlreadyExistingCustomerException {
+        //customer = new Customer("John", "Doe", "John@Doe.com");
+        //cartHandler = new CartHandler();
+        //catalog = new CatalogHandler();
+        customer = customerRegistration.register("John", "Doe", "John@Doe.com");
+        store = storeModifier.addStore("Store", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+        item = new Item(catalogExplorer.getCookie(name), number);
+        cartModifier.addCookie(customer, store, item);
+        /*try {
+            cartHandler.addCookie(catalog.getCookie(name), number);
+        } catch (RuntimeException ignored) {
+        }
+        System.out.println(catalog.getCookie(name).getName() + catalog.getCookie(name).getCookingTime() + catalog.getCookie(name).getPrice());
+        */
+    }
+
+
     @And("the cookie {word} price is {double}")
-    public void theCookiePriceIs(String name, double price){
-        assert catalog.getCookie(name).getPrice() == price;
+    public void theCookiePriceIs(String name, double price) {
+        assert catalogExplorer.getCookie(name).getPrice() == price;
+        //assert catalog.getCookie(name).getPrice() == price;
     }
 
     @And("the cookie {word} cooking time is {int}")
-    public void theCookieTimeIs(String name, int time){
-        assert catalog.getCookie(name).getCookingTime() == time;
+    public void theCookieTimeIs(String name, int time) {
+        assert catalogExplorer.getCookie(name).getCookingTime() == time;
+        //assert catalog.getCookie(name).getCookingTime() == time;
     }
 
     @And("the client is VIP")
-    public void theClientIsVIP(){isVIP=true;}
+    public void theClientIsVIP() {
+        customer.setIsVIP(true);
+        //isVIP = true;
+    }
 
     @And("the client isn't VIP")
-    public void theClientIsntVIP(){isVIP=false;}
+    public void theClientIsntVIP() {
+        customer.setIsVIP(false);
+        //isVIP = false;
+    }
 
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
-        try {
-            cartHandler.addCookie(catalog.getCookie(name), number);}
-        catch (RuntimeException ignored){}
-        System.out.println("add to cart" + cartHandler.getCookies().values());
+        item = new Item(catalogExplorer.getCookie(name), number);
+        cartModifier.addCookie(customer, store, item);
+        /*try {
+            cartHandler.addCookie(catalog.getCookie(name), number);
+        } catch (RuntimeException ignored) {
+        }
+        System.out.println("add to cart" + cartHandler.getCookies().values());*/
     }
 
     @When("the client confirm the order")
-    public void theClientConfirmTheOrder() throws CloneNotSupportedException {
-        try {
+    public void theClientConfirmTheOrder() throws EmptyCartException, PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
+        order = cartProcessor.confirmOrder(customer, store);
+        ordered = true;
+        /*try {
             ordered = true;
-            order= cartHandler.confirmOrder(isVIP);
-        }catch (EmptyCartException e){
+            order = cartHandler.confirmOrder(isVIP);
+        } catch (EmptyCartException e) {
             ordered = false;
-        }
+        }*/
     }
 
     @Then("the cart should contain {int} cookies")
     public void the_cart_should_contain_cookies(Integer number) {
-        assert (cartHandler.getNbCookies()==number);
+        assert (customer.getCart().size() == number);
+        //assert (cartHandler.getNbCookies() == number);
     }
 
     @Then("the cart should contain {int} cookies {word}")
-    public void theCartShouldContainThisCookies(int number, String name){
-        System.out.println("init cart" + cartHandler.getCookies().values());
-        if(catalog.hasCookie(name)) assert (cartHandler.getCookies().get(catalog.getCookie(name)) == number);
+    public void theCartShouldContainThisCookies(int number, String name) {
+        Set<Item> items = customer.getCart();
+        items.forEach(item -> {
+            if (item.getCookie().getName().equals(name)) {
+                assert item.getQuantity() == number;
+            }
+        });
+        //System.out.println("init cart" + cartHandler.getCookies().values());
+        //assert !catalog.hasCookie(name) || (cartHandler.getCookies().get(catalog.getCookie(name)) == number);
     }
 
     @Then("the client should receive a purchase order")
     public void theClientShouldReceiveAPurchaseOrder() {
-        assert(order!=null);
+        assert (order != null);
     }
 
     @Then("the client should get notified that the order is empty")
     public void theClientShouldGetNotifiedThatTheOrderIsEmpty() {
-        assert(!ordered);
+        assert (!ordered);
     }
 
     @Then("the cart should be empty")
-    public void theCartIsEmpty(){assert (cartHandler.getNbCookies() == 0);}
+    public void theCartIsEmpty() {
+        assert (customer.getCart().isEmpty());
+        //assert (cartHandler.getNbCookies() == 0);
+    }
 
     @Then("the cart's price should be {double}")
-    public void thePriceShouldBe(double price){assert cartHandler.getPrice() == price;}
+    public void thePriceShouldBe(double price) {
+        assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum() == price);
+        //assert cartHandler.getPrice() == price;
+    }
 
     @Then("the cart's cooking time should be {int}")
-    public void theCookingTimeshouldBe(int time){
-        System.out.println(cartHandler.getCookingTime());
-        assert cartHandler.getCookingTime()==time;}
+    public void theCookingTimeshouldBe(int time) {
+        assert (customer.getCart().stream().mapToInt(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() == time);
+        //System.out.println(cartHandler.getCookingTime());
+        //assert cartHandler.getCookingTime() == time;
+    }
 
     @Then("the price should be {double}")
-    public void thePriceShouldBe(int price){
-        assert order.getPrice()==price;
+    public void thePriceShouldBe(int price) {
+        assert order.getPrice() == price;
     }
 }

@@ -18,9 +18,10 @@ public class StoreManagement implements StoreModifier {
     }
 
     @Override
-    public void addStore(String name, LocalTime OpeningTime, LocalTime ClosingTime) {
+    public Store addStore(String name, LocalTime OpeningTime, LocalTime ClosingTime) {
         Store newStore = new Store(name, OpeningTime, ClosingTime);
         storeRepository.save(newStore, newStore.getId());
+        return newStore;
     }
 
     @Override
