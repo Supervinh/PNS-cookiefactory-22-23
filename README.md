@@ -12,6 +12,8 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/2
 **I want** to confirm my order
 **so that** It can be prepared.
 
+_**Cucumber.feature:**_ Cart.feature
+
 _**Scenario:**_ Cart is empty
 
 _**Scenario:**_ Cart is not empty
@@ -24,6 +26,8 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/4
 **As a** customer,
 **I want** to retrieve my order as it is ready
 **so that** I can eat my cookies.
+
+_**Cucumber.feature:**_ Order.feature
 
 _**Scenario:**_ The order is ready
 
@@ -44,9 +48,11 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/12
 **I want** to know how long to cook a given cookie
 **so that** I can cook correctly in the given time.
 
+_**Cucumber.feature:**_ Order.feature
+
 _**Scenario:**_ The order had time to be cooked
 
-_**Cucumber.feature:**_ Order.feature
+
 
 ## Sprint 3
 
@@ -62,6 +68,8 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/7
 **I want** to remove ingredients to the stock
 **so that** I can no longer offer receit containg this ingredient.
 
+_**Cucumber.feature:**_ Stock.feature
+
 _**Scenario:**_ The stock contains the ingredient to be removed
 
 _**Scenario:**_ The stock contains the ingredient to be removed but not enough
@@ -72,7 +80,7 @@ _**Scenario:**_ The stock does contain the ingredient to be added
 
 _**Scenario:**_ The stock does not contain the ingredient to be added
 
-_**Cucumber.feature:**_ Stock.feature
+
 
 ### Modifier les horraires d'ouverture
 
@@ -82,6 +90,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/15
 **I want** to change the store's opening time
 **so that** I can accept orders in thoses time widows.
 
+_**Cucumber.feature:**_ StoreOwnerAccount.feature
 
 _**Scenario:**_ The store's opening hour is after the new opening hour
 
@@ -91,7 +100,7 @@ _**Scenario:**_ The store's closing hour is after the new closing hour
 
 _**Scenario:**_ The store's closing hour is before the new closing hour
 
-_**Cucumber.feature:**_ StoreOwnerAccount.feature
+
 
 ### Loyalty programm
 
