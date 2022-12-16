@@ -83,4 +83,13 @@ public class Customer {
         return lastCancel;
     }
 
+    public double getCookingTime() {
+        double cookingTime = 15;
+        for(Item i : cart){
+            cookingTime += i.getCookie().getCookingTime()* i.getQuantity();
+
+        }
+        return cookingTime;
+    }
+
 }

@@ -106,7 +106,7 @@ public class OrderDefinitions {
 
     @Given("the cook is working and has {int} order")
     public void theCookIsWorkingAndHasOrder(int nbOrders) throws AlreadyExistingCustomerException {
-        cookRegistration.addCook("Gordon", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0), store.getId());
+        cookRegistration.addCook("Gordon", LocalTime.of(0, 0,0 , 0), LocalTime.of(23, 59, 59, 0), store.getId());
         if (nbOrders > 0) {
             for (int i = 0; i < nbOrders; i++) {
                 currentOrder = new Order(customer, customer.getCart(), store.getId(), LocalDateTime.now().plusHours(1));
@@ -120,7 +120,9 @@ public class OrderDefinitions {
     public void theCookReceiveAnOrder() {
         currentOrder = new Order(customer, customer.getCart(), store.getId(), LocalDateTime.now().plusHours(1));
         currentOrder.setOrderState(OrderState.PAID);
+        System.out.println(currentOrder.getOrderState());
         orderProcessing.assignOrder(currentOrder, store);
+        System.out.println(currentOrder.getOrderState());
     }
 
     @Then("the order's status should be {word}")
@@ -209,18 +211,9 @@ public class OrderDefinitions {
     }
 
 
-//    @Then("the cart's cooking time should be {double}")
-//    public void theCookingTimeshouldBe(double time) {
-//        assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() == time);
-//    }
-//
-//    @And("the cookie {word} cooking time is {int}")
-//    public void theCookieTimeIs(String name, int time) {
-//        Item item = items.stream().filter(e -> e.getCookie().getName().equals(name)).findFirst().get();
-//        item.getCookie().setCookingTime(time);
-//    }
-//
-//
+
+
+
 //    @Then("the price should be {double}")
 //    public void thePriceShouldBe(int price) {
 //        assert order.getPrice() == price;

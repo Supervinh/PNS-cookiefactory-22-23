@@ -44,17 +44,6 @@ Feature: Order management
      And  the order is paid
      Then the client receive a receipt for his last order
 
-  Scenario: checking time when adding cookie to cart
-    Given the cart contains 3 cookies chocolate
-    And the cookie chocolate cooking time is 5
-    Then the cart's cooking time should be 30
-
-  Scenario: checking time when adding cookie to cart
-    Given the cart contains 3 cookies chocolate
-    And the cookie chocolate cooking time is 5
-    And the cookie caramel cooking time is 5
-    When the client add 2 caramel to the cart
-    Then the cart's cooking time should be 40
 
   Scenario: checking price's reduction
     Given the cart contains 6 cookies chocolate

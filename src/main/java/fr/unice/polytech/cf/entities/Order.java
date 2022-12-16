@@ -10,7 +10,6 @@ public class Order {
     private final UUID storeId;
     private final Customer customer;
     private final Set<Item> items;
-    private final int orderNumber = 1;
     private OrderState orderState;
 
     public Order(Customer customer, Set<Item> cart, UUID storeId, LocalDateTime retrieve) {
@@ -39,7 +38,7 @@ public class Order {
     }
 
     public double getCookingTime() {
-        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();
+        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum()+15;
     }
 
     public int getNbCookies() {
