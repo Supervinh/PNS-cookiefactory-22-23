@@ -27,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -107,7 +106,6 @@ public class CartDefinitions {
     }
 
 
-
     @And("the client is VIP")
     public void theClientIsVIP() {
         customer.setIsVIP(true);
@@ -121,8 +119,13 @@ public class CartDefinitions {
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
         if (number != 0) {
-            item = new Item(catalogExplorer.getCookie(name), number);
-            cartModifier.addCookie(customer, store, item);
+            try {
+                item = new Item(catalogExplorer.getCookie(name), number);
+                cartModifier.addCookie(customer, store, item);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
         }
 
     }
@@ -181,7 +184,6 @@ public class CartDefinitions {
         assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum()
                 == quantity * item.getCookie().getPrice() + quantity2 * item2.getCookie().getPrice());
     }
-
 
 
 }

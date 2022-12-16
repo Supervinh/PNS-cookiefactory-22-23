@@ -14,7 +14,7 @@ Feature: Order management
 
   Scenario: The cook receive an order
     Given the cook is working and has 0 order
-    When the cook receive an order
+    When the cook receive a paid order
     Then the order's status should be WORKING_ON_IT
 
   Scenario: The cook receive an order
@@ -24,8 +24,7 @@ Feature: Order management
 
   Scenario: The order is not "paid"
     Given the cook is working and has 0 order
-    When the cook receive an order
-    And the order is not paid
+    When the cook receive an unpaid order
     Then the order's status should be UNPAID
 
   Scenario: The client tries to retrieve a finished order
@@ -38,15 +37,12 @@ Feature: Order management
     Given the client has made an order
     And the client's order is not ready
     When the client comes to retrieve the order
-    Then the order's status should be the same as before
+    Then the order's status shouldn't be delivered
 
    Scenario: the client want a receipt
      Given  the client has made an order
      And  the order is paid
      Then the client receive a receipt for his last order
-
-
-
 
   Scenario: checking time when adding cookie to cart
     Given the cart contains 3 cookies chocolate
@@ -59,8 +55,6 @@ Feature: Order management
     And the cookie caramel cooking time is 5
     When the client add 2 caramel to the cart
     Then the cart's cooking time should be 40
-
-
 
   Scenario: checking price's reduction
     Given the cart contains 6 cookies chocolate

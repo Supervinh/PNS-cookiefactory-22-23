@@ -10,21 +10,11 @@ public class Order {
     private final UUID storeId;
     private final Customer customer;
     private final Set<Item> items;
-    private OrderState commandState;
     private final int orderNumber = 1;
     private OrderState orderState;
 
-    /*public Order(Customer customer, Set<Item> cart, UUID storeId) {
-        this.orderState = OrderState.UNPAID;
-        this.customer = customer;
-        this.items = cart;
-        this.storeId = storeId;
-        retrieve = LocalDateTime.now().plusHours(1);
-        this.id = UUID.randomUUID();
-    }*/
-
     public Order(Customer customer, Set<Item> cart, UUID storeId, LocalDateTime retrieve) {
-        this.commandState = OrderState.UNPAID;
+        this.orderState = OrderState.UNPAID;
         this.customer = customer;
         this.items = cart;
         this.storeId = storeId;
