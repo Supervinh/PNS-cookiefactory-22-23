@@ -1,7 +1,6 @@
 # Cookiefactory-22-23-Team-N
 
 # User stories 
-La liste des fonctionnalités livrées par user story.
 
 ## Sprint 1
 
