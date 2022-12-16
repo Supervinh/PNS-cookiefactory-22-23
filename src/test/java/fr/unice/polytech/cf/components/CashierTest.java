@@ -90,7 +90,7 @@ public class CashierTest {
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()).getPrice());
-        assertEquals(price*1.1, order.getPrice(), 0.0);
+        assertEquals(1.1*price, order.getPrice(),0.000001);
         assertEquals(2,order.getItems().size());
 
     }

@@ -9,6 +9,9 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.entities.ingredients.Mix;
 import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
+import fr.unice.polytech.cf.exceptions.EmptyCartException;
+import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
+import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.modifier.CartProcessor;
 import fr.unice.polytech.cf.interfaces.explorer.CustomerFinder;
 import fr.unice.polytech.cf.interfaces.modifier.CartModifier;
@@ -21,6 +24,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Set;
@@ -83,7 +87,7 @@ public class CartHandlerTest {
 
 
     @Test
-    public void addItems()  {
+    public void addItemsAndCheckIfCorrect() throws EmptyCartException, PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
         Item firstItem=new Item(new BasicCookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
@@ -109,6 +113,8 @@ public class CartHandlerTest {
 
         assertEquals(cartProcessor.getPrice(john,store),27.5*1.1);
         assertEquals(cartProcessor.getCookingTime(john),25);
+
+
     }
 
 
