@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf.interfaces;
+package fr.unice.polytech.cf.interfaces.modifier;
 
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.IngredientNotInStockException;

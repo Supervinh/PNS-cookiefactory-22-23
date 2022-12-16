@@ -14,8 +14,7 @@ import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
-import fr.unice.polytech.cf.interfaces.*;
-import fr.unice.polytech.cf.repositories.CookRepository;
+import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
 import fr.unice.polytech.cf.repositories.OrderRepository;
 import fr.unice.polytech.cf.repositories.StoreRepository;
@@ -24,15 +23,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Set;
-import java.util.SortedMap;
 
 public class CookSchedulingDefinitions {
     @Autowired
@@ -51,7 +47,6 @@ public class CookSchedulingDefinitions {
     private CustomerRepository customerRepository;
     @Autowired
     private Kitchen kitchen;
-    private Store store;
 
     @Before
     public void settingUpContext() throws AlreadyExistingCustomerException {
@@ -60,14 +55,13 @@ public class CookSchedulingDefinitions {
         Store store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
         customerRegistration.register("John", "Doe", "John@Doe.com");
         cookScheduler.addCook("myCucumberCook", store.getOpeningTime(), store.getClosingTime(), store.getId());
-        System.out.println(cookScheduler.getCooks());
-        //storeRepository.save(store, store.getId());
+        storeRepository.save(store, store.getId());
     }
 
     @Given("the store is open")
     public void the_store_is_open() {
-        storeModifier.changeStoreOpeningTime(store, LocalTime.of(8, 0));
-        storeModifier.changeStoreClosingTime(store, LocalTime.of(8, 0));
+        storeModifier.changeStoreOpeningTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
+        storeModifier.changeStoreClosingTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
     }
 
     @Given("the cook has an empty schedule")

@@ -11,21 +11,15 @@ import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.entities.ingredients.Mix;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
-import fr.unice.polytech.cf.interfaces.Bank;
-import fr.unice.polytech.cf.interfaces.OrderProcessing;
-import fr.unice.polytech.cf.interfaces.Payment;
+import fr.unice.polytech.cf.interfaces.modifier.Bank;
+import fr.unice.polytech.cf.interfaces.modifier.Payment;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
-import org.springframework.format.datetime.joda.LocalTimeParser;
 
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -34,9 +28,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class CashierTest {

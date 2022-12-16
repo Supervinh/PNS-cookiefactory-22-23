@@ -2,9 +2,9 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
-import fr.unice.polytech.cf.interfaces.CatalogExplorer;
-import fr.unice.polytech.cf.interfaces.CatalogModifier;
-import fr.unice.polytech.cf.interfaces.StockExplorer;
+import fr.unice.polytech.cf.interfaces.explorer.CatalogExplorer;
+import fr.unice.polytech.cf.interfaces.modifier.CatalogModifier;
+import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
 import fr.unice.polytech.cf.repositories.CatalogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

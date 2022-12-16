@@ -2,12 +2,15 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.*;
 import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
-import fr.unice.polytech.cf.interfaces.*;
+import fr.unice.polytech.cf.interfaces.modifier.CartProcessor;
+import fr.unice.polytech.cf.interfaces.explorer.OrderFinder;
+import fr.unice.polytech.cf.interfaces.modifier.CartModifier;
+import fr.unice.polytech.cf.interfaces.modifier.Payment;
+import fr.unice.polytech.cf.interfaces.modifier.TooGoodToGoProcessing;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
 import fr.unice.polytech.cf.repositories.OrderRepository;
 import fr.unice.polytech.cf.repositories.StoreRepository;

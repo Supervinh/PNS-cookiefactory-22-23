@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.interfaces.StoreModifier;
+import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.StoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

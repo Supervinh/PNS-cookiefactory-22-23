@@ -2,14 +2,13 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.ingredients.*;
 import fr.unice.polytech.cf.exceptions.IngredientNotInStockException;
-import fr.unice.polytech.cf.interfaces.StockExplorer;
-import fr.unice.polytech.cf.interfaces.StockModifier;
+import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
+import fr.unice.polytech.cf.interfaces.modifier.StockModifier;
 import fr.unice.polytech.cf.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Component

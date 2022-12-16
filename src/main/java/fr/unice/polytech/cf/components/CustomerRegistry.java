@@ -2,8 +2,8 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.Customer;
 import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
-import fr.unice.polytech.cf.interfaces.CustomerFinder;
-import fr.unice.polytech.cf.interfaces.CustomerRegistration;
+import fr.unice.polytech.cf.interfaces.explorer.CustomerFinder;
+import fr.unice.polytech.cf.interfaces.modifier.CustomerRegistration;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

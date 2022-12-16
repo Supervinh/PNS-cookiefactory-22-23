@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf.interfaces;
+package fr.unice.polytech.cf.interfaces.modifier;
 
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.Store;

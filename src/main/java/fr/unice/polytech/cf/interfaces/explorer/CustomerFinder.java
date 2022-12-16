@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf.interfaces;
+package fr.unice.polytech.cf.interfaces.explorer;
 
 import fr.unice.polytech.cf.entities.Customer;
 
