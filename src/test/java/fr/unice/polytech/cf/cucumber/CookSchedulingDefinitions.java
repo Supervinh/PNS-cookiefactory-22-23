@@ -49,9 +49,6 @@ public class CookSchedulingDefinitions {
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private CookRepository cookRepository;
     @Autowired
     private Kitchen kitchen;
     private Store store;
@@ -60,8 +57,7 @@ public class CookSchedulingDefinitions {
     public void settingUpContext() throws AlreadyExistingCustomerException {
         storeRepository.deleteAll();
         customerRepository.deleteAll();
-        cookRepository.deleteAll();
-        store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
+        Store store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
         customerRegistration.register("John", "Doe", "John@Doe.com");
         cookScheduler.addCook("myCucumberCook", store.getOpeningTime(), store.getClosingTime(), store.getId());
         System.out.println(cookScheduler.getCooks());
@@ -77,7 +73,7 @@ public class CookSchedulingDefinitions {
     @Given("the cook has an empty schedule")
     public void the_cook_has_an_empty_schedule() {
         System.out.println("Empty schedule");
-        System.out.println(cookScheduler.getCooks());
+        System.out.println(cookScheduler.findByName("myCucumberCook").isPresent());
 
         cookScheduler.getCooks().iterator().next().getCookSchedule().clear();
     }

@@ -1,10 +1,10 @@
 Feature: CookScheduling management
 
-  Scenario: A cook is available and chosen for the next order
-    Given the store is open
-    And the cook has an empty schedule
-    When is assigned a 25 minutes order
-    Then he should have two slot taken for that order
+#  Scenario: A cook is available and chosen for the next order
+#    Given the store is open
+#    And the cook has an empty schedule
+#    When is assigned a 25 minutes order
+#    Then he should have two slot taken for that order
 
 
   Scenario: no cooks are available for the timeslot

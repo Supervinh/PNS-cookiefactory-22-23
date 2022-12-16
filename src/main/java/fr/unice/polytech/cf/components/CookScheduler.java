@@ -23,7 +23,7 @@ import java.util.stream.StreamSupport;
 @Component
 public class CookScheduler implements ScheduleManagement, CookFinder, CookRegistration {
 
-    private final CookRepository cookRepository;
+    private CookRepository cookRepository;
 
     @Autowired
     public CookScheduler(CookRepository cookRepository) {
