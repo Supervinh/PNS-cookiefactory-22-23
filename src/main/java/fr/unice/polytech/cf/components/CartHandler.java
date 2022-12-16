@@ -51,7 +51,7 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
         // if(cookie.getClass()==PartyCookie.class && !store.canMakePartyCookie()) throw new RuntimeException("This store can't make party cookies");
         int newQuantity = item.getQuantity();
         Set<Item> items = customer.getCart();
-        Optional<Item> existing = items.stream().filter(e -> e.getCookie().equals(item.getCookie())).findFirst();
+        Optional<Item> existing = items.stream().filter(e -> e.getCookie().getName().equals(item.getCookie().getName())).findFirst();
         if (isEnoughIngredientsInStock(item, store, customer)) {
             if (existing.isPresent()) {
                 newQuantity += existing.get().getQuantity();
@@ -73,7 +73,7 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
 
     @Override
     public boolean isEnoughIngredientsInStock(Item item, Store store, Customer customer) {
-        Set<Item> items = customer.getCart();
+        Set<Item> items = new HashSet<>(customer.getCart());
         items.add(item);
         List<Ingredient> ingredientsToCheck = new ArrayList<>();
         for (Item i : items) {

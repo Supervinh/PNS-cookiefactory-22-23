@@ -10,7 +10,6 @@ public class Item {
 
     private int quantity;
 
-    public Item() {}
 
     public Item(Cookie cookie, int quantity) {
         this.cookie = cookie;
