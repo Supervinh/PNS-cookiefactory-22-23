@@ -190,14 +190,18 @@ public class CartDefinitions {
     @Then("the cart's cooking time should be {double}")
     public void theCookingTimeshouldBe(double time) {
         assert (customer.getCookingTime() == time);
-        //assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() == time);
     }
 
     @And("the cookie {word} cooking time is {int}")
     public void theCookieTimeIs(String name, int time) {
         customer.getCart().stream().filter(item -> item.getCookie().getName().equals(name)).findFirst().get().getCookie().setCookingTime(time);
-        //Item item = items.stream().filter(e -> e.getCookie().getName().equals(name)).findFirst().get();
-        //item.getCookie().setCookingTime(time);
     }
+
+        @Then("the price should be {double}")
+    public void thePriceShouldBe(int price) {
+        assert order.getPrice() == price;
+    }
+
+
 
 }

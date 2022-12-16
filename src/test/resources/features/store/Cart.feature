@@ -63,3 +63,15 @@ Feature: Cart management
     And the cookie caramel cooking time is 5
     Then the cart's cooking time should be 40
 
+
+  Scenario: checking price's reduction
+    Given the cart contains 6 cookies chocolate
+    And the client is VIP
+    When the client confirm the order
+    Then the cart's price should be 29.7
+
+  Scenario: checking price's reduction
+    Given the cart contains 6 cookies chocolate
+    And the client isn't VIP
+    When the client confirm the order
+    Then the cart's price should be 33.0

@@ -210,14 +210,4 @@ public class OrderDefinitions {
         assert (orderModifier.getReceipt(currentOrder).equals("5.5" + "\n" + "1 chocolate" + "\n"));
     }
 
-
-
-
-
-//    @Then("the price should be {double}")
-//    public void thePriceShouldBe(int price) {
-//        assert order.getPrice() == price;
-//    }
-//
-
 }
