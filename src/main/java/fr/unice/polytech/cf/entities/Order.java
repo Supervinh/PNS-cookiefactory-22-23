@@ -14,14 +14,14 @@ public class Order {
     private final int orderNumber = 1;
     private OrderState orderState;
 
-    public Order(Customer customer, Set<Item> cart, UUID storeId) {
+    /*public Order(Customer customer, Set<Item> cart, UUID storeId) {
         this.orderState = OrderState.UNPAID;
         this.customer = customer;
         this.items = cart;
         this.storeId = storeId;
         retrieve = LocalDateTime.now().plusHours(1);
         this.id = UUID.randomUUID();
-    }
+    }*/
 
     public Order(Customer customer, Set<Item> cart, UUID storeId, LocalDateTime retrieve) {
         this.commandState = OrderState.UNPAID;
@@ -48,8 +48,8 @@ public class Order {
         return retrieve;
     }
 
-    public int getCookingTime() {
-        return items.stream().mapToInt(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();
+    public double getCookingTime() {
+        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();
     }
 
     public int getNbCookies() {

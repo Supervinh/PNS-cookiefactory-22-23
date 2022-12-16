@@ -4,14 +4,19 @@ import fr.unice.polytech.cf.entities.Customer;
 import fr.unice.polytech.cf.entities.Item;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.*;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
+import fr.unice.polytech.cf.repositories.StoreRepository;
 import io.cucumber.java.Before;
 import io.cucumber.java.bs.A;
+import io.cucumber.java.bs.I;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,12 +24,16 @@ import io.cucumber.java.en.When;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class CartDefinitions {
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private StoreRepository storeRepository;
 
     @Autowired
     private CartModifier cartModifier;
@@ -34,6 +43,9 @@ public class CartDefinitions {
 
     @Autowired
     private CatalogExplorer catalogExplorer;
+
+    @Autowired
+    private CatalogModifier catalogModifier;
 
     @Autowired
     private StoreModifier storeModifier;
@@ -52,6 +64,7 @@ public class CartDefinitions {
     @Before
     public void settingUpContext() {
         customerRepository.deleteAll();
+        storeRepository.deleteAll();
     }
 
     @Given("the cart contains {int} cookies {word}")
@@ -61,6 +74,9 @@ public class CartDefinitions {
         //catalog = new CatalogHandler();
         customer = customerRegistration.register("John", "Doe", "John@Doe.com");
         store = storeModifier.addStore("Store", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
+        catalogModifier.addCookie(new CookieRecipe(name, 1, 1,
+                new Ingredient(store.getId(), IngredientEnum.DOUGH, "dough", 1),
+                new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "flavour", 1), new ArrayList<>()));
         item = new Item(catalogExplorer.getCookie(name), number);
         cartModifier.addCookie(customer, store, item);
         /*try {
@@ -109,7 +125,7 @@ public class CartDefinitions {
 
     @When("the client confirm the order")
     public void theClientConfirmTheOrder() throws EmptyCartException, PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
-        order = cartProcessor.confirmOrder(customer, store);
+        order = cartProcessor.confirmOrder(customer, store, null);
         ordered = true;
         /*try {
             ordered = true;
@@ -159,9 +175,9 @@ public class CartDefinitions {
         //assert cartHandler.getPrice() == price;
     }
 
-    @Then("the cart's cooking time should be {int}")
-    public void theCookingTimeshouldBe(int time) {
-        assert (customer.getCart().stream().mapToInt(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() == time);
+    @Then("the cart's cooking time should be {double}")
+    public void theCookingTimeshouldBe(double time) {
+        assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() == time);
         //System.out.println(cartHandler.getCookingTime());
         //assert cartHandler.getCookingTime() == time;
     }

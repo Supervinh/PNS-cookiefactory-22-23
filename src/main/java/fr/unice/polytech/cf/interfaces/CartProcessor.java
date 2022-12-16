@@ -10,6 +10,7 @@ import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,9 @@ public interface CartProcessor {
 
     Map<BasicCookie, Integer> getCookies();
     double getPrice(Customer customer, Store store);
-    int getCookingTime(Customer customer);
+    double getCookingTime(Customer customer);
     int getNbCookies(Customer customer);
     List<Ingredient> getIngredientsFromCart(Customer customer);
-    Order confirmOrder(Customer customer, Store store) throws EmptyCartException, CloneNotSupportedException, PaymentException, OrderCancelledTwiceException;
+    Order confirmOrder(Customer customer, Store store, LocalDateTime retrieve) throws EmptyCartException, CloneNotSupportedException, PaymentException, OrderCancelledTwiceException;
     boolean isEnoughIngredientsInStock(Item item, Store store, Customer customer);
 }

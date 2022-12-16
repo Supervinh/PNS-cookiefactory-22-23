@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -96,8 +98,8 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
     }
 
     @Override
-    public int getCookingTime(Customer customer) {
-        return customer.getCart().stream().mapToInt(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();
+    public double getCookingTime(Customer customer) {
+        return customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum();
     }
 
     @Override
@@ -115,9 +117,12 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
     }
 
     @Override
-    public Order confirmOrder(Customer customer, Store store) throws EmptyCartException, PaymentException, OrderCancelledTwiceException {
+    public Order confirmOrder(Customer customer, Store store, LocalDateTime retrieve) throws EmptyCartException, PaymentException, OrderCancelledTwiceException {
         if (!customer.getCart().isEmpty()) {
-            Order order = payment.payOrder(customer, customer.getCart(), store);
+            if(retrieve == null){
+                retrieve = LocalDateTime.now().plusHours(1);
+            }
+            Order order = payment.payOrder(customer, customer.getCart(), store, retrieve);
             stock.removeIngredientsFromStock(getIngredientsFromCart(customer), store.getId());
             customer.setCart(new HashSet<>());
             customerRepository.save(customer, customer.getId());

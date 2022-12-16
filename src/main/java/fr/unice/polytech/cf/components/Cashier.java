@@ -10,6 +10,7 @@ import fr.unice.polytech.cf.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -30,8 +31,11 @@ public class Cashier implements Payment {
     }
 
     @Override
-    public Order payOrder(Customer customer, Set<Item> items, Store store) throws PaymentException, OrderCancelledTwiceException {
-        Order order = new Order(customer, items, store.getId());
+    public Order payOrder(Customer customer, Set<Item> items, Store store, LocalDateTime retrieve) throws PaymentException, OrderCancelledTwiceException {
+        if(retrieve == null){
+            retrieve = LocalDateTime.now().plusHours(1);
+        }
+        Order order = new Order(customer, items, store.getId(),retrieve);
         if(((new Date().getTime()-customer.getForbiddenToOrder().getTime())/60000)<10){
             throw new OrderCancelledTwiceException();
         }

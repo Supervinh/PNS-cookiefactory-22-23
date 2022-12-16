@@ -11,7 +11,7 @@ public abstract class Cookie {
 
     String name;
     double price;
-    int cookingTime;
+    double cookingTime;
     Cooking cooking;
     Ingredient dough;
     Ingredient flavour;
@@ -22,7 +22,7 @@ public abstract class Cookie {
         return name;
     }
 
-    public int getCookingTime() {
+    public double getCookingTime() {
         return cookingTime;
     }
 

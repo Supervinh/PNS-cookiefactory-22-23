@@ -3,6 +3,7 @@ package fr.unice.polytech.cf.components;
 import fr.unice.polytech.cf.entities.Cook;
 import fr.unice.polytech.cf.entities.Order;
 import fr.unice.polytech.cf.entities.TimeSlot;
+import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.interfaces.CookFinder;
 import fr.unice.polytech.cf.interfaces.CookRegistration;
 import fr.unice.polytech.cf.interfaces.ScheduleManagement;
@@ -11,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -41,15 +44,25 @@ public class CookScheduler implements ScheduleManagement, CookFinder, CookRegist
 
 
     @Override
-    public void addCook(Cook newCook) {
+    public Cook addCook(String name, LocalTime startWork, LocalTime endWork, UUID storeId) throws AlreadyExistingCustomerException {
+        if(findByName(name).isPresent())
+            throw new AlreadyExistingCustomerException(name);
+        Cook newCook = new Cook(name, startWork, endWork, storeId);
         cookRepository.save(newCook, newCook.getId());
+        return newCook;
+    }
+
+    public Optional<Cook> findByName(String name) {
+        return StreamSupport.stream(cookRepository.findAll().spliterator(), false)
+                .filter(cook -> name.equals(cook.getName())).findAny();
     }
 
     @Override
-    public void addCooks(List<Cook> newCooks) {
+    public List<Cook> addCooks(List<Cook> newCooks) {
         for (Cook c : newCooks) {
             cookRepository.save(c, c.getId());
         }
+        return newCooks;
     }
 
     @Override
@@ -76,9 +89,9 @@ public class CookScheduler implements ScheduleManagement, CookFinder, CookRegist
     public List<TimeSlot> orderToTimeSlot(Order o) {
         ArrayList<TimeSlot> ret = new ArrayList<TimeSlot>();
         LocalDateTime d = o.getRetrieveDate();
-        int cookingTime = o.getCookingTime();
+        double cookingTime = o.getCookingTime();
         while (cookingTime > 0) {
-            ret.add(new TimeSlot(d.minusMinutes(cookingTime)));
+            ret.add(new TimeSlot(d.minusMinutes((long) cookingTime)));
             cookingTime -= 15;
         }
         return ret;
