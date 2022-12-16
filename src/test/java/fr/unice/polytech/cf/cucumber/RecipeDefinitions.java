@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.BrandCook;
@@ -16,7 +16,7 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 
 public class RecipeDefinitions {
-    CatalogHandler c = new CatalogHandler();
+    /*CatalogHandler c = new CatalogHandler();
     BrandOwner brandOwner = new BrandOwner(c);
     BrandCook brandCook = new BrandCook(brandOwner, c);
     boolean accepted= false;
@@ -53,5 +53,5 @@ public class RecipeDefinitions {
     public void isInCatalog(String cookie){assert c.hasCookie(cookie)==true;}
 
     @Then("the cookie {word} shouldn't be in the catalog")
-    public void isNotInCatalog(String cookie){assert c.hasCookie(cookie)==false;}
+    public void isNotInCatalog(String cookie){assert c.hasCookie(cookie)==false;}*/
 }

@@ -5,15 +5,16 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.repositories.BasicRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
 
-@Component
+@Repository
 public class IngredientRepository extends BasicRepositoryImpl<Ingredient, UUID> {
 
-    private IngredientRepository ingredientRepository;
+    /*private IngredientRepository ingredientRepository;
 
     @Autowired
     public IngredientRepository(IngredientRepository ingredientRepository) {
@@ -23,5 +24,5 @@ public class IngredientRepository extends BasicRepositoryImpl<Ingredient, UUID> 
     public Optional<Ingredient> findByStoreId(UUID storeId) {
         return StreamSupport.stream(ingredientRepository.findAll().spliterator(), false)
                 .filter(i -> storeId.equals(i.getStoreId())).findAny();
-    }
+    }*/
 }

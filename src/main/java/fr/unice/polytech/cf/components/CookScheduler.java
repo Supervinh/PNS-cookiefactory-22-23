@@ -52,6 +52,7 @@ public class CookScheduler implements ScheduleManagement, CookFinder, CookRegist
         return newCook;
     }
 
+    @Override
     public Optional<Cook> findByName(String name) {
         return StreamSupport.stream(cookRepository.findAll().spliterator(), false)
                 .filter(cook -> name.equals(cook.getName())).findAny();

@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.entities.Order;
@@ -13,7 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class UserAccountDefinitions {
-    Customer customer;
+    /*Customer customer;
     boolean receivedError;
 
     @Given("the account has ordered {int} cookies")
@@ -125,5 +125,5 @@ public class UserAccountDefinitions {
     @Then("he should receive an error")
     public void he_should_receive_an_error() {
         assert(receivedError);
-    }
+    }*/
 }

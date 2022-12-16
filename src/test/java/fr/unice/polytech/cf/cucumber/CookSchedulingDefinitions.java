@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Kitchen;

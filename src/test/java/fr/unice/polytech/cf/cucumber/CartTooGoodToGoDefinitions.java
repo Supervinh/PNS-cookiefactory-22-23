@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.entities.Order;
@@ -17,7 +17,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class CartTooGoodToGoDefinitions {
-    Store store = new Store("Default Store", LocalTime.of(10, 0), LocalTime.of(19, 30));
+    /*Store store = new Store("Default Store", LocalTime.of(10, 0), LocalTime.of(19, 30));
     CartHandlerTooGoodToGo cartTooGoodToGo;
     Order order;
     //Cook cook = new Cook("Gordon", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0));
@@ -51,5 +51,5 @@ public class CartTooGoodToGoDefinitions {
 
         assert ((float) cartTooGoodToGo.getPrice() == price);
     }
-
+*/
 }

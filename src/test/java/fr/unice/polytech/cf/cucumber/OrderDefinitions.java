@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
@@ -22,7 +22,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 public class OrderDefinitions {
-    Order currentOrder;
+    /*Order currentOrder;
     CatalogHandler catalog;
     boolean possible;
     Cook cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
@@ -72,10 +72,10 @@ public class OrderDefinitions {
     @And("the order is not paid")
     public void theOrderIsNotPaid() {
         currentOrder.setOrderState(OrderState.UNPAID);
-      /*Order unpaidOrder = new Order(new Cart());
+      *//*Order unpaidOrder = new Order(new Cart());
         unpaidOrder.setOrderState(OrderState.UNPAID);
         cook.addOrder(unpaidOrder);
-        cook.prepareOrder(unpaidOrder);*/
+        cook.prepareOrder(unpaidOrder);*//*
     }
     @And("the order is paid")
     public void theLastOrderIsPaid(){
@@ -139,5 +139,5 @@ public class OrderDefinitions {
     @Then("the client receive a receipt for his last order")
     public void theClientReceiveAReceipt(){
         assert(client.getCurrentOrders().get(client.getCurrentOrders().size()-1).getreceipt().equals("5.5"+"\n"+"chocolate"+"\n"));
-    }
+    }*/
 }

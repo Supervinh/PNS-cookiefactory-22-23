@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.StoreOwnerAccount;
@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 import java.time.LocalTime;
 
 public class StoreOwnerAccountDefinitions {
-    StoreOwnerAccount storeOwnerAccount = new StoreOwnerAccount("Cookie factory Biot");
+    /*StoreOwnerAccount storeOwnerAccount = new StoreOwnerAccount("Cookie factory Biot");
     @Given("the store's opening time is {int}:{int}")
     public void theStoreOpeningTimeIs(int hours, int minutes ) {
         Store ownedStore = storeOwnerAccount.getOwnedStore();
@@ -72,5 +72,5 @@ public class StoreOwnerAccountDefinitions {
             double expectedPrice = Math.floor(ingredient.getBasePrice() * (1 + taxAppliedToIngredients/100.0) * 100) / 100;
             assert(ingredient.getPrice() == expectedPrice);
         }
-    }
+    }*/
 }

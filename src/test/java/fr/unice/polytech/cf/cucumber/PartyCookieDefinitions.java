@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PartyCookieDefinitions {
-    CatalogHandler catalog=new CatalogHandler();
+    /*CatalogHandler catalog=new CatalogHandler();
     Store store;
     CartHandler cartHandler;
     boolean isAdded;
@@ -67,5 +67,5 @@ public class PartyCookieDefinitions {
     public void isAdded(){assert isAdded==true;}
 
     @Then(("the cookie shouldn't be added"))
-    public void isNotAdded(){assert isAdded==false;}
+    public void isNotAdded(){assert isAdded==false;}*/
 }

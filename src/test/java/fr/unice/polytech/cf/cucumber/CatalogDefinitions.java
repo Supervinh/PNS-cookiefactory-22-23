@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CatalogDefinitions {
-    @Autowired
+    /*@Autowired
     CatalogHandler catalogHandler;
 
     @Given("we create a catalog")
@@ -40,5 +40,5 @@ public class CatalogDefinitions {
     @And("we add a cookie {word} to the catalog")
     public void we_add_a_cookie_to_the_catalog(String cookie){
         catalogHandler.addCookie(new BasicCookie(cookie));
-    }
+    }*/
 }

@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.entities.Customer;
 import fr.unice.polytech.cf.entities.Item;
@@ -63,6 +63,8 @@ public class CartDefinitions {
 
     @Before
     public void settingUpContext() {
+        System.out.println("salope");
+        System.out.println(customerRepository);
         customerRepository.deleteAll();
         storeRepository.deleteAll();
     }

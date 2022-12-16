@@ -1,4 +1,4 @@
-package fr.unice.polytech.cf;
+package fr.unice.polytech.cf.cucumber;
 
 import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.CatalogHandler;
@@ -9,7 +9,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class StockDefinition {
-    CartHandler cartHandler;
+    /*CartHandler cartHandler;
     CatalogHandler catalog;
     StockHandler stock;
     BasicCookie basicCookie;
@@ -42,5 +42,5 @@ public class StockDefinition {
     @Then("the cart should contain {int} cookie")
     public void the_cart_should_contain_cookies(Integer number) {
         assert (cartHandler.getNbCookies()==number);
-    }
+    }*/
 }
