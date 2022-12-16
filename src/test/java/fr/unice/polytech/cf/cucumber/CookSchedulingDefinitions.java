@@ -54,22 +54,24 @@ public class CookSchedulingDefinitions {
     private CookRepository cookRepository;
     @Autowired
     private Kitchen kitchen;
+    private Store store;
 
     @Before
     public void settingUpContext() throws AlreadyExistingCustomerException {
         storeRepository.deleteAll();
         customerRepository.deleteAll();
         cookRepository.deleteAll();
-        Store store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
+        store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
         customerRegistration.register("John", "Doe", "John@Doe.com");
         cookScheduler.addCook("myCucumberCook", store.getOpeningTime(), store.getClosingTime(), store.getId());
-        storeRepository.save(store, store.getId());
+        System.out.println(cookScheduler.getCooks());
+        //storeRepository.save(store, store.getId());
     }
 
     @Given("the store is open")
     public void the_store_is_open() {
-        storeModifier.changeStoreOpeningTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
-        storeModifier.changeStoreClosingTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
+        storeModifier.changeStoreOpeningTime(store, LocalTime.of(8, 0));
+        storeModifier.changeStoreClosingTime(store, LocalTime.of(8, 0));
     }
 
     @Given("the cook has an empty schedule")

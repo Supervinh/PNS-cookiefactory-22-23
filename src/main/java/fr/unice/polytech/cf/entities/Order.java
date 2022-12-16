@@ -46,7 +46,7 @@ public class Order {
     }
 
     public double getPrice() {
-        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum();
+        return Math.floor(items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum()*100)/100;
     }
 
     public UUID getId() {

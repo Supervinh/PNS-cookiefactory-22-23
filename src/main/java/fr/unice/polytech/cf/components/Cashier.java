@@ -40,6 +40,7 @@ public class Cashier implements Payment {
             throw new OrderCancelledTwiceException();
         }
         applyStoreTaxes(order, store);
+        applyVIPDiscount(order, customer);
         double price = order.getPrice();
         boolean status = false;
         status = bank.pay(customer, price);
@@ -56,6 +57,17 @@ public class Cashier implements Payment {
     public void applyStoreTaxes(Order order, Store store) {
         for (Item item : order.getItems()) {
             item.getCookie().setPrice(item.getCookie().getPrice() * (1 + store.getTaxes()));
+        }
+    }
+
+    @Override
+    public void applyVIPDiscount(Order order, Customer customer) {
+        if (customer.isVIP()) {
+            for (Item item : order.getItems()) {
+                System.out.println(item.getCookie().getPrice());
+                item.getCookie().setPrice(Math.floor((item.getCookie().getPrice()* 0.9 * 100.0)) / 100.0);
+            }
+            customer.setIsVIP(false);
         }
     }
 

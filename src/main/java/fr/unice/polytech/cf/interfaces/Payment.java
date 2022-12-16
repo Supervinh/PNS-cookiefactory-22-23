@@ -14,5 +14,6 @@ public interface Payment {
 
     Order payOrder(Customer customer, Set<Item> items, Store store, LocalDateTime retrieve) throws PaymentException, OrderCancelledTwiceException;
     void applyStoreTaxes(Order order, Store store);
+    void applyVIPDiscount(Order order, Customer customer);
 
 }

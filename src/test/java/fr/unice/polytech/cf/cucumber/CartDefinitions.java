@@ -122,7 +122,7 @@ public class CartDefinitions {
             try {
                 item = new Item(catalogExplorer.getCookie(name), number);
                 cartModifier.addCookie(customer, store, item);
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
@@ -186,7 +186,6 @@ public class CartDefinitions {
     }
 
 
-
     @Then("the cart's cooking time should be {double}")
     public void theCookingTimeshouldBe(double time) {
         assert (customer.getCookingTime() == time);
@@ -197,11 +196,11 @@ public class CartDefinitions {
         customer.getCart().stream().filter(item -> item.getCookie().getName().equals(name)).findFirst().get().getCookie().setCookingTime(time);
     }
 
-        @Then("the price should be {double}")
-    public void thePriceShouldBe(int price) {
+    @Then("the cart's price should be {double}")
+    public void thePriceShouldBe(double price) {
+        System.out.println(order.getPrice());
         assert order.getPrice() == price;
     }
-
 
 
 }
