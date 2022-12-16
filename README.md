@@ -1,21 +1,5 @@
 # Cookiefactory-22-23-Team-N
 
-# doc
-Contient le rapport final
-
-# .github
-   1. Contient sous workflows/maven.yml, une version d'un fichier d'actions qui est déclenché dès que vous poussez du code. 
-Sur cette version initiale seule un test Junit5 est déclenché pour vérifier que tout fonctionne.
-       - Github Actions (See in .github/workflows) to simply make a maven+test compilation
-  2. Contient sous ISSUE_TEMPLATE, les modèles pour les issues user_story et bug. Vous pouvez le compléter à votre guise.
-
-# src
- - pom.xml : 
-       - Cucumber 7 et JUnit 5
-       - Maven compatible
-       - JDK 17
-
-
 # User stories 
 La liste des fonctionnalités livrées par user story.
 
@@ -42,8 +26,6 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/4
 **I want** to retrieve my order as it is ready
 **so that** I can eat my cookies.
 
-
-
 _**Scenario:**_ The order is ready
 
 _**Scenario:**_ The order is not ready
@@ -51,7 +33,47 @@ _**Scenario:**_ The order is not ready
 
 ## Sprint 2
 
+### Temps de préparation des cookies
+
+Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/12
+
+**As a** customer,
+**I want** to know how long it is to cook a given order
+**so that** I can plan accordingly what and when to order.
+
+**As a** cook,
+**I want** to know how long to cook a given cookie
+**so that** I can cook correctly in the given time.
+
+_**Scenario:**_ The order had time to be cooked
+
+_**Cucumber.feature:**_ Order.feature
+
 ## Sprint 3
+
+### modification des stocks
+
+Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/7
+
+**As a** store owner,
+**I want** to add ingredients to the stock
+**so that** I can increase the amount of cookies possible.
+
+**As a** store owner,
+**I want** to remove ingredients to the stock
+**so that** I can no longer offer receit containg this ingredient.
+
+_**Scenario:**_ The stock contains the ingredient to be removed
+
+_**Scenario:**_ The stock contains the ingredient to be removed but not enough
+
+_**Scenario:**_ The stock does not contain the ingredient to be removed
+
+_**Scenario:**_ The stock does contain the ingredient to be added
+
+_**Scenario:**_ The stock does not contain the ingredient to be added
+
+_**Cucumber.feature:**_ Stock.feature
 
 ### Modifier les horraires d'ouverture
 
@@ -62,7 +84,6 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/15
 **so that** I can accept orders in thoses time widows.
 
 
-
 _**Scenario:**_ The store's opening hour is after the new opening hour
 
 _**Scenario:**_ The store's opening hour is before the new opening hour
@@ -71,7 +92,7 @@ _**Scenario:**_ The store's closing hour is after the new closing hour
 
 _**Scenario:**_ The store's closing hour is before the new closing hour
 
-_**Cucomber.feature:**_ StoreOwnerAccount.feature
+_**Cucumber.feature:**_ StoreOwnerAccount.feature
 
 ### Loyalty programm
 
@@ -81,7 +102,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/16
 **I want** to subscribe to the Loyalty Program
 **so that** I can have discounts.
 
-_**Cucomber.feature:**_ UserAccount.feature
+_**Cucumber.feature:**_ UserAccount.feature
 
 _**Scenario:**_ subscribing correctly to VIP
 
@@ -100,7 +121,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/17
 **I want** to be able to cancel orders 
 **so that** I can change my mind if there's is a last minute change in my plans.
 
-_**Cucomber.feature:**_ UserAccount.feature
+_**Cucumber.feature:**_ UserAccount.feature
 
 _**Scenario:**_ The customer cancels a paid order
 
@@ -117,7 +138,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/18
 **I want** to add recipes to the catalog
 **so that** I can add a range of cookies.
 
-_**Cucomber.feature:**_ Recipe.feature
+_**Cucumber.feature:**_ Recipe.feature
 
 _**Scenario:**_ adding a recipe to the catalog
 
@@ -134,7 +155,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/19
 
 **As a** a customer, **I want** to order XL cookies for special events, **so that** I can have amazing big cookies.
 
-_**Cucomber.feature:**_ PartyCookie.feature
+_**Cucumber.feature:**_ PartyCookie.feature
 
 _**Scenario:**_ checking cookie's price
 
@@ -151,7 +172,7 @@ Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/20
 **I want** to have a schedukle
 **so that** I can work properly.
 
-_**Cucomber.feature:**_ CookScheduling.feature
+_**Cucumber.feature:**_ CookScheduling.feature
 
 _**Scenario:**_ A cook receives an order
 
@@ -159,15 +180,5 @@ _**Scenario:**_A store had no cook available
 
 _**Scenario:**_ A cook is available and another isn't
 
-
-
-
-### Milestone X
-
-Chaque user story doit être décrite par 
-   - son identifiant en tant que issue github (#), 
-   - sa forme classique (As a… I want to… In order to…) (pour faciliter la lecture)
-   - Le nom du fichier feature Cucumber et le nom des scénarios qui servent de tests d’acceptation pour la story.
-   Les contenus détaillés sont dans l'issue elle-même.
    
    
