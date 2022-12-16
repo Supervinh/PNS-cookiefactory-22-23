@@ -1,21 +1,5 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.entities.Order;
-import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import fr.unice.polytech.cf.entities.ingredients.Cooking;
-import fr.unice.polytech.cf.entities.ingredients.Ingredient;
-import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
-import fr.unice.polytech.cf.entities.ingredients.Mix;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-
 public class CartTooGoodToGoDefinitions {
     /*Store store = new Store("Default Store", LocalTime.of(10, 0), LocalTime.of(19, 30));
     CartHandlerTooGoodToGo cartTooGoodToGo;

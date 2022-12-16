@@ -1,13 +1,5 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CartHandler;
-import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.components.StockHandler;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-
 public class StockDefinition {
     /*CartHandler cartHandler;
     CatalogHandler catalog;

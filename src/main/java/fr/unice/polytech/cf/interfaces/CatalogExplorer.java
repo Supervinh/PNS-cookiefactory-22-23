@@ -1,21 +1,19 @@
 package fr.unice.polytech.cf.interfaces;
 
 
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface CatalogExplorer {
 
-    Optional<CookieRecipe> findByName(String name);
+    List<Cookie> findByName(String name);
 
-    CookieRecipe getCookie(String name);
+    Cookie getCookie(String name);
 
-    List<CookieRecipe> getCookies();
-
-    boolean hasCookie(String name);
-
+    List<Cookie> getCookies();
 
 }
 

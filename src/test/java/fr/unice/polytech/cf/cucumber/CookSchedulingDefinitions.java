@@ -1,30 +1,23 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CartHandler;
 import fr.unice.polytech.cf.components.Kitchen;
 import fr.unice.polytech.cf.entities.*;
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
-import fr.unice.polytech.cf.entities.ingredients.Ingredient;
-import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.*;
 import fr.unice.polytech.cf.repositories.CookRepository;
-import fr.unice.polytech.cf.repositories.CustomerRepository;
 import fr.unice.polytech.cf.repositories.StoreRepository;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class CookSchedulingDefinitions {
     @Autowired

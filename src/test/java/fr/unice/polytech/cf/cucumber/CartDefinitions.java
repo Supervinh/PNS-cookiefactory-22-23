@@ -14,6 +14,7 @@ import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.*;
+import fr.unice.polytech.cf.repositories.CatalogRepository;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
 import fr.unice.polytech.cf.repositories.IngredientRepository;
 import fr.unice.polytech.cf.repositories.StoreRepository;
@@ -27,7 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -67,11 +67,13 @@ public class CartDefinitions {
     @Autowired
     private StockModifier stockModifier;
 
+    @Autowired
+    private CatalogRepository catalogRepository;
+
     private Order order;
     private Customer customer;
     private Store store;
     private Item item;
-    private HashSet<Item> items;
     private EmptyCartException exception;
 
 
@@ -80,28 +82,25 @@ public class CartDefinitions {
         ingredientRepository.deleteAll();
         customerRepository.deleteAll();
         storeRepository.deleteAll();
-        items = new HashSet<>();
+        catalogRepository.deleteAll();
         customer = customerRegistration.register("John", "Doe", "John@Doe.com");
         store = storeModifier.addStore("Store", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0));
         for (int i = 0; i <= 10; i++) {
             stockModifier.addIngredient(new Ingredient(store.getId(), IngredientEnum.DOUGH, "dough", 2.5));
             stockModifier.addIngredient(new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "flavour", 3));
         }
+        catalogModifier.addCookie(new BasicCookie("chocolate", Cooking.CHEWY,
+                stockExplorer.findIngredientByName("dough").get(0),
+                stockExplorer.findIngredientByName("flavour").get(0),
+                Mix.MIXED, new ArrayList<>()));
+        catalogModifier.addCookie(new BasicCookie("caramel", Cooking.CHEWY, stockExplorer.findIngredientByName("dough").get(0),
+                stockExplorer.findIngredientByName("flavour").get(0), Mix.MIXED, new ArrayList<>()));
     }
 
     @Given("the cart contains {int} cookies {word}")
     public void theCartContainsThisCookies(int number, String name) {
         if (number != 0) {
-            item = new Item(new BasicCookie(name, Cooking.CHEWY, stockExplorer.findIngredientByName("dough").get(0),
-                    stockExplorer.findIngredientByName("flavour").get(0), Mix.MIXED, new ArrayList<>()), number);
-            int newQuantity = item.getQuantity();
-            Optional<Item> existing = items.stream().filter(e -> e.getCookie().getName().equals(item.getCookie().getName())).findFirst();
-            if (existing.isPresent()) {
-                newQuantity += existing.get().getQuantity();
-            }
-            existing.ifPresent(items::remove);
-            items.add(new Item(item.getCookie(), newQuantity));
-
+            item = new Item(catalogExplorer.getCookie(name), number);
             cartModifier.addCookie(customer, store, item);
         }
 
@@ -122,23 +121,14 @@ public class CartDefinitions {
     @When("the client add {int} {word} to the cart")
     public void the_client_add_cookie_s_to_the_cart(Integer number, String name) {
         if (number != 0) {
-            item = new Item(new BasicCookie(name, Cooking.CHEWY, stockExplorer.findIngredientByName("dough").get(0),
-                    stockExplorer.findIngredientByName("flavour").get(0), Mix.MIXED, new ArrayList<>()), number);
-            int newQuantity = item.getQuantity();
-            Optional<Item> existing = items.stream().filter(e -> e.getCookie().getName().equals(item.getCookie().getName())).findFirst();
-            if (existing.isPresent()) {
-                newQuantity += existing.get().getQuantity();
-            }
-            existing.ifPresent(items::remove);
-            items.add(new Item(item.getCookie(), newQuantity));
+            item = new Item(catalogExplorer.getCookie(name), number);
             cartModifier.addCookie(customer, store, item);
         }
 
     }
 
     @When("the client confirm the order")
-    public void theClientConfirmTheOrder() throws
-            PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
+    public void theClientConfirmTheOrder() throws PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
         try {
             order = cartProcessor.confirmOrder(customer, store, null);
         } catch (EmptyCartException e) {
@@ -175,22 +165,21 @@ public class CartDefinitions {
     @Then("the cart should be empty")
     public void theCartIsEmpty() {
         assert (customer.getCart().isEmpty());
-        //assert (cartHandler.getNbCookies() == 0);
     }
 
     @Then("the cart's price should be {double} times the price of a {word} cookie")
     public void thePriceShouldBe(double quantity, String name) {
-        Item itemTemp = items.stream().filter(item -> item.getCookie().getName().equals(name)).findFirst().get();
-        assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum() == quantity * itemTemp.getCookie().getPrice());
+        item = new Item(catalogExplorer.getCookie(name), 1);
+        assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum() == quantity * item.getCookie().getPrice());
     }
 
     @Then("the cart's price should be {double} times the price of a {word} cookie plus {double}" +
             " times the price of a {word} cookie")
     public void thePriceShouldBe(double quantity, String name, double quantity2, String name2) {
-        Item itemTemp = items.stream().filter(item -> item.getCookie().getName().equals(name)).findFirst().get();
-        Item itemTemp2 = items.stream().filter(item -> item.getCookie().getName().equals(name2)).findFirst().get();
+        item = new Item(catalogExplorer.getCookie(name), 1);
+        Item item2 = new Item(catalogExplorer.getCookie(name2), 1);
         assert (customer.getCart().stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum()
-                == quantity * itemTemp.getCookie().getPrice() + quantity2 * itemTemp2.getCookie().getPrice());
+                == quantity * item.getCookie().getPrice() + quantity2 * item2.getCookie().getPrice());
     }
 
 

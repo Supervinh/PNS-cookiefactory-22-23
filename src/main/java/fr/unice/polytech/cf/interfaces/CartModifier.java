@@ -3,7 +3,6 @@ package fr.unice.polytech.cf.interfaces;
 import fr.unice.polytech.cf.entities.Customer;
 import fr.unice.polytech.cf.entities.Item;
 import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 
 public interface CartModifier {
 

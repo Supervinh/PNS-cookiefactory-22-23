@@ -6,13 +6,9 @@ import fr.unice.polytech.cf.entities.ingredients.Mix;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class BasicCookie extends CookieLabels implements Cookie {
-
-    public BasicCookie(String name) {
-        this.name = name;
-        this.price = 5;
-    }
 
     public BasicCookie(String name, Cooking cooking, Ingredient dough, Ingredient flavour, Mix mix, List<Ingredient> toppings) {
         this.name = name;
@@ -26,6 +22,7 @@ public class BasicCookie extends CookieLabels implements Cookie {
         }
         this.price = this.dough.getPrice() + this.flavour.getPrice() + this.topping.stream().mapToDouble(Ingredient::getPrice).sum();
         this.cookingTime = 5;
+        this.id = UUID.randomUUID();
     }
 
     @Override
@@ -82,5 +79,10 @@ public class BasicCookie extends CookieLabels implements Cookie {
         }
 
         return ingredients;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 }

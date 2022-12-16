@@ -6,6 +6,7 @@ import fr.unice.polytech.cf.entities.ingredients.Mix;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public interface Cookie {
 
@@ -26,6 +27,8 @@ public interface Cookie {
     public List<Ingredient> getTopping();
 
     public List<Ingredient> getIngredients();
+
+    public UUID getId();
 }
 
 

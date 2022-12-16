@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 
 public class BrandCook {
     CatalogHandler catalog;
@@ -12,9 +12,9 @@ public class BrandCook {
         brandOwner = b;
     }
 
-    public boolean addCookie(CookieRecipe cookieRecipe) {
-        if (brandOwner.acceptRecipe(cookieRecipe)) {
-            catalog.addCookie(cookieRecipe);
+    public boolean addCookie(BasicCookie basicCookie) {
+        if (brandOwner.acceptRecipe(basicCookie)) {
+            catalog.addCookie(basicCookie);
             return true;
         } else {
             throw new RuntimeException("Too expensive");

@@ -1,12 +1,13 @@
 package fr.unice.polytech.cf.interfaces;
 
 import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 public interface CatalogModifier {
     void updateCatalog(Store store);
 
-    void addCookie(CookieRecipe cookieRecipe);
+    void addCookie(Cookie cookie);
 
-    void removeCookie(CookieRecipe cookieRecipe);
+    void removeCookie(Cookie cookie);
 }

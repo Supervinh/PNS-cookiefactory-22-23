@@ -2,7 +2,7 @@ package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.*;
 import fr.unice.polytech.cf.entities.OrderState;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
@@ -18,7 +18,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,11 +81,6 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
         return stock.ingredientsCanBeRemovedFromStock(ingredientsToCheck, store.getId());
     }
 
-
-    @Override
-    public Map<BasicCookie, Integer> getCookies() {
-        return null;
-    }
 
     @Override
     public double getPrice(Customer customer, Store store) {

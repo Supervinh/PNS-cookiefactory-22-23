@@ -1,12 +1,5 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class CatalogDefinitions {
     /*@Autowired
     CatalogHandler catalogHandler;

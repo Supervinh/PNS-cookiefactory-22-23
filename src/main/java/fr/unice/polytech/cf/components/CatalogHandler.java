@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.interfaces.CatalogExplorer;
 import fr.unice.polytech.cf.interfaces.CatalogModifier;
 import fr.unice.polytech.cf.interfaces.StockExplorer;
@@ -11,13 +11,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.StreamSupport;
 
 @Component
 public class CatalogHandler implements CatalogExplorer, CatalogModifier {
-    private StockExplorer stock;
-    private CatalogRepository catalogRepository;
+    private final StockExplorer stock;
+    private final CatalogRepository catalogRepository;
 
     @Autowired
     public CatalogHandler(StockExplorer stock, CatalogRepository catalogRepository) {
@@ -27,51 +26,50 @@ public class CatalogHandler implements CatalogExplorer, CatalogModifier {
 
     @Override
     public void updateCatalog(Store store) {
-        Iterable<CookieRecipe> cookies = catalogRepository.findAll();
+        Iterable<Cookie> cookies = catalogRepository.findAll();
         cookies.forEach(cookie -> {
             if (!stock.ingredientsCanBeRemovedFromStock(cookie.getIngredients(), store.getId())) {
                 catalogRepository.deleteById(cookie.getId());
+
             }
         });
     }
 
     @Override
-    public CookieRecipe getCookie(String name) {
-        Optional<CookieRecipe> cookieRecipe = findByName(name);
-        if (cookieRecipe.isPresent()) {
-            return cookieRecipe.get();
+    public Cookie getCookie(String name) {
+        List<Cookie> cookies = findByName(name);
+        for (Cookie cookie : cookies) {;
+            if (cookie.getName().equals(name)) {
+                return cookie;
+            }
         }
         throw new RuntimeException("Cookie recipe does not exist");
     }
 
     @Override
-    public void addCookie(CookieRecipe cookieRecipe) {
-        catalogRepository.save(cookieRecipe, cookieRecipe.getId());
+    public void addCookie(Cookie cookie) {
+        catalogRepository.save(cookie, cookie.getId());
     }
 
     @Override
-    public void removeCookie(CookieRecipe cookieRecipe) {
-        catalogRepository.deleteById(cookieRecipe.getId());
+    public void removeCookie(Cookie cookie) {
+        catalogRepository.deleteById(cookie.getId());
     }
 
     @Override
-    public List<CookieRecipe> getCookies() {
-        Iterable<CookieRecipe> cookies = catalogRepository.findAll();
+    public List<Cookie> getCookies() {
+        Iterable<Cookie> cookies = catalogRepository.findAll();
         if (cookies == null) {
             return new ArrayList<>();
         }
         return StreamSupport.stream(cookies.spliterator(), false).toList();
     }
 
-    @Override
-    public boolean hasCookie(String name) {
-        return findByName(name).isPresent();
-    }
 
     @Override
-    public Optional<CookieRecipe> findByName(String name) {
+    public List<Cookie> findByName(String name) {
         return StreamSupport.stream(catalogRepository.findAll().spliterator(), false)
-                .filter(i -> name.equals(i.getName())).findAny();
+                .filter(cookie -> name.equals(cookie.getName())).toList();
     }
 
 }

@@ -1,7 +1,7 @@
 package fr.unice.polytech.cf.entities;
 
 import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.cookies.CookieRecipe;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 
 public class BrandOwner {
     CatalogHandler catalog;
@@ -10,11 +10,11 @@ public class BrandOwner {
         catalog = c;
     }
 
-    public void removeCookie(CookieRecipe cookieRecipe) {
-        catalog.removeCookie(cookieRecipe);
+    public void removeCookie(BasicCookie basicCookie) {
+        catalog.removeCookie(basicCookie);
     }
 
-    public boolean acceptRecipe(CookieRecipe c) {
+    public boolean acceptRecipe(BasicCookie c) {
         return c.getPrice() < 3.5;
     }
 }

@@ -5,6 +5,7 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.Mix;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CookieLabels {
     String name;
@@ -15,4 +16,5 @@ public class CookieLabels {
     Ingredient flavour ;
     Mix mix;
     List<Ingredient> topping;
+    UUID id;
 }

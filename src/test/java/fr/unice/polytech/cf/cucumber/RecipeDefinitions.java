@@ -1,20 +1,5 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CatalogHandler;
-import fr.unice.polytech.cf.entities.BrandCook;
-import fr.unice.polytech.cf.entities.BrandOwner;
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
-import fr.unice.polytech.cf.entities.ingredients.Cooking;
-import fr.unice.polytech.cf.entities.ingredients.Ingredient;
-import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
-import fr.unice.polytech.cf.entities.ingredients.Mix;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-
-import java.util.ArrayList;
-
 public class RecipeDefinitions {
     /*CatalogHandler c = new CatalogHandler();
     BrandOwner brandOwner = new BrandOwner(c);
