@@ -47,13 +47,22 @@ public class CatalogHandler implements CatalogExplorer, CatalogModifier {
     }
 
     @Override
-    public void addCookie(Cookie cookie) {
-        catalogRepository.save(cookie, cookie.getId());
+    public boolean addCookie(Cookie cookie) {
+        if(acceptRecipe(cookie)) {
+            catalogRepository.save(cookie, cookie.getId());
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void removeCookie(Cookie cookie) {
         catalogRepository.deleteById(cookie.getId());
+    }
+
+    @Override
+    public boolean acceptRecipe(Cookie c) {
+        return c.getPrice() < 7.5;
     }
 
     @Override

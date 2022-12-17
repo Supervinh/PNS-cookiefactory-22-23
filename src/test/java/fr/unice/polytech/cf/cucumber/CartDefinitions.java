@@ -200,7 +200,6 @@ public class CartDefinitions {
 
     @Then("the cart's price should be {double}")
     public void thePriceShouldBe(double price) {
-        System.out.println(order.getPrice());
         assert order.getPrice() == price;
     }
 

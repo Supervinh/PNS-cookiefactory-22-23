@@ -1,42 +1,76 @@
 package fr.unice.polytech.cf.cucumber;
 
+import fr.unice.polytech.cf.components.CatalogHandler;
+import fr.unice.polytech.cf.entities.Store;
+import fr.unice.polytech.cf.entities.cookies.BasicCookie;
+import fr.unice.polytech.cf.entities.cookies.Cookie;
+import fr.unice.polytech.cf.entities.ingredients.Cooking;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
+import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
+import fr.unice.polytech.cf.entities.ingredients.Mix;
+import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
+import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
+import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
+import fr.unice.polytech.cf.repositories.CatalogRepository;
+import fr.unice.polytech.cf.repositories.StoreRepository;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
+
 public class RecipeDefinitions {
-    /*CatalogHandler c = new CatalogHandler();
-    BrandOwner brandOwner = new BrandOwner(c);
-    BrandCook brandCook = new BrandCook(brandOwner, c);
-    boolean accepted= false;
+    @Autowired
+    private CatalogHandler brandOwner;
+    @Autowired
+    private StoreRepository storeRepository;
+    @Autowired
+    private StoreModifier storeModifier;
 
-    @Given("the brand's cook suggest a recipe {word}")
-    public void suggestReipe(String cookie){
-        accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
-                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 0.5),
-                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
-                Mix.MIXED, new ArrayList<>()));
+    private boolean accepted = false;
+    private Store store;
+    private Cookie cookie;
+    private Exception exception;
+
+
+    @Given("the brand's cook thinks of a recipe {word}")
+    public void theBrandSCookThinksOfARecipe(String recipeName) {
+        store = storeModifier.addStore("CucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
+        cookie = new BasicCookie(recipeName, Cooking.CRUNCHY,
+                new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 0.5),
+                new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                Mix.MIXED, new ArrayList<>());
     }
-    @Given("the brand's cook suggests a recipe {word}")
-    public void suggestsReipe(String cookie){
-        try {
-            accepted = brandCook.addCookie(new BasicCookie(cookie, Cooking.CRUNCHY,
-                    new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 5),
-                    new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
-                    Mix.MIXED, new ArrayList<>()));
-        } catch (RuntimeException e){}
+
+    @Given("the brand's cook suggests the recipe")
+    public void suggestReipe() {
+        accepted = brandOwner.addCookie(cookie);
+
     }
 
-    @And("it's accepted")
-    public void accepted(){assert accepted==true;}
-
-    @And("it's not accepted")
-    public void notAccepted(){assert accepted==false;}
-
+    @Given("the brand's cook thinks of a recipe {word} too expensive")
+    public void theBrandSCookThinksOfARecipeTooExpensive(String recipeName) {
+        store = storeModifier.addStore("CucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
+        cookie = new BasicCookie(recipeName, Cooking.CRUNCHY,
+                new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 5.5),
+                new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
+                Mix.MIXED, new ArrayList<>());
+    }
+/*
     @When("the brand owner deletes the cookie {word}")
-    public void deleteCookie(String cookie){
+    public void deleteCookie(String cookie) {
         brandOwner.removeCookie(c.getCookie(cookie));
-    }
+    }*/
 
     @Then("the cookie {word} should be in the catalog")
-    public void isInCatalog(String cookie){assert c.hasCookie(cookie)==true;}
+    public void isInCatalog(String cookie) {
+        assert accepted;
+    }
 
     @Then("the cookie {word} shouldn't be in the catalog")
-    public void isNotInCatalog(String cookie){assert c.hasCookie(cookie)==false;}*/
+    public void isNotInCatalog(String cookie) {
+        assert !accepted;
+    }
 }

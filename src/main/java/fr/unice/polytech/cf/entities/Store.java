@@ -29,6 +29,7 @@ public class Store {
     }
 
     public Store(String name, double taxes, LocalTime openingTime, LocalTime closingTime) {
+        this.id = UUID.randomUUID();
         this.name = name;
         this.openingTime = openingTime;
         this.closingTime = closingTime;

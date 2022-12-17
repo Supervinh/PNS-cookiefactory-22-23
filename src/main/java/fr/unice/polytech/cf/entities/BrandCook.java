@@ -5,7 +5,7 @@ import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 
 public class BrandCook {
     CatalogHandler catalog;
-    BrandOwner brandOwner;
+/*    BrandOwner brandOwner;
 
     public BrandCook(BrandOwner b, CatalogHandler c) {
         catalog = c;
@@ -19,5 +19,5 @@ public class BrandCook {
         } else {
             throw new RuntimeException("Too expensive");
         }
-    }
+    }*/
 }

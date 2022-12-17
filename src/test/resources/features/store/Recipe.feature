@@ -1,15 +1,15 @@
 Feature: Recipe management
 
-#  Scenario: adding a recipe to the catalog
-#    Given the brand's cook suggest a recipe new
-#    And it's accepted
-#    Then the cookie new should be in the catalog
-#
-#  Scenario: not adding a recipe to the catalog
-#    Given the brand's cook suggests a recipe newer
-#    And it's not accepted
-#    Then the cookie newer shouldn't be in the catalog
-#
+  Scenario: adding a recipe to the catalog
+    Given the brand's cook thinks of a recipe myCucumberCookie
+    When the brand's cook suggests the recipe
+    Then the cookie myCucumberCookie should be in the catalog
+
+  Scenario: not adding a recipe to the catalog
+    Given the brand's cook thinks of a recipe myCucumberCookie too expensive
+    When the brand's cook suggests the recipe
+    Then the cookie myCucumberCookie shouldn't be in the catalog
+
 #  Scenario: deleting a recipe off the catalog
 #    Given the brand's cook suggest a recipe new
 #    And it's accepted
