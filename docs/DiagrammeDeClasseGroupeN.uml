@@ -1,128 +1,520 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement />
+  <OriginalElement>C:/Users/bevan/Desktop/Polytech/SI4/S7T/Conception/cookiefactory-22-23-n/src/main/java</OriginalElement>
   <nodes>
-    <node x="250.65888951340088" y="379.0281559348564">fr.unice.polytech.cf.Catalog</node>
-    <node x="764.6588895134009" y="269.0281559348564">fr.unice.polytech.cf.entities.Store</node>
-    <node x="111.65888951340088" y="-250.9718440651436">fr.unice.polytech.cf.Cookie</node>
-    <node x="10.15888951340088" y="1190.0281559348564">fr.unice.polytech.cf.repositories.OrderHistory</node>
-    <node x="-36.34111048659912" y="346.0281559348564">fr.unice.polytech.cf.components.CartHandler</node>
-    <node x="-29.84111048659912" y="784.0281559348564">fr.unice.polytech.cf.Order</node>
-    <node x="763.6588895134009" y="872.0281559348564">fr.unice.polytech.cf.entities.StoreOwnerAccount</node>
-    <node x="492.6588895134009" y="368.0281559348564">fr.unice.polytech.cf.CommandState</node>
-    <node x="-4.341110486599121" y="1467.0281559348564">fr.unice.polytech.cf.entities.UserAccount</node>
-    <node x="248.65888951340088" y="1190.0281559348564">fr.unice.polytech.cf.entities.Cook</node>
-    <node x="764.6588895134009" y="-162.9718440651436">fr.unice.polytech.cf.components.StockHandler</node>
+    <node x="1109.9999999999995" y="2515.0">fr.unice.polytech.cf.interfaces.modifier.TooGoodToGoProcessing</node>
+    <node x="2729.987062404872" y="2538.5">fr.unice.polytech.cf.repositories.OrderRepository</node>
+    <node x="2248.0" y="2504.0">fr.unice.polytech.cf.interfaces.modifier.OrderModifier</node>
+    <node x="2463.0" y="2063.0">fr.unice.polytech.cf.interfaces.explorer.StockExplorer</node>
+    <node x="6286.045852359208" y="2966.0">fr.unice.polytech.cf.components.CustomerRegistry</node>
+    <node x="3549.5" y="2119.5">fr.unice.polytech.cf.repositories.CatalogRepository</node>
+    <node x="5675.466133942163" y="807.0">fr.unice.polytech.cf.entities.cookies.BasicCookie</node>
+    <node x="3732.5" y="2074.0">fr.unice.polytech.cf.interfaces.modifier.CatalogModifier</node>
+    <node x="5084.987062404873" y="2492.0">fr.unice.polytech.cf.exceptions.PaymentException</node>
+    <node x="2907.987062404872" y="2504.0">fr.unice.polytech.cf.interfaces.modifier.Payment</node>
+    <node x="719.9999999999995" y="2515.0">fr.unice.polytech.cf.interfaces.modifier.CartModifier</node>
+    <node x="3449.737062404872" y="1236.0">fr.unice.polytech.repositories.Repository</node>
+    <node x="1937.2958523592083" y="2074.0">fr.unice.polytech.cf.interfaces.modifier.StockModifier</node>
+    <node x="2512.0" y="2538.5">fr.unice.polytech.cf.repositories.StoreRepository</node>
+    <node x="6717.237062404873" y="2095.0">fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException</node>
+    <node x="4769.737062404873" y="2119.5">fr.unice.polytech.cf.repositories.CookRepository</node>
+    <node x="6050.737062404873" y="2526.0">fr.unice.polytech.cf.interfaces.modifier.Bank</node>
+    <node x="3082.75" y="2084.0">fr.unice.polytech.cf.interfaces.explorer.CatalogExplorer</node>
+    <node x="5675.466133942163" y="1246.0">fr.unice.polytech.cf.entities.cookies.PartyCookie</node>
+    <node x="1448.9999999999995" y="2526.0">fr.unice.polytech.cf.interfaces.explorer.OrderFinder</node>
+    <node x="6146.7829147640805" y="1973.0">fr.unice.polytech.cf.entities.Cook</node>
+    <node x="2776.4208523592083" y="2955.0">fr.unice.polytech.cf.components.OrderHandler</node>
+    <node x="5397.820395738206" y="2504.0">fr.unice.polytech.cf.interfaces.modifier.OrderProcessing</node>
+    <node x="5652.820395738206" y="2437.0">fr.unice.polytech.cf.components.CookScheduler</node>
+    <node x="3776.987062404872" y="2538.5">fr.unice.polytech.cf.exceptions.OrderNotReadyException</node>
+    <node x="5498.7829147640805" y="2085.0">fr.unice.polytech.cf.interfaces.modifier.ScheduleManagement</node>
+    <node x="4611.987062404873" y="2538.5">fr.unice.polytech.cf.repositories.CustomerRepository</node>
+    <node x="5667.466133942163" y="638.5">fr.unice.polytech.cf.entities.cookies.CookieLabels</node>
+    <node x="4341.987062404873" y="2526.0">fr.unice.polytech.cf.interfaces.explorer.StoreFinder</node>
+    <node x="2595.3203957382057" y="549.0">fr.unice.polytech.cf.entities.cookies.Cookie</node>
+    <node x="5534.716133942163" y="-15.0">fr.unice.polytech.cf.entities.ingredients.IngredientEnum</node>
+    <node x="6583.737062404873" y="2526.0">fr.unice.polytech.cf.interfaces.modifier.CustomerRegistration</node>
+    <node x="6290.737062404873" y="2515.0">fr.unice.polytech.cf.interfaces.explorer.CustomerFinder</node>
+    <node x="3304.987062404872" y="2538.5">fr.unice.polytech.cf.exceptions.OrderNotPaidException</node>
+    <node x="3426.737062404872" y="1677.0">fr.unice.polytech.repositories.BasicRepositoryImpl</node>
+    <node x="5750.716133942163" y="267.0">fr.unice.polytech.cf.entities.ingredients.Mix</node>
+    <node x="5803.7829147640805" y="2085.0">fr.unice.polytech.cf.interfaces.modifier.CookRegistration</node>
+    <node x="4943.737062404873" y="2084.0">fr.unice.polytech.cf.interfaces.explorer.CookFinder</node>
+    <node x="5011.295852359208" y="2966.0">fr.unice.polytech.cf.components.Cashier</node>
+    <node x="5547.875" y="1621.0">fr.unice.polytech.cf.entities.Order</node>
+    <node x="2478.3203957382057" y="828.0">fr.unice.polytech.cf.entities.Item</node>
+    <node x="5476.920852359208" y="2966.0">fr.unice.polytech.cf.components.Kitchen</node>
+    <node x="2234.7958523592083" y="2944.0">fr.unice.polytech.cf.components.StoreManagement</node>
+    <node x="5481.466133942163" y="1091.0">fr.unice.polytech.cf.entities.Customer</node>
+    <node x="-100.00000000000045" y="2538.5">fr.unice.polytech.cf.exceptions.EmptyCartException</node>
+    <node x="1720.2958523592083" y="2119.5">fr.unice.polytech.cf.repositories.IngredientRepository</node>
+    <node x="5556.716133942163" y="111.0">fr.unice.polytech.cf.entities.ingredients.Ingredient</node>
+    <node x="6860.0329147640805" y="1291.0">fr.unice.polytech.cf.entities.OrderState</node>
+    <node x="1797.0" y="2438.0">fr.unice.polytech.cf.components.StockHandler</node>
+    <node x="3526.987062404872" y="2459.0">fr.unice.polytech.cf.components.CatalogHandler</node>
+    <node x="703.0458523592083" y="2889.0">fr.unice.polytech.cf.components.CartHandler</node>
+    <node x="4813.987062404873" y="2538.5">fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException</node>
+    <node x="5907.795852359208" y="2988.0">fr.unice.polytech.cf.connectors.BankProxy</node>
+    <node x="-136.0" y="3186.0">fr.unice.polytech.cf.Application</node>
+    <node x="5923.716133942164" y="267.0">fr.unice.polytech.cf.entities.ingredients.Cooking</node>
+    <node x="-117.01293759512782" y="3000.5">fr.unice.polytech.cf.entities.StoreOwnerAccount</node>
+    <node x="1191.9001141552503" y="2119.5">fr.unice.polytech.cf.exceptions.IngredientNotInStockException</node>
+    <node x="99.99999999999955" y="2359.0">fr.unice.polytech.cf.entities.Store</node>
+    <node x="329.99999999999955" y="2471.0">fr.unice.polytech.cf.interfaces.modifier.CartProcessor</node>
+    <node x="4011.9870624048726" y="2493.0">fr.unice.polytech.cf.interfaces.modifier.StoreModifier</node>
+    <node x="6203.7829147640805" y="1697.0">fr.unice.polytech.cf.entities.TimeSlot</node>
   </nodes>
   <notes />
   <edges>
+    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.entities.Item" relationship="TO_MANY">
+      <point x="4.547473508864641E-13" y="-194.0" />
+      <point x="205.0" y="1218.5" />
+      <point x="5424.0" y="1218.5" />
+      <point x="5424.0" y="923.0" />
+      <point x="86.9996042617945" y="-0.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException" relationship="CREATE">
+      <point x="-181.0" y="-49.0" />
+      <point x="79.30878995433523" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.interfaces.modifier.ScheduleManagement" relationship="REALIZATION">
+      <point x="0.0" y="-116.0" />
+      <point x="5813.820395738206" y="2337.0" />
+      <point x="5704.987062404873" y="2337.0" />
+      <point x="5704.987062404873" y="2317.0" />
+      <point x="5629.2829147640805" y="2317.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.cookies.BasicCookie" target="fr.unice.polytech.cf.entities.cookies.CookieLabels" relationship="GENERALIZATION">
+      <point x="50.00000000000006" y="-116.0" />
+      <point x="5825.466133942163" y="782.0" />
+      <point x="5735.466133942163" y="782.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.OrderHandler" target="fr.unice.polytech.cf.repositories.OrderRepository" relationship="TO_ONE">
+      <point x="1.4764079151063925E-4" y="60.0" />
+      <point x="2940.421" y="3128.0" />
+      <point x="2758.921" y="3128.0" />
+      <point x="-50.066062404872355" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.cookies.CookieLabels" target="fr.unice.polytech.cf.entities.ingredients.Mix" relationship="TO_ONE">
+      <point x="22.75" y="-14.5" />
+      <point x="-69.0" y="38.0" />
+    </edge>
     <edge source="fr.unice.polytech.cf.entities.StoreOwnerAccount" target="fr.unice.polytech.cf.entities.Store" relationship="TO_ONE">
-      <point x="15.0" y="-60.5" />
-      <point x="15.0" y="203.5" />
+      <point x="-90.0" y="-0.0" />
+      <point x="-143.5" y="3015.0" />
+      <point x="-143.5" y="2521.0" />
+      <point x="-105.0" y="-32.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Order" target="fr.unice.polytech.cf.CommandState" relationship="TO_ONE">
-      <point x="147.5" y="0.0" />
-      <point x="617.6588895134009" y="932.5281559348564" />
-      <point x="0.0" y="104.5" />
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.repositories.StoreRepository" relationship="TO_ONE">
+      <point x="-14.999852359208262" y="-126.0" />
+      <point x="873.046" y="2743.0" />
+      <point x="2589.0" y="2743.0" />
+      <point x="-0.0" y="14.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.Cookie" relationship="TO_MANY">
-      <point x="134.0" y="-119.0" />
-      <point x="312.6588895134009" y="353.5281559348564" />
-      <point x="312.6588895134009" y="267.5281559348564" />
-      <point x="224.15888951340088" y="267.5281559348564" />
-      <point x="-13.5" y="203.5" />
+    <edge source="fr.unice.polytech.cf.repositories.CookRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="4846.737062404873" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.UserAccount" target="fr.unice.polytech.cf.repositories.OrderHistory" relationship="TO_ONE">
-      <point x="0.0" y="-225.5" />
-      <point x="0.0" y="82.5" />
+    <edge source="fr.unice.polytech.cf.repositories.IngredientRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="1.1368683772161603E-13" y="-14.5" />
+      <point x="1813.2958523592083" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.StockHandler" relationship="CREATE">
-      <point x="-16.5" y="-93.5" />
-      <point x="341.1588895134009" y="311.5281559348564" />
-      <point x="484.6588895134009" y="311.5281559348564" />
-      <point x="484.6588895134009" y="-47.471844065143614" />
-      <point x="-153.0" y="0.0" />
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.interfaces.modifier.CartModifier" relationship="REALIZATION">
+      <point x="0.0" y="-126.0" />
+      <point x="888.0458523592083" y="2828.0" />
+      <point x="904.9999999999995" y="2828.0" />
+      <point x="0.0" y="38.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.Cookie" relationship="TO_MANY">
-      <point x="-1.5" y="-93.5" />
-      <point x="356.1588895134009" y="276.5281559348564" />
-      <point x="312.6588895134009" y="276.5281559348564" />
-      <point x="312.6588895134009" y="267.5281559348564" />
-      <point x="224.15888951340088" y="267.5281559348564" />
-      <point x="-13.5" y="203.5" />
+    <edge source="fr.unice.polytech.cf.components.CustomerRegistry" target="fr.unice.polytech.cf.entities.Customer" relationship="CREATE">
+      <point x="136.5" y="15.0" />
+      <point x="7008.737062404873" y="3030.0" />
+      <point x="7008.737062404873" y="1429.5" />
+      <point x="87.0" y="100.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.UserAccount" target="fr.unice.polytech.cf.Order" relationship="TO_MANY">
-      <point x="-122.0" y="0.0" />
-      <point x="-21.84111048659912" y="1692.5281559348564" />
-      <point x="-21.84111048659912" y="1135.5281559348564" />
-      <point x="117.65888951340088" y="1135.5281559348564" />
-      <point x="0.0" y="148.5" />
+    <edge source="fr.unice.polytech.cf.entities.cookies.CookieLabels" target="fr.unice.polytech.cf.entities.ingredients.Cooking" relationship="TO_ONE">
+      <point x="68.0" y="-0.0" />
+      <point x="6013.216133942164" y="653.0" />
+      <point x="-0.0" y="38.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.components.StockHandler" relationship="TO_ONE">
-      <point x="13.5" y="-93.5" />
-      <point x="371.1588895134009" y="212.5281559348564" />
-      <point x="917.6588895134009" y="212.5281559348564" />
-      <point x="0.0" y="115.5" />
+    <edge source="fr.unice.polytech.cf.entities.Item" target="fr.unice.polytech.cf.entities.cookies.Cookie" relationship="TO_ONE">
+      <point x="37.5" y="-95.0" />
+      <point x="-92.5" y="104.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Order" target="fr.unice.polytech.cf.components.CartHandler" relationship="TO_ONE">
-      <point x="15.0" y="-148.5" />
-      <point x="35.0" y="126.5" />
+    <edge source="fr.unice.polytech.cf.entities.Order" target="fr.unice.polytech.cf.entities.OrderState" relationship="TO_ONE">
+      <point x="96.5" y="-105.5" />
+      <point x="6956.0329147640805" y="1664.5" />
+      <point x="-0.0" y="38.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.UserAccount" target="fr.unice.polytech.cf.repositories.OrderHistory" relationship="CREATE">
-      <point x="15.0" y="-225.5" />
-      <point x="15.0" y="82.5" />
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.entities.Order" relationship="CREATE">
+      <point x="72.69121004566477" y="-49.0" />
+      <point x="5272.487062404873" y="1785.0" />
+      <point x="-96.5" y="15.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.StockHandler" relationship="CREATE">
-      <point x="-153.0" y="-196.0" />
-      <point x="484.6588895134009" y="276.5281559348564" />
-      <point x="484.6588895134009" y="-47.471844065143614" />
-      <point x="-153.0" y="0.0" />
+    <edge source="fr.unice.polytech.cf.components.Kitchen" target="fr.unice.polytech.cf.components.CookScheduler" relationship="TO_ONE">
+      <point x="65.8995433789978" y="-49.0" />
+      <point x="-153.5" y="116.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.Store" target="fr.unice.polytech.cf.components.StockHandler" relationship="TO_ONE">
-      <point x="0.0" y="-203.5" />
-      <point x="0.0" y="115.5" />
+    <edge source="fr.unice.polytech.cf.components.StoreManagement" target="fr.unice.polytech.cf.interfaces.modifier.StoreModifier" relationship="REALIZATION">
+      <point x="103.33333333333348" y="-71.0" />
+      <point x="2493.129185692542" y="2828.0" />
+      <point x="4316.987062404873" y="2828.0" />
+      <point x="4316.987062404873" y="2778.0" />
+      <point x="4166.987062404873" y="2778.0" />
+      <point x="0.0" y="60.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.Catalog" target="fr.unice.polytech.cf.Cookie" relationship="CREATE">
-      <point x="-99.5" y="-93.5" />
-      <point x="20.5" y="203.5" />
+    <edge source="fr.unice.polytech.cf.entities.Customer" target="fr.unice.polytech.cf.entities.Item" relationship="TO_MANY">
+      <point x="-87.00013394216239" y="-0.0" />
+      <point x="5424.0" y="1329.0" />
+      <point x="5424.0" y="923.0" />
+      <point x="86.9996042617945" y="-0.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.Order" relationship="CREATE">
-      <point x="20.0" y="126.5" />
-      <point x="0.0" y="-148.5" />
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.interfaces.modifier.TooGoodToGoProcessing" relationship="REALIZATION">
+      <point x="0.0" y="-126.0" />
+      <point x="888.0458523592083" y="2828.0" />
+      <point x="1269.4999999999995" y="2828.0" />
+      <point x="0.0" y="38.0" />
     </edge>
-    <edge source="fr.unice.polytech.cf.repositories.OrderHistory" target="fr.unice.polytech.cf.Order" relationship="TO_MANY">
-      <point x="0.0" y="-82.5" />
-      <point x="0.0" y="148.5" />
+    <edge source="fr.unice.polytech.cf.components.OrderHandler" target="fr.unice.polytech.cf.exceptions.OrderNotReadyException" relationship="CREATE">
+      <point x="164.0" y="-0.0" />
+      <point x="3884.487062404872" y="3015.0" />
+      <point x="-0.0" y="14.5" />
     </edge>
-    <edge source="fr.unice.polytech.cf.entities.Cook" target="fr.unice.polytech.cf.Order" relationship="TO_ONE">
-      <point x="0.0" y="-82.5" />
-      <point x="337.6588895134009" y="1135.5281559348564" />
-      <point x="117.65888951340088" y="1135.5281559348564" />
-      <point x="0.0" y="148.5" />
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.interfaces.modifier.Payment" relationship="REALIZATION">
+      <point x="-125.66666666666674" y="-49.0" />
+      <point x="5074.129185692542" y="2808.0" />
+      <point x="3190.737062404872" y="2808.0" />
+      <point x="94.25" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StockHandler" target="fr.unice.polytech.cf.interfaces.explorer.StockExplorer" relationship="REALIZATION">
+      <point x="143.66666666666652" y="-115.0" />
+      <point x="2156.166666666666" y="2337.0" />
+      <point x="2248.583333333333" y="2337.0" />
+      <point x="2248.583333333333" y="2327.0" />
+      <point x="2570.0" y="2327.0" />
+      <point x="-107.0" y="71.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CustomerRegistry" target="fr.unice.polytech.cf.interfaces.explorer.CustomerFinder" relationship="REALIZATION">
+      <point x="0.0" y="-49.0" />
+      <point x="6422.545852359208" y="2868.0" />
+      <point x="6433.716133942164" y="2868.0" />
+      <point x="6433.716133942164" y="2858.0" />
+      <point x="6427.237062404873" y="2858.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CatalogHandler" target="fr.unice.polytech.cf.repositories.CatalogRepository" relationship="TO_ONE">
+      <point x="-10.987062404872177" y="-94.0" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.interfaces.modifier.Bank" relationship="TO_ONE">
+      <point x="-0.0" y="-49.0" />
+      <point x="5199.795852359208" y="2713.0" />
+      <point x="6160.737062404873" y="2713.0" />
+      <point x="-0.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.interfaces.modifier.CookRegistration" relationship="REALIZATION">
+      <point x="0.0" y="-116.0" />
+      <point x="5813.820395738206" y="2337.0" />
+      <point x="5704.987062404873" y="2337.0" />
+      <point x="5704.987062404873" y="2317.0" />
+      <point x="5964.7829147640805" y="2317.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StockHandler" target="fr.unice.polytech.cf.exceptions.IngredientNotInStockException" relationship="CREATE">
+      <point x="-215.5" y="-55.5" />
+      <point x="1316.9001141552503" y="2497.5" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.OrderHandler" target="fr.unice.polytech.cf.exceptions.OrderNotPaidException" relationship="CREATE">
+      <point x="164.0" y="-15.0" />
+      <point x="3405.987062404872" y="3000.0" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.cookies.PartyCookie" target="fr.unice.polytech.cf.entities.cookies.BasicCookie" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="0.0" y="116.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.repositories.CookRepository" relationship="TO_ONE">
+      <point x="-161.0" y="-78.5" />
+      <point x="4846.737062404873" y="2474.5" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.cookies.CookieLabels" target="fr.unice.polytech.cf.entities.ingredients.Ingredient" relationship="TO_MANY">
+      <point x="-12.25" y="-14.5" />
+      <point x="79.5" y="194.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CustomerRegistry" target="fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException" relationship="CREATE">
+      <point x="136.50014764079242" y="-0.0" />
+      <point x="6861.237" y="3015.0" />
+      <point x="6861.237" y="2387.0" />
+      <point x="6854.237" y="2387.0" />
+      <point x="-6.240487255126936E-5" y="39.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.repositories.CustomerRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="4702.987062404873" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="fr.unice.polytech.repositories.BasicRepositoryImpl" target="fr.unice.polytech.repositories.Repository" relationship="REALIZATION">
+      <point x="0.0" y="-93.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StoreManagement" target="fr.unice.polytech.cf.interfaces.explorer.StoreFinder" relationship="REALIZATION">
+      <point x="103.33333333333348" y="-71.0" />
+      <point x="2493.129185692542" y="2828.0" />
+      <point x="4316.987062404873" y="2828.0" />
+      <point x="4316.987062404873" y="2778.0" />
+      <point x="4466.987062404873" y="2778.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.Cook" target="fr.unice.polytech.cf.entities.TimeSlot" relationship="TO_MANY">
+      <point x="5.0" y="-161.0" />
+      <point x="-0.0" y="73.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.repositories.CatalogRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="3631.0" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.OrderHandler" target="fr.unice.polytech.cf.interfaces.modifier.OrderModifier" relationship="REALIZATION">
+      <point x="-109.33333333333326" y="-60.0" />
+      <point x="2831.087519025875" y="2838.0" />
+      <point x="1800.116248097414" y="2838.0" />
+      <point x="1800.116248097414" y="2828.0" />
+      <point x="2370.0" y="2828.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StoreManagement" target="fr.unice.polytech.cf.entities.Store" relationship="CREATE">
+      <point x="-19.79585235920831" y="-71.0" />
+      <point x="2370.0" y="2858.0" />
+      <point x="81.0" y="2858.0" />
+      <point x="81.0" y="2590.5" />
+      <point x="-104.99999999999955" y="37.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.components.StockHandler" relationship="TO_ONE">
+      <point x="185.0" y="-15.0" />
+      <point x="2012.5" y="3000.0" />
+      <point x="-0.0" y="115.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CatalogHandler" target="fr.unice.polytech.cf.interfaces.explorer.CatalogExplorer" relationship="REALIZATION">
+      <point x="57.5" y="-94.0" />
+      <point x="3699.487062404872" y="2337.0" />
+      <point x="3709.987062404872" y="2337.0" />
+      <point x="3709.987062404872" y="2317.0" />
+      <point x="3197.75" y="2317.0" />
+      <point x="0.0" y="50.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StoreManagement" target="fr.unice.polytech.cf.repositories.StoreRepository" relationship="TO_ONE">
+      <point x="1.4764079151063925E-4" y="-71.0" />
+      <point x="2389.796" y="2743.0" />
+      <point x="2589.0" y="2743.0" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.repositories.CustomerRepository" relationship="TO_ONE">
+      <point x="185.00014764079174" y="15.0" />
+      <point x="1254.5" y="3030.0" />
+      <point x="1254.5" y="3107.0" />
+      <point x="4702.987" y="3107.0" />
+      <point x="-6.240487255126936E-5" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.interfaces.modifier.OrderProcessing" relationship="TO_ONE">
+      <point x="-15.0" y="-49.0" />
+      <point x="5184.795852359208" y="2698.0" />
+      <point x="5515.320395738206" y="2698.0" />
+      <point x="-0.0" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.cookies.BasicCookie" target="fr.unice.polytech.cf.entities.cookies.Cookie" relationship="REALIZATION">
+      <point x="-49.99999999999994" y="-116.0" />
+      <point x="5725.466133942163" y="782.0" />
+      <point x="2745.3203957382057" y="782.0" />
+      <point x="50.0" y="104.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.interfaces.explorer.CookFinder" relationship="REALIZATION">
+      <point x="0.0" y="-116.0" />
+      <point x="5813.820395738206" y="2337.0" />
+      <point x="5704.987062404873" y="2337.0" />
+      <point x="5704.987062404873" y="2317.0" />
+      <point x="5071.237062404873" y="2317.0" />
+      <point x="0.0" y="50.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Kitchen" target="fr.unice.polytech.cf.interfaces.modifier.OrderProcessing" relationship="REALIZATION">
+      <point x="-58.75" y="-49.0" />
+      <point x="5535.670852359208" y="2868.0" />
+      <point x="5574.070395738206" y="2868.0" />
+      <point x="58.75" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.repositories.OrderRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="2808.987062404872" y="2337.0" />
+      <point x="2901.5" y="2337.0" />
+      <point x="2901.5" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.interfaces.modifier.CartProcessor" relationship="REALIZATION">
+      <point x="0.0" y="-126.0" />
+      <point x="888.0458523592083" y="2828.0" />
+      <point x="514.9999999999995" y="2828.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.Order" target="fr.unice.polytech.cf.entities.Item" relationship="TO_MANY">
+      <point x="-96.5" y="-0.0" />
+      <point x="5424.0" y="1770.0" />
+      <point x="5424.0" y="923.0" />
+      <point x="86.9996042617945" y="-0.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.repositories.StoreRepository" target="fr.unice.polytech.repositories.BasicRepositoryImpl" relationship="GENERALIZATION">
+      <point x="0.0" y="-14.5" />
+      <point x="2589.0" y="2337.0" />
+      <point x="2389.7958523592083" y="2337.0" />
+      <point x="2389.7958523592083" y="1951.0" />
+      <point x="3543.737062404872" y="1951.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CustomerRegistry" target="fr.unice.polytech.cf.repositories.CustomerRepository" relationship="TO_ONE">
+      <point x="1.4764079242013395E-4" y="49.0" />
+      <point x="6422.546" y="3107.0" />
+      <point x="4702.987" y="3107.0" />
+      <point x="-6.240487255126936E-5" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CustomerRegistry" target="fr.unice.polytech.cf.interfaces.modifier.CustomerRegistration" relationship="REALIZATION">
+      <point x="0.0" y="-49.0" />
+      <point x="6422.545852359208" y="2868.0" />
+      <point x="6433.716133942164" y="2868.0" />
+      <point x="6433.716133942164" y="2858.0" />
+      <point x="6713.737062404873" y="2858.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StockHandler" target="fr.unice.polytech.cf.interfaces.modifier.StockModifier" relationship="REALIZATION">
+      <point x="143.66666666666652" y="-115.0" />
+      <point x="2156.166666666666" y="2337.0" />
+      <point x="2248.583333333333" y="2337.0" />
+      <point x="2248.583333333333" y="2327.0" />
+      <point x="2152.7958523592083" y="2327.0" />
+      <point x="0.0" y="60.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.OrderHandler" target="fr.unice.polytech.cf.interfaces.explorer.OrderFinder" relationship="REALIZATION">
+      <point x="-109.33333333333326" y="-60.0" />
+      <point x="2831.087519025875" y="2838.0" />
+      <point x="1800.116248097414" y="2838.0" />
+      <point x="1800.116248097414" y="2818.0" />
+      <point x="1612.9999999999995" y="2818.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.Cook" target="fr.unice.polytech.cf.entities.Order" relationship="TO_MANY">
+      <point x="113.5" y="-161.0" />
+      <point x="6403.2829147640805" y="1679.5" />
+      <point x="96.5" y="-90.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CatalogHandler" target="fr.unice.polytech.cf.interfaces.explorer.StockExplorer" relationship="TO_ONE">
+      <point x="-115.0" y="-66.5" />
+      <point x="2990.25" y="2486.5" />
+      <point x="2990.25" y="2134.0" />
+      <point x="214.0" y="-0.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.Order" target="fr.unice.polytech.cf.entities.Customer" relationship="TO_ONE">
+      <point x="-75.90886605783726" y="-149.0" />
+      <point x="-0.0" y="238.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.entities.Item" relationship="CREATE">
+      <point x="-185.0" y="32.0" />
+      <point x="-153.5" y="3047.0" />
+      <point x="-153.5" y="923.0" />
+      <point x="-87.0" y="-0.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.exceptions.EmptyCartException" relationship="CREATE">
+      <point x="-185.0" y="-32.0" />
+      <point x="-10.000000000000455" y="2983.0" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.entities.TimeSlot" relationship="CREATE">
+      <point x="-27.537480974125174" y="-116.0" />
+      <point x="5786.2829147640805" y="1770.0" />
+      <point x="-91.0" y="-0.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.repositories.OrderRepository" relationship="TO_ONE">
+      <point x="185.00014764079174" y="-0.0" />
+      <point x="1613.0" y="3015.0" />
+      <point x="1613.0" y="3128.0" />
+      <point x="2758.921" y="3128.0" />
+      <point x="-50.066062404872355" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.interfaces.modifier.Payment" relationship="TO_ONE">
+      <point x="-0.0" y="126.0" />
+      <point x="888.0458523592083" y="3257.5" />
+      <point x="3121.9208523592083" y="3257.5" />
+      <point x="25.433789954336135" y="49.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.exceptions.PaymentException" relationship="CREATE">
+      <point x="-30.0" y="-49.0" />
+      <point x="-0.19121004566477495" y="61.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CartHandler" target="fr.unice.polytech.cf.interfaces.explorer.OrderFinder" relationship="REALIZATION">
+      <point x="0.0" y="-126.0" />
+      <point x="888.0458523592083" y="2838.0" />
+      <point x="1612.9999999999995" y="2838.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CatalogHandler" target="fr.unice.polytech.cf.interfaces.modifier.CatalogModifier" relationship="REALIZATION">
+      <point x="57.5" y="-94.0" />
+      <point x="3699.487062404872" y="2337.0" />
+      <point x="3709.987062404872" y="2337.0" />
+      <point x="3709.987062404872" y="2317.0" />
+      <point x="3838.0" y="2317.0" />
+      <point x="0.0" y="60.0" />
     </edge>
     <edge source="fr.unice.polytech.cf.entities.StoreOwnerAccount" target="fr.unice.polytech.cf.entities.Store" relationship="CREATE">
-      <point x="0.0" y="-60.5" />
-      <point x="0.0" y="203.5" />
+      <point x="89.99993759512782" y="-0.0" />
+      <point x="81.0" y="3015.0" />
+      <point x="81.0" y="2590.5" />
+      <point x="-104.99999999999955" y="37.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.entities.ingredients.Ingredient" target="fr.unice.polytech.cf.entities.ingredients.IngredientEnum" relationship="TO_ONE">
+      <point x="-0.0" y="-194.0" />
+      <point x="-0.0" y="38.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.entities.Cook" relationship="CREATE">
+      <point x="161.0" y="-55.5" />
+      <point x="6298.237062404873" y="2497.5" />
+      <point x="8.454147640792144" y="161.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.CookScheduler" target="fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException" relationship="CREATE">
+      <point x="14.999604261794047" y="-116.0" />
+      <point x="5828.82" y="2387.0" />
+      <point x="6854.237" y="2387.0" />
+      <point x="-6.240487255126936E-5" y="39.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.StockHandler" target="fr.unice.polytech.cf.repositories.IngredientRepository" relationship="TO_ONE">
+      <point x="-199.2041476407917" y="-115.0" />
+      <point x="-0.0" y="14.5" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.connectors.BankProxy" target="fr.unice.polytech.cf.interfaces.modifier.Bank" relationship="REALIZATION">
+      <point x="0.0" y="-27.0" />
+      <point x="6017.795852359208" y="2868.0" />
+      <point x="6215.737062404873" y="2868.0" />
+      <point x="55.0" y="27.0" />
+    </edge>
+    <edge source="fr.unice.polytech.cf.components.Cashier" target="fr.unice.polytech.cf.repositories.OrderRepository" relationship="TO_ONE">
+      <point x="1.4764079242013395E-4" y="49.0" />
+      <point x="5199.796" y="3128.0" />
+      <point x="2758.921" y="3128.0" />
+      <point x="-50.066062404872355" y="14.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Compact" zoom="0.4227605118829982" showDependencies="true" x="528.0" y="834.0" />
-  <SelectedNodes>
-    <node>fr.unice.polytech.cf.components.StockHandler</node>
-    <node>fr.unice.polytech.cf.repositories.OrderHistory</node>
-    <node>fr.unice.polytech.cf.Cookie</node>
-    <node>fr.unice.polytech.cf.CommandState</node>
-    <node>fr.unice.polytech.cf.Catalog</node>
-    <node>fr.unice.polytech.cf.entities.Store</node>
-    <node>fr.unice.polytech.cf.entities.Cook</node>
-    <node>fr.unice.polytech.cf.components.CartHandler</node>
-    <node>fr.unice.polytech.cf.Order</node>
-    <node>fr.unice.polytech.cf.entities.StoreOwnerAccount</node>
-    <node>fr.unice.polytech.cf.entities.UserAccount</node>
-  </SelectedNodes>
+  <settings layout="Hierarchic" zoom="0.32025286259541985" showDependencies="true" x="2056.970204841713" y="2627.4513966480445" />
+  <SelectedNodes />
   <Categories>
     <Category>Fields</Category>
     <Category>Methods</Category>
+    <Category>Properties</Category>
   </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
