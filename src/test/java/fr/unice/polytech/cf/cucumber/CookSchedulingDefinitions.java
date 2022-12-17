@@ -11,9 +11,6 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.entities.ingredients.Mix;
 import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
-import fr.unice.polytech.cf.exceptions.EmptyCartException;
-import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
-import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.explorer.StoreFinder;
 import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
@@ -105,19 +102,6 @@ public class CookSchedulingDefinitions {
         for (Order order : orders)
             assert (order.getOrderState() != OrderState.WORKING_ON_IT);
     }
-
-    /*@And("a cook is available and another isn't")
-    public void a_cook_is_available_and_another_isn_t() throws AlreadyExistingCustomerException {
-        //Cook cook1 = new Cook("Gordon", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0));
-        //cook = new Cook("Ramsey", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0));
-        Cook cook1 = cookRegistration.addCook("Gordon", LocalTime.of(8, 0, 0, 0), LocalTime.of(17, 0, 0, 0), store.getId());
-        order = new Order(customer, customer.getCart(),store.getId(), LocalDateTime.of(2022, 11, 20, 11, 14, 30, 2));
-
-        //store.getStoreSchedule().addCook(cook1);
-        //store.getStoreSchedule().addCook(cook);
-        kitchen.assignOrder(order, store);
-        //store.assignOrder(new Order(new CartHandler(), LocalDateTime.of(2022, 11, 20, 11, 14, 30, 2))); // should occupy cook1
-    }*/
 
     @And("a new order comes in")
     public void a_new_order_comes_in() {

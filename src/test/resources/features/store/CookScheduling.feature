@@ -13,11 +13,6 @@ Feature: CookScheduling management
     When a 25 minutes order comes in the myCucumberStore 's kitchen
     Then the order is refused
 
-#  Scenario: A cook is available and another one isn't for a new order
-#    Given the store is open
-#    And a cook is available and another isn't
-#    When a new order comes in
-#    Then the available cook should have the order assigned to him
 
 
     
