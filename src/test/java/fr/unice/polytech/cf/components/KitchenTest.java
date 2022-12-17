@@ -30,26 +30,22 @@ public class KitchenTest {
 
     @Autowired
     OrderRepository orderRepository;
-
+    LocalTime time = LocalTime.of(8, 30);
+    LocalTime time2 = LocalTime.of(20, 30);
+    LocalDateTime date = LocalDateTime.of(2022, 12, 17, 22, 0);
     @Autowired
     private CustomerRegistration registry;
-
     @Autowired
     private OrderProcessing processor;
-
-
-
     private Set<Item> items;
     private Customer john;
-    LocalTime time= LocalTime.of(8,30);
-    LocalTime time2= LocalTime.of(20,30);
     private Store store;
-    LocalDateTime date=LocalDateTime.of(2022,12,17,22,0);
+
     @BeforeEach
     public void setUpContext() throws Exception {
         customerRepository.deleteAll();
         orderRepository.deleteAll();
-        store=new Store("store1",0.1,time,time2);
+        store = new Store("store1", 0.1, time, time2);
         items = new HashSet<>();
         items.add(new Item(new BasicCookie("chocolate", Cooking.CRUNCHY,
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 3),
@@ -59,16 +55,16 @@ public class KitchenTest {
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()), 1));
-        john = registry.register("john", "wick","johnwick@gmail.com");
+        john = registry.register("john", "wick", "johnwick@gmail.com");
     }
 
     @Test
     void processCommand() throws Exception {
-        Order inProgress = new Order(john, items,store.getId(),date);
+        Order inProgress = new Order(john, items, store.getId(), date);
         inProgress.setOrderState(OrderState.PAID);
         processor.prepareOrder(inProgress);
         assertEquals(inProgress.getOrderState(), OrderState.WORKING_ON_IT);
         processor.finishOrder(inProgress);
-        assertEquals(OrderState.READY,inProgress.getOrderState() );
+        assertEquals(OrderState.READY, inProgress.getOrderState());
     }
 }

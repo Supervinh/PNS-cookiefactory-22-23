@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,33 +27,27 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.eq;
 
 @SpringBootTest
 public class CashierTest {
 
     @Autowired
     CustomerRepository customerRepository;
-
-    @Autowired
-    private Payment cashier;
-
-    @Autowired
-    private Bank bank;
-
-
-    private Store store;
-
-    private Set<Item> items;
     Customer customer1;
     Customer customer2;
-    LocalTime time= LocalTime.of(8,30);
-    LocalTime time2= LocalTime.of(20,30);
+    LocalTime time = LocalTime.of(8, 30);
+    LocalTime time2 = LocalTime.of(20, 30);
+    @Autowired
+    private Payment cashier;
+    @Autowired
+    private Bank bank;
+    private Store store;
+    private Set<Item> items;
 
     @BeforeEach
     public void setUp() throws Exception {
         customerRepository.deleteAll();
-        store=new Store("store1",0.1,time,time2);
+        store = new Store("store1", 0.1, time, time2);
 
         // We could also use below the customerRegistry component to setup the test environment
         items = new HashSet<>();
@@ -67,19 +60,16 @@ public class CashierTest {
                 new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()), 1));
         // Customers
-        customer1 = new Customer("paul","edouard","pauledouard@hotmail.com");
+        customer1 = new Customer("paul", "edouard", "pauledouard@hotmail.com");
         customerRepository.save(customer1, customer1.getId());
-        customer2  = new Customer("jean", "dameso","jean.dameso@gmail.com");
+        customer2 = new Customer("jean", "dameso", "jean.dameso@gmail.com");
         customerRepository.save(customer2, customer2.getId());
-        // Mocking the bank proxy
-        //when(bankMock.pay(eq(customer1), anyDouble())).thenReturn(true);
-        //when(bankMock.pay(eq(customer2),  anyDouble())).thenReturn(false);
     }
 
     @Test
     public void payement() throws OrderCancelledTwiceException, PaymentException {
         // paying order
-        Order order = cashier.payOrder(customer1, items,store,LocalDateTime.of(2022,12,16,16,58));
+        Order order = cashier.payOrder(customer1, items, store, LocalDateTime.of(2022, 12, 16, 16, 58));
         assertNotNull(order);
 
         assertEquals(items, order.getItems());
@@ -90,11 +80,10 @@ public class CashierTest {
                 new Ingredient(store.getId(), IngredientEnum.DOUGH, "Chocolate", 3),
                 new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
                 Mix.MIXED, new ArrayList<>()).getPrice());
-        assertEquals(1.1*price, order.getPrice(),0.000001);
-        assertEquals(2,order.getItems().size());
+        assertEquals(1.1 * price, order.getPrice(), 0.000001);
+        assertEquals(2, order.getItems().size());
 
     }
-
 
 
 }

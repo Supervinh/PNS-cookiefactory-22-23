@@ -20,16 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class CatalogHandlerTest {
+    private final LocalTime time = LocalTime.of(8, 30);
+    private final LocalTime time2 = LocalTime.of(20, 30);
+    private final Store store = new Store("store1", 0.1, time, time2);
     @Autowired
     private CatalogHandler catalog;
     @Autowired
     private StockModifier stockModifier;
     @Autowired
     private CatalogRepository catalogRepository;
-
-    private final LocalTime time = LocalTime.of(8, 30);
-    private final LocalTime time2 = LocalTime.of(20, 30);
-    private final Store store = new Store("store1", 0.1, time, time2);
 
     @BeforeEach
     void setup() {
