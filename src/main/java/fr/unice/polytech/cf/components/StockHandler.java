@@ -1,6 +1,6 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.ingredients.*;
+import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.IngredientNotInStockException;
 import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
 import fr.unice.polytech.cf.interfaces.modifier.StockModifier;
@@ -8,13 +8,16 @@ import fr.unice.polytech.cf.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.StreamSupport;
 
 @Component
 public class StockHandler implements StockModifier, StockExplorer {
 
-    private IngredientRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
 
     @Autowired
     public StockHandler(IngredientRepository ingredientRepository) {

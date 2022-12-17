@@ -1,14 +1,13 @@
 package fr.unice.polytech.cf.components;
 
 import fr.unice.polytech.cf.entities.*;
-import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
-import fr.unice.polytech.cf.interfaces.modifier.CartProcessor;
 import fr.unice.polytech.cf.interfaces.explorer.OrderFinder;
 import fr.unice.polytech.cf.interfaces.modifier.CartModifier;
+import fr.unice.polytech.cf.interfaces.modifier.CartProcessor;
 import fr.unice.polytech.cf.interfaces.modifier.Payment;
 import fr.unice.polytech.cf.interfaces.modifier.TooGoodToGoProcessing;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
@@ -22,19 +21,18 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 
 @Component
 public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProcessing, OrderFinder {
-    private CustomerRepository customerRepository;
-    private StoreRepository storeRepository;
+    private final CustomerRepository customerRepository;
+    private final StoreRepository storeRepository;
 
-    private OrderRepository orderRepository;
-    private Payment payment;
-    private StockHandler stock;
+    private final OrderRepository orderRepository;
+    private final Payment payment;
+    private final StockHandler stock;
 
 
     @Autowired
@@ -116,7 +114,7 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
     @Override
     public Order confirmOrder(Customer customer, Store store, LocalDateTime retrieve) throws EmptyCartException, PaymentException, OrderCancelledTwiceException {
         if (!customer.getCart().isEmpty()) {
-            if(retrieve == null){
+            if (retrieve == null) {
                 retrieve = LocalDateTime.now().plusHours(1);
             }
             Order order = payment.payOrder(customer, customer.getCart(), store, retrieve);
@@ -130,11 +128,11 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
     }
 
     @Override
-    public void updateTooGoodToGo(){
+    public void updateTooGoodToGo() {
         List<Order> ordersToGoodToGo = findOrdersByState(OrderState.TOO_GOOD_TO_GO);
-        for(Order order : ordersToGoodToGo){
+        for (Order order : ordersToGoodToGo) {
             Optional<Store> optionalStore = storeRepository.findById(order.getStoreId());
-            if (optionalStore.isPresent()){
+            if (optionalStore.isPresent()) {
                 Store store = optionalStore.get();
                 List<Item> cartTooGoodToGo = store.getCartTooGoodToGo();
                 cartTooGoodToGo.addAll(order.getItems());
@@ -143,13 +141,13 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
             }
         }
         Iterable<Store> stores = storeRepository.findAll();
-        for (Store store : stores){
+        for (Store store : stores) {
             store.timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if(store.isOpen())
+                    if (store.isOpen())
                         updateTooGoodToGo();
-                    else{
+                    else {
                         store.timer.cancel();
                         store.timer.purge();
                         try {
@@ -161,19 +159,19 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
                             }, new SimpleDateFormat("yyyy-MM-dd").parse(LocalDate.now().plusDays(1).atTime(store.getOpeningTime()).toString()));
                         } catch (ParseException e) {
                             throw new RuntimeException(e);
-                        };
+                        }
                     }
 
                 }
-            }, 1000*60*180);
+            }, 1000 * 60 * 180);
         }
 
     }
 
     @Override
-    public List<Item> applyTooGoodToGoPolicy(List<Item> cartTooGoodToGo){
-        for (Item item : cartTooGoodToGo){
-            item.getCookie().setPrice(item.getCookie().getPrice()*0.3);
+    public List<Item> applyTooGoodToGoPolicy(List<Item> cartTooGoodToGo) {
+        for (Item item : cartTooGoodToGo) {
+            item.getCookie().setPrice(item.getCookie().getPrice() * 0.3);
             item.getCookie().setCookingTime(0);
         }
         System.out.println("Sending cart too good to go");
@@ -182,7 +180,7 @@ public class CartHandler implements CartModifier, CartProcessor, TooGoodToGoProc
     }
 
     @Override
-    public List<Order> findOrdersByState(Enum<OrderState> state){
+    public List<Order> findOrdersByState(Enum<OrderState> state) {
         return StreamSupport.stream(orderRepository.findAll().spliterator(), false)
                 .filter(order -> order.getOrderState().equals(state))
                 .collect(Collectors.toList());

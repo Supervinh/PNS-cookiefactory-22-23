@@ -11,14 +11,18 @@ import fr.unice.polytech.cf.exceptions.PaymentException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 public interface CartProcessor {
 
     double getPrice(Customer customer, Store store);
+
     double getCookingTime(Customer customer);
+
     int getNbCookies(Customer customer);
+
     List<Ingredient> getIngredientsFromCart(Customer customer);
+
     Order confirmOrder(Customer customer, Store store, LocalDateTime retrieve) throws EmptyCartException, CloneNotSupportedException, PaymentException, OrderCancelledTwiceException;
+
     boolean isEnoughIngredientsInStock(Item item, Store store, Customer customer);
 }

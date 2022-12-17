@@ -23,7 +23,7 @@ import java.util.stream.StreamSupport;
 @Component
 public class CookScheduler implements ScheduleManagement, CookFinder, CookRegistration {
 
-    private CookRepository cookRepository;
+    private final CookRepository cookRepository;
 
     @Autowired
     public CookScheduler(CookRepository cookRepository) {
@@ -45,7 +45,7 @@ public class CookScheduler implements ScheduleManagement, CookFinder, CookRegist
 
     @Override
     public Cook addCook(String name, LocalTime startWork, LocalTime endWork, UUID storeId) throws AlreadyExistingCustomerException {
-        if(findByName(name).isPresent())
+        if (findByName(name).isPresent())
             throw new AlreadyExistingCustomerException(name);
         Cook newCook = new Cook(name, startWork, endWork, storeId);
         cookRepository.save(newCook, newCook.getId());

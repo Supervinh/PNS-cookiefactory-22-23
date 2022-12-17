@@ -11,9 +11,9 @@ public class CookieLabels {
     String name;
     double price;
     double cookingTime;
-    Cooking cooking ;
+    Cooking cooking;
     Ingredient dough;
-    Ingredient flavour ;
+    Ingredient flavour;
     Mix mix;
     List<Ingredient> topping;
     UUID id;

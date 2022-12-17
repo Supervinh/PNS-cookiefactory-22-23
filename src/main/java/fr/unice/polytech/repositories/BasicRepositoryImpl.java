@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public class BasicRepositoryImpl<T, ID> implements Repository<T, ID> {
 
-    private HashMap<ID,T> storage = new HashMap<>();
+    private final HashMap<ID, T> storage = new HashMap<>();
 
     @Override
     public long count() {
@@ -39,7 +39,7 @@ public class BasicRepositoryImpl<T, ID> implements Repository<T, ID> {
 
     @Override
     public <S extends T> void save(S entity, ID id) {
-        storage.put(id,entity);
+        storage.put(id, entity);
     }
 
 }

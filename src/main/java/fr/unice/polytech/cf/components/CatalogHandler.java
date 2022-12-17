@@ -3,8 +3,8 @@ package fr.unice.polytech.cf.components;
 import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 import fr.unice.polytech.cf.interfaces.explorer.CatalogExplorer;
-import fr.unice.polytech.cf.interfaces.modifier.CatalogModifier;
 import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
+import fr.unice.polytech.cf.interfaces.modifier.CatalogModifier;
 import fr.unice.polytech.cf.repositories.CatalogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,7 @@ public class CatalogHandler implements CatalogExplorer, CatalogModifier {
     @Override
     public Cookie getCookie(String name) {
         List<Cookie> cookies = findByName(name);
-        for (Cookie cookie : cookies) {;
+        for (Cookie cookie : cookies) {
             if (cookie.getName().equals(name)) {
                 return cookie;
             }
@@ -48,7 +48,7 @@ public class CatalogHandler implements CatalogExplorer, CatalogModifier {
 
     @Override
     public boolean addCookie(Cookie cookie) {
-        if(acceptRecipe(cookie)) {
+        if (acceptRecipe(cookie)) {
             catalogRepository.save(cookie, cookie.getId());
             return true;
         }

@@ -12,5 +12,4 @@ public interface OrderProcessing {
     boolean assignOrder(Order order, Store store);
 
 
-
 }

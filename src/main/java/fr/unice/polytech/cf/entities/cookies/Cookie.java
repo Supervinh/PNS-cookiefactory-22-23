@@ -1,34 +1,31 @@
 package fr.unice.polytech.cf.entities.cookies;
 
-import fr.unice.polytech.cf.entities.ingredients.Cooking;
 import fr.unice.polytech.cf.entities.ingredients.Ingredient;
-import fr.unice.polytech.cf.entities.ingredients.Mix;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public interface Cookie {
 
-    public String getName();
+    String getName();
 
-    public double getCookingTime();
+    double getCookingTime();
 
-    public double getPrice();
+    void setCookingTime(int cookingTime);
 
-    public void setPrice(double price);
+    double getPrice();
 
-    public void setCookingTime(int cookingTime);
+    void setPrice(double price);
 
-    public Ingredient getDough();
+    Ingredient getDough();
 
-    public Ingredient getFlavour();
+    Ingredient getFlavour();
 
-    public List<Ingredient> getTopping();
+    List<Ingredient> getTopping();
 
-    public List<Ingredient> getIngredients();
+    List<Ingredient> getIngredients();
 
-    public UUID getId();
+    UUID getId();
 }
 
 

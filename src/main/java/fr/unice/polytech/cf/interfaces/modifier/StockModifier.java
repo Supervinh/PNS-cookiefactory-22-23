@@ -13,6 +13,7 @@ public interface StockModifier {
     void addIngredients(List<Ingredient> ingredients);
 
     Ingredient removeIngredientByName(String ingredientName, UUID storeId) throws IngredientNotInStockException;
+
     List<Ingredient> removeIngredientsFromStock(List<Ingredient> ingredientsToRemove, UUID storeId);
 
 

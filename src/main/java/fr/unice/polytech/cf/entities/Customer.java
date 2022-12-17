@@ -1,6 +1,9 @@
 package fr.unice.polytech.cf.entities;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 public class Customer {
 
@@ -20,7 +23,7 @@ public class Customer {
         this.name = name;
         this.surname = surname;
         this.mail = mail;
-        id= UUID.randomUUID();
+        id = UUID.randomUUID();
         cookiesForVIP = 0;
         lastCancel = new Date(1); // sets the Date to an old one
         forbiddenToOrder = new Date(1); // sets the Date to an old one
@@ -28,12 +31,21 @@ public class Customer {
 
     }
 
-    public void setCookiesForVIP(int nb){cookiesForVIP = nb;}
+    public int getCookiesForVIP() {
+        return cookiesForVIP;
+    }
 
-    public int getCookiesForVIP(){return cookiesForVIP;}
+    public void setCookiesForVIP(int nb) {
+        cookiesForVIP = nb;
+    }
 
-    public boolean isVIP(){return isVIP;}
-    public void setIsVIP(boolean b){isVIP=b;}
+    public boolean isVIP() {
+        return isVIP;
+    }
+
+    public void setIsVIP(boolean b) {
+        isVIP = b;
+    }
 
     public UUID getId() {
         return id;
@@ -71,22 +83,26 @@ public class Customer {
         this.cart = cart;
     }
 
-    public void setForbiddenToOrder(Date d) {
-        forbiddenToOrder = d;
-    }
     public Date getForbiddenToOrder() {
         return forbiddenToOrder;
     }
-    public void setLastCancel(Date d){lastCancel = d;}
+
+    public void setForbiddenToOrder(Date d) {
+        forbiddenToOrder = d;
+    }
 
     public Date getLastCancel() {
         return lastCancel;
     }
 
+    public void setLastCancel(Date d) {
+        lastCancel = d;
+    }
+
     public double getCookingTime() {
         double cookingTime = 15;
-        for(Item i : cart){
-            cookingTime += i.getCookie().getCookingTime()* i.getQuantity();
+        for (Item i : cart) {
+            cookingTime += i.getCookie().getCookingTime() * i.getQuantity();
 
         }
         return cookingTime;

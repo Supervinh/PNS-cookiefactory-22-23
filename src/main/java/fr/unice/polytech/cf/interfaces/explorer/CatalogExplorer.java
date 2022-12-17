@@ -1,11 +1,9 @@
 package fr.unice.polytech.cf.interfaces.explorer;
 
 
-import fr.unice.polytech.cf.entities.cookies.BasicCookie;
 import fr.unice.polytech.cf.entities.cookies.Cookie;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CatalogExplorer {
 

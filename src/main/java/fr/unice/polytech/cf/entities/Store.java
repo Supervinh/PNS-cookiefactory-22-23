@@ -1,20 +1,20 @@
 package fr.unice.polytech.cf.entities;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.List;
+import java.util.Timer;
+import java.util.UUID;
 
 public class Store {
 
-    private UUID id;
     private final String name;
+    public Timer timer;
+    private UUID id;
     private LocalTime openingTime;
     private LocalTime closingTime;
-
     private List<Item> cartTooGoodToGo;
-    private boolean canMakePartyCookie;
+    private final boolean canMakePartyCookie;
     private double taxes;
-
-    public Timer timer;
 
     public Store(String name, LocalTime openingTime, LocalTime closingTime) {
         this.id = UUID.randomUUID();
@@ -23,7 +23,7 @@ public class Store {
         this.closingTime = closingTime;
         this.timer = new Timer();
         this.taxes = 0.0;
-        canMakePartyCookie=false;
+        canMakePartyCookie = false;
 
 
     }
@@ -35,16 +35,17 @@ public class Store {
         this.closingTime = closingTime;
         this.timer = new Timer();
         this.taxes = taxes;
-        canMakePartyCookie=false;
+        canMakePartyCookie = false;
+    }
+
+    public double getTaxes() {
+        return taxes;
     }
 
     public void setTaxes(double taxes) {
         this.taxes = taxes;
     }
 
-    public double getTaxes() {
-        return taxes;
-    }
     public String getName() {
         return name;
     }
@@ -84,6 +85,7 @@ public class Store {
     public List<Item> getCartTooGoodToGo() {
         return cartTooGoodToGo;
     }
+
     public void setCartTooGoodToGo(List<Item> cartTooGoodToGo) {
         this.cartTooGoodToGo = cartTooGoodToGo;
     }

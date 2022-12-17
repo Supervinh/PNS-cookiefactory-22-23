@@ -2,7 +2,7 @@ package fr.unice.polytech.repositories;
 
 import java.util.Optional;
 
-public interface Repository <T, ID> {
+public interface Repository<T, ID> {
 
     // Returns the number of entities available.
     long count();

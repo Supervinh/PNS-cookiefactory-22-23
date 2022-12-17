@@ -1,6 +1,9 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.*;
+import fr.unice.polytech.cf.entities.Cook;
+import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.OrderState;
+import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.interfaces.modifier.OrderProcessing;
 import fr.unice.polytech.cf.repositories.OrderRepository;
 import org.springframework.stereotype.Component;

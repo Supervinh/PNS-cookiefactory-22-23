@@ -38,7 +38,7 @@ public class Order {
     }
 
     public double getCookingTime() {
-        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum()+15;
+        return items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getCookingTime()).sum() + 15;
     }
 
     public int getNbCookies() {
@@ -46,7 +46,7 @@ public class Order {
     }
 
     public double getPrice() {
-        return Math.floor(items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum()*100)/100;
+        return Math.floor(items.stream().mapToDouble(item -> item.getQuantity() * item.getCookie().getPrice()).sum() * 100) / 100;
     }
 
     public UUID getId() {

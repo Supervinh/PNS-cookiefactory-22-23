@@ -1,6 +1,9 @@
 package fr.unice.polytech.cf.components;
 
-import fr.unice.polytech.cf.entities.*;
+import fr.unice.polytech.cf.entities.Customer;
+import fr.unice.polytech.cf.entities.Item;
+import fr.unice.polytech.cf.entities.Order;
+import fr.unice.polytech.cf.entities.Store;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
 import fr.unice.polytech.cf.interfaces.modifier.Bank;
@@ -17,11 +20,11 @@ import java.util.Set;
 @Component
 public class Cashier implements Payment {
 
-    private Bank bank;
+    private final Bank bank;
 
-    private OrderProcessing kitchen;
+    private final OrderProcessing kitchen;
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
     public Cashier(Bank bank, OrderProcessing kitchen, OrderRepository orderRepository) {
@@ -32,11 +35,11 @@ public class Cashier implements Payment {
 
     @Override
     public Order payOrder(Customer customer, Set<Item> items, Store store, LocalDateTime retrieve) throws PaymentException, OrderCancelledTwiceException {
-        if(retrieve == null){
+        if (retrieve == null) {
             retrieve = LocalDateTime.now().plusHours(1);
         }
-        Order order = new Order(customer, items, store.getId(),retrieve);
-        if(((new Date().getTime()-customer.getForbiddenToOrder().getTime())/60000)<10){
+        Order order = new Order(customer, items, store.getId(), retrieve);
+        if (((new Date().getTime() - customer.getForbiddenToOrder().getTime()) / 60000) < 10) {
             throw new OrderCancelledTwiceException();
         }
         applyStoreTaxes(order, store);
@@ -47,7 +50,7 @@ public class Cashier implements Payment {
         if (!status) {
             throw new PaymentException(customer.getName(), price);
         }
-        orderRepository.save(order,order.getId());
+        orderRepository.save(order, order.getId());
         kitchen.prepareOrder(order);
         return order;
     }
@@ -65,7 +68,7 @@ public class Cashier implements Payment {
         if (customer.isVIP()) {
             for (Item item : order.getItems()) {
                 System.out.println(item.getCookie().getPrice());
-                item.getCookie().setPrice(Math.floor((item.getCookie().getPrice()* 0.9 * 100.0)) / 100.0);
+                item.getCookie().setPrice(Math.floor((item.getCookie().getPrice() * 0.9 * 100.0)) / 100.0);
             }
             customer.setIsVIP(false);
         }

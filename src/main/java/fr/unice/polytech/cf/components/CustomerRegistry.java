@@ -15,7 +15,7 @@ import java.util.stream.StreamSupport;
 @Component
 public class CustomerRegistry implements CustomerFinder, CustomerRegistration {
 
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
 
     @Autowired
     public CustomerRegistry(CustomerRepository customerRepository) {
@@ -24,10 +24,10 @@ public class CustomerRegistry implements CustomerFinder, CustomerRegistration {
 
     @Override
     public Customer register(String name, String surname, String email) throws AlreadyExistingCustomerException {
-        if(findByName(name).isPresent())
+        if (findByName(name).isPresent())
             throw new AlreadyExistingCustomerException(name);
         Customer newcustomer = new Customer(name, surname, email);
-        customerRepository.save(newcustomer,newcustomer.getId());
+        customerRepository.save(newcustomer, newcustomer.getId());
         return newcustomer;
     }
 

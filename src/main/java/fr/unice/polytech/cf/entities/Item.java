@@ -19,6 +19,7 @@ public class Item {
     public Cookie getCookie() {
         return cookie;
     }
+
     public void setCookie(Cookie cookie) {
         this.cookie = cookie;
     }
@@ -26,12 +27,15 @@ public class Item {
     public int getQuantity() {
         return quantity;
     }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
     @Override
-    public String toString() { return quantity + "x" + cookie.toString(); }
+    public String toString() {
+        return quantity + "x" + cookie.toString();
+    }
 
     @Override
     public boolean equals(Object o) {

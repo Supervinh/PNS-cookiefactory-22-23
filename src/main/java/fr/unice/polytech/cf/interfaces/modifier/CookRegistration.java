@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface CookRegistration {
 
     Cook addCook(String name, LocalTime startWork, LocalTime endWork, UUID storeId) throws AlreadyExistingCustomerException;
+
     List<Cook> addCooks(List<Cook> cooks);
 
     void removeCook(Cook cook);

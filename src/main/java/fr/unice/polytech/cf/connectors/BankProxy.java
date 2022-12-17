@@ -10,7 +10,7 @@ public class BankProxy implements Bank {
     @Override
     public boolean pay(Customer customer, double value) {
         // should be an external connection to a bank service
-        return (value>0);
+        return (value > 0);
     }
 
 }

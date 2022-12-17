@@ -5,11 +5,10 @@ import java.util.UUID;
 
 public class Ingredient {
 
-    private UUID id;
-
-    private UUID storeId;
     private final IngredientEnum type;
     private final String name;
+    private final UUID id;
+    private final UUID storeId;
     private double price;
 
     private double storeTax;
@@ -41,15 +40,15 @@ public class Ingredient {
     }
 
     public double getPrice() {
-        return Math.floor((price*(1 + storeTax) * 100.0)) / 100.0;
-    }
-
-    public void setStoreTax(double taxe) {
-        this.storeTax = taxe;
+        return Math.floor((price * (1 + storeTax) * 100.0)) / 100.0;
     }
 
     public double getStoreTax() {
         return this.storeTax;
+    }
+
+    public void setStoreTax(double taxe) {
+        this.storeTax = taxe;
     }
 
     public String getName() {

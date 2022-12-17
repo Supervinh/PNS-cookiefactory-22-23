@@ -28,17 +28,17 @@ public class StoreManagement implements StoreModifier, StoreFinder {
     }
 
     @Override
-    public void changeStoreOpeningTime(Store store, LocalTime newOpeningTime){
+    public void changeStoreOpeningTime(Store store, LocalTime newOpeningTime) {
         store.setOpeningTime(newOpeningTime);
     }
 
     @Override
-    public void changeStoreClosingTime(Store store, LocalTime newClosingTime){
+    public void changeStoreClosingTime(Store store, LocalTime newClosingTime) {
         store.setClosingTime(newClosingTime);
     }
 
     @Override
-    public void changeStoreTaxes(Store store, double storeTaxes){
+    public void changeStoreTaxes(Store store, double storeTaxes) {
         store.setTaxes(storeTaxes);
     }
 
