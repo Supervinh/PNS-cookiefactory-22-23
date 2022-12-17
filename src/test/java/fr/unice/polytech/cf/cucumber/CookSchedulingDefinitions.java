@@ -14,6 +14,7 @@ import fr.unice.polytech.cf.exceptions.AlreadyExistingCustomerException;
 import fr.unice.polytech.cf.exceptions.EmptyCartException;
 import fr.unice.polytech.cf.exceptions.OrderCancelledTwiceException;
 import fr.unice.polytech.cf.exceptions.PaymentException;
+import fr.unice.polytech.cf.interfaces.explorer.StoreFinder;
 import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.CustomerRepository;
 import fr.unice.polytech.cf.repositories.OrderRepository;
@@ -36,6 +37,8 @@ public class CookSchedulingDefinitions {
     @Autowired
     private StoreModifier storeModifier;
     @Autowired
+    private StoreFinder storeFinder;
+    @Autowired
     private CustomerRegistry customerRegistration;
     @Autowired
     private CookScheduler cookScheduler;
@@ -52,46 +55,43 @@ public class CookSchedulingDefinitions {
     public void settingUpContext() throws AlreadyExistingCustomerException {
         storeRepository.deleteAll();
         customerRepository.deleteAll();
-        Store store = new Store("myCucumberStore", LocalTime.of(8, 0), LocalTime.of(20, 0));
         customerRegistration.register("John", "Doe", "John@Doe.com");
-        cookScheduler.addCook("myCucumberCook", store.getOpeningTime(), store.getClosingTime(), store.getId());
-        storeRepository.save(store, store.getId());
     }
 
-    @Given("the store is open")
-    public void the_store_is_open() {
-        storeModifier.changeStoreOpeningTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
-        storeModifier.changeStoreClosingTime(storeRepository.findAll().iterator().next(), LocalTime.of(8, 0));
+    @Given("the store {word} is open")
+    public void the_store_is_open(String storeName) throws AlreadyExistingCustomerException {
+        storeModifier.addStore(storeName, LocalTime.of(0, 0), LocalTime.of(23, 59, 59));
     }
 
-    @Given("the cook has an empty schedule")
-    public void the_cook_has_an_empty_schedule() {
-        System.out.println("Empty schedule");
-        System.out.println(cookScheduler.findByName("myCucumberCook").isPresent());
-
-        cookScheduler.getCooks().iterator().next().getCookSchedule().clear();
-    }
-
-    @When("is assigned a {int} minutes order")
-    public void is_assigned_a_minutes_order(Integer cookingTime) throws EmptyCartException, PaymentException, OrderCancelledTwiceException, CloneNotSupportedException {
-        Optional<Customer> customer = customerRegistration.findByName("John");
-        Store store = storeRepository.findAll().iterator().next();
-        if (customer.isPresent()) {
-            BasicCookie cookie = new BasicCookie("myCucumberCookie", Cooking.CHEWY, new Ingredient(store.getId(), IngredientEnum.DOUGH, "dough",1), new Ingredient(store.getId(), IngredientEnum.FLAVOUR, "flavor",1), Mix.MIXED, new ArrayList<>());
-            cookie.setCookingTime(cookingTime);
-            customer.get().getCart().add(new Item(cookie, 1));
-            Order order = new Order(customer.get(),customer.get().getCart(),store.getId(), LocalDateTime.now());
-            orderRepository.save(order, order.getId());
+    @Given("the cook {word} is working in {word} with an empty schedule")
+    public void the_cook_has_an_empty_schedule(String cookName, String storeName) throws AlreadyExistingCustomerException {
+        Optional<Store> store = storeFinder.findByName(storeName);
+        if (store.isPresent()) {
+            Cook myNewCook = cookScheduler.addCook(cookName, store.get().getOpeningTime(), store.get().getClosingTime(), store.get().getId());
+            myNewCook.getCookSchedule().clear();
         }
-        Order order = orderRepository.findAll().iterator().next();
-        kitchen.assignOrder(order, store);
-
-
     }
 
-    @Then("he should have two slot taken for that order")
-    public void he_should_have_two_slot_taken_for_that_order() {
-        assert (cookScheduler.getCooks().iterator().next().getCookSchedule().size() == 2);
+    @When("a {int} minutes order comes in the {word} 's kitchen")
+    public void a_minutes_order_comes_in_the_kitchen(Integer cookingTime, String storeName) {
+        Optional<Customer> customer = customerRegistration.findByName("John");
+        Optional<Store> store = storeFinder.findByName(storeName);
+        if (customer.isPresent() && store.isPresent()) {
+            BasicCookie cookie = new BasicCookie("myCucumberCookie", Cooking.CHEWY, new Ingredient(store.get().getId(), IngredientEnum.DOUGH, "dough",1), new Ingredient(store.get().getId(), IngredientEnum.FLAVOUR, "flavor",1), Mix.MIXED, new ArrayList<>());
+            cookie.setCookingTime(cookingTime-15);
+            customer.get().getCart().add(new Item(cookie, 1));
+            Order order = new Order(customer.get(),customer.get().getCart(),store.get().getId(), LocalDateTime.now());
+            System.out.println(order.getCookingTime());
+            System.out.println(order.getRetrieveDate());
+            orderRepository.save(order, order.getId());
+            kitchen.assignOrder(order, store.get());
+        }
+    }
+
+    @Then("{word} should have {int} slot taken for that order")
+    public void he_should_have_two_slot_taken_for_that_order(String cookName, int nbSlots) {
+        Optional<Cook> workingCook = cookScheduler.findByName(cookName);
+        assert workingCook.isEmpty() || workingCook.get().getCookSchedule().size() == nbSlots;
     }
 
     @Given("a store with no cook available")
@@ -100,7 +100,9 @@ public class CookSchedulingDefinitions {
 
     @Then("the order is refused")
     public void the_order_is_refused() {
-        assert (orderRepository.findAll().iterator().next().getOrderState() != OrderState.WORKING_ON_IT);
+        Iterable<Order> orders = orderRepository.findAll();
+        for (Order order : orders)
+            assert (order.getOrderState() != OrderState.WORKING_ON_IT);
     }
 
     /*@And("a cook is available and another isn't")
