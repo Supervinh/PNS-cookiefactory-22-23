@@ -10,8 +10,7 @@ Feature: Recipe management
     When the brand's cook suggests the recipe
     Then the cookie myCucumberCookie shouldn't be in the catalog
 
-#  Scenario: deleting a recipe off the catalog
-#    Given the brand's cook suggest a recipe new
-#    And it's accepted
-#    When the brand owner deletes the cookie new
-#    Then the cookie new shouldn't be in the catalog
+  Scenario: deleting a recipe off the catalog
+    Given the catalog contains the cookie myCucumberCookie
+    When the brand's cook deletes the cookie myCucumberCookie
+    Then the cookie myCucumberCookie shouldn't be in the catalog
