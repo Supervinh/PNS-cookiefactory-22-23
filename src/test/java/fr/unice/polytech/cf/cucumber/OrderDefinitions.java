@@ -1,6 +1,5 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.components.CatalogHandler;
 import fr.unice.polytech.cf.entities.OrderState;
 import fr.unice.polytech.cf.entities.*;
 import fr.unice.polytech.cf.entities.cookies.BasicCookie;
@@ -9,7 +8,6 @@ import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.entities.ingredients.IngredientEnum;
 import fr.unice.polytech.cf.entities.ingredients.Mix;
 import fr.unice.polytech.cf.exceptions.*;
-import fr.unice.polytech.cf.interfaces.explorer.CatalogExplorer;
 import fr.unice.polytech.cf.interfaces.explorer.StockExplorer;
 import fr.unice.polytech.cf.interfaces.modifier.*;
 import fr.unice.polytech.cf.repositories.*;
@@ -29,10 +27,7 @@ import java.util.Random;
 
 public class OrderDefinitions {
     Order currentOrder;
-    CatalogHandler catalog;
     boolean possible;
-    //Cook cook = new Cook("Gordon", LocalTime.of(8,0,0,0), LocalTime.of(17,0,0,0));
-    //Customer client = new Customer("Tom", "Bevan", "tom.bevan@etu.unice.fr");
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -47,19 +42,10 @@ public class OrderDefinitions {
     private CustomerRegistration customerRegistration;
 
     @Autowired
-    private CatalogExplorer catalogExplorer;
-
-    @Autowired
-    private CatalogModifier catalogModifier;
-
-    @Autowired
     private StoreModifier storeModifier;
 
     @Autowired
     private CartProcessor cartProcessor;
-
-    @Autowired
-    private IngredientRepository ingredientRepository;
 
     @Autowired
     private StockExplorer stockExplorer;
@@ -68,13 +54,9 @@ public class OrderDefinitions {
     private StockModifier stockModifier;
 
     @Autowired
-    private CatalogRepository catalogRepository;
-    @Autowired
     private OrderProcessing orderProcessing;
     @Autowired
     private CookRepository cookRepository;
-    @Autowired
-    private ScheduleManagement scheduleManagement;
     @Autowired
     private CookRegistration cookRegistration;
     @Autowired
@@ -98,13 +80,6 @@ public class OrderDefinitions {
         possible = false;
 
     }
-//
-//    @Given("the cart doesn't contain the cookie {string}")
-//    public void the_catalog_doesn_t_contain_cookie(String cookie) {
-//        if (!catalog.hasCookie(cookie)) {
-//            System.out.println("the catalog doesn't contain the cookie");
-//        }
-//    }
 
     @Given("the cook is working and has {int} order")
     public void theCookIsWorkingAndHasOrder(int nbOrders) throws AlreadyExistingCustomerException {
@@ -138,24 +113,6 @@ public class OrderDefinitions {
         orderProcessing.assignOrder(currentOrder, store);
     }
 
-    //
-//    @And("the order is paid")
-//    public void theLastOrderIsPaid() {
-//        CartHandler cartHandler = new CartHandler();
-//        cartHandler.addCookie(new BasicCookie("chocolate", Cooking.CRUNCHY,
-//                new Ingredient(storeId, IngredientEnum.DOUGH, "Chocolate", 3),
-//                new Ingredient(storeId, IngredientEnum.FLAVOUR, "Cinnamon", 2.5),
-//                Mix.MIXED, new ArrayList<>()), 1);
-//        Order paidOrder = new Order(cartHandler);
-//        paidOrder.setOrderState(OrderState.PAID);
-//        try {
-//            client.addOrder(paidOrder);
-//        } catch (OrderCancelledTwiceException e) {
-//            e.printStackTrace();
-//        }
-//        client.getCurrentOrders().get(client.getCurrentOrders().size() - 1).setOrderState(OrderState.PAID);
-//    }
-//
     @When("the cook finishes to prepare the order")
     public void theCookFinishesToPrepareTheOrder() {
         orderProcessing.finishOrder(currentOrder);
