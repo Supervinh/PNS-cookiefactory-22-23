@@ -55,6 +55,7 @@ public class CookSchedulingDefinitions {
     public void settingUpContext() throws AlreadyExistingCustomerException {
         storeRepository.deleteAll();
         customerRepository.deleteAll();
+        orderRepository.deleteAll();
         customerRegistration.register("John", "Doe", "John@Doe.com");
     }
 
