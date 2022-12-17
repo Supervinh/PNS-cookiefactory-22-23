@@ -188,5 +188,19 @@ _**Scenario:**_ A store had no cook available
 
 _**Scenario:**_ A cook is available and another isn't
 
+### Too Good To Go
+
+Issue https://github.com/PNS-Conception/cookiefactory-22-23-n/issues/21
+
+**As a** a customer
+**I want** to be able to buy cookies that are going to be wasted
+**so that I** can have cheaper cookies
+
+_**Cucumber.feature:**_ Cart.feature
+
+_**Scenario:**_ an order is not retrieved
+
+
+
    
    
