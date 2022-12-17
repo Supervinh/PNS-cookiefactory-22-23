@@ -10,7 +10,6 @@ import fr.unice.polytech.cf.entities.ingredients.Mix;
 import fr.unice.polytech.cf.interfaces.modifier.CatalogModifier;
 import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.CatalogRepository;
-import fr.unice.polytech.cf.repositories.StoreRepository;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,8 +21,6 @@ import java.util.ArrayList;
 public class RecipeDefinitions {
     @Autowired
     private CatalogModifier brandOwner;
-    @Autowired
-    private StoreRepository storeRepository;
     @Autowired
     private StoreModifier storeModifier;
     @Autowired

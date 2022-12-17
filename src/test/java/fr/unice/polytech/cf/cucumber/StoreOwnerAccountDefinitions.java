@@ -1,13 +1,9 @@
 package fr.unice.polytech.cf.cucumber;
 
-import fr.unice.polytech.cf.entities.Store;
-import fr.unice.polytech.cf.entities.StoreOwnerAccount;
-import fr.unice.polytech.cf.entities.ingredients.Ingredient;
 import fr.unice.polytech.cf.interfaces.explorer.StoreFinder;
 import fr.unice.polytech.cf.interfaces.modifier.StoreModifier;
 import fr.unice.polytech.cf.repositories.StoreRepository;
 import io.cucumber.java.Before;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
